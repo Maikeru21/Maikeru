@@ -1,188 +1,149 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>O mnie - Ciekawostki i Zainteresowania</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <style>
-        * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Michał – O mnie i moje pasje</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
-}
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
 
-.container {
-    width: 90%;
-    margin: 0 auto;
-    max-width: 1200px;
-}
+    .container {
+      width: 90%;
+      margin: 0 auto;
+      max-width: 1200px;
+    }
 
-header {
-    background-color: #2196F3;
-    color: white;
-    padding: 50px 0;
-    text-align: center;
-}
+    header {
+      background: linear-gradient(135deg, #2196F3, #1976D2);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
 
-header h1 {
-    font-size: 3rem;
-    margin-bottom: 10px;
-}
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      animation: fadeInDown 1s ease-in-out;
+    }
 
-header p {
-    font-size: 1.2rem;
-}
+    header p {
+      font-size: 1.3rem;
+      opacity: 0.9;
+    }
 
-main {
-    padding: 40px 0;
-}
+    main {
+      padding: 50px 0;
+    }
 
-section {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-    padding: 30px;
-}
+    section {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+      margin-bottom: 40px;
+      padding: 30px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-h2 {
-    font-size: 2rem;
-    color: #2196F3;
-    margin-bottom: 15px;
-}
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    }
 
-ul {
-    list-style: none;
-}
+    h2 {
+      font-size: 2rem;
+      color: #1976D2;
+      margin-bottom: 20px;
+      position: relative;
+    }
 
-ul li {
-    font-size: 1.2rem;
-    padding: 8px 0;
-}
+    h2::after {
+      content: "";
+      position: absolute;
+      width: 60px;
+      height: 4px;
+      background: #2196F3;
+      bottom: -8px;
+      left: 0;
+      border-radius: 2px;
+    }
 
-footer {
-    background-color: #333;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-}
+    ul {
+      list-style: none;
+      margin-top: 10px;
+    }
 
-footer a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-}
+    ul li {
+      font-size: 1.1rem;
+      padding: 8px 0;
+      padding-left: 25px;
+      position: relative;
+    }
 
-footer a:hover {
-    text-decoration: underline;
-}
+    ul li::before {
+      content: "✔";
+      position: absolute;
+      left: 0;
+      color: #2196F3;
+      font-weight: bold;
+    }
 
-/* Stylizacja sekcji o kotach */
-.cats {
-    text-align: center;
-}
+    footer {
+      background-color: #222;
+      color: white;
+      padding: 25px 0;
+      text-align: center;
+      margin-top: 40px;
+    }
 
-.cats .cat-images {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-top: 20px;
-}
+    footer a {
+      color: #ffca28;
+      text-decoration: none;
+      font-weight: 600;
+    }
 
-.cat-photo {
-    width: 280px;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+    footer a:hover {
+      text-decoration: underline;
+    }
 
-.cat-photo img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
+    /* Sekcja o kotach */
+    .cats {
+      text-align: center;
+    }
 
-.cat-photo p {
-    font-size: 1rem;
-    color: #555;
-    padding: 10px;
-    background-color: #f5f5f5;
-    text-align: center;
-}
+    .cat-images {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 25px;
+    }
 
-    </style>
-    <header>
-        <div class="container">
-            <h1>Witaj na mojej stronie!</h1>
-            <p>Tutaj poznasz moje pasje, zainteresowania i hobby.</p>
-        </div>
-    </header>
+    .cat-photo {
+      width: 280px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+      background: #fafafa;
+      transition: transform 0.3s ease;
+    }
 
-    <main class="container">
-        <section class="about-me">
-            <h2>O mnie</h2>
-            <p>Witaj! Nazywam się Michał. Zajmuję się wieloma rzeczami, a moje życie pełne jest pasji i zainteresowań.</p>
-        </section>
+    .cat-photo:hover {
+      transform: scale(1.05);
+    }
 
-        <section class="sports">
-            <h2>Sporty, którymi się interesuję</h2>
-            <p>Oto kilka sportów, które są moimi ulubionymi:</p>
-            <ul>
-                <li>Siatkówka-Uwielbiam grać w siate,chodze na treningi z śiatkówki.</li>
-                <li>Bieganie-Od kiedy pamiętam to bieganie sprawało mi przyjemność.</li>
-                <li>Koszykówka-Lubie pograć sobie czasami z znajomymi.</li>
-            </ul>
-        </section>
-
-        <section class="hobbies">
-            <h2>Moje hobby</h2>
-            <p>W wolnym czasie uwielbiam robić różne rzeczy:</p>
-            <ul>
-                <li>Gotowanie-Kocham gotować jeszcze bardziej niż dla siebie to dla innych, lubie widok jak komuś smakuje moje jedzenie.</li>
-                <li>Granie w gry komputerowe-Lubie grać w gry najbardziej w te które mogę grać z znajomymi dzięki temu mamy bardzo duzo śmiesznych i zabawnych chwil.</li>
-                <li>Spotykanie sie z znajomymi-Uwielbiam poznawac nowe osoby i wspólnie spędzać z nimi czas.</li>
-            </ul>
-        </section>
-
-        <section class="favorite-game">
-            <h2>Moja ulubiona gra</h2>
-            <p>Moja ulubiona gra to <strong>The Binding of Isaac</strong>. Gra oferuje niesamowitą fabułę i wciągającą rozgrywkę.</p>
-        </section>
-
-        <!-- Sekcja o kotach -->
-        <section class="cats">
-            <h2>Uwielbiam koty!</h2>
-            <p>Koty to moje ulubione zwierzęta, sam mam kota który wabi sie <strong>Azazel</strong></p>
-            
-            <!-- Miejsce na zdjęcia kota -->
-            <div class="cat-images">
-                <div class="cat-photo">
-                    <img src="kot1.jpg" alt="Mój kot 1">
-                    <p>Oto Azazel, który uwielbia odpoczywać w umywalce.</p>
-                </div>
-                <div class="cat-photo">
-                    <img src="kot2.jpg" alt="Mój kot 2">
-                    <p>Azazel bardzo słotko wyglonda jak śpi</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>Kontakt: <a href="mailto:twojemail@example.com">twojemail@example.com</a></p>
-        </div>
-    </footer>
-</body>
-</html>
+    .cat-photo img {
+      width: 100%;
+      height: auto;
+      d
