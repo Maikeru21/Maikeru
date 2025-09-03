@@ -6,144 +6,151 @@
   <title>Michał – O mnie i moje pasje</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * {margin:0;padding:0;box-sizing:border-box;}
     body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f9f9f9;
-      color: #333;
-      line-height: 1.6;
+      font-family:'Poppins',sans-serif;
+      background-color:#000;
+      color:#00ff66; /* WSZYSTKIE NAPISY NA ZIELONO */
+      display:flex;
+      flex-direction:column;
+      align-items:center;
     }
-
-    .container {
-      width: 90%;
-      margin: 0 auto;
-      max-width: 1200px;
-    }
-
-    header {
-      background: linear-gradient(135deg, #2196F3, #1976D2);
-      color: white;
-      padding: 60px 20px;
-      text-align: center;
-    }
-
-    header h1 {
-      font-size: 3rem;
-      margin-bottom: 15px;
-      animation: fadeInDown 1s ease-in-out;
-    }
-
-    header p {
-      font-size: 1.3rem;
-      opacity: 0.9;
-    }
-
-    main {
-      padding: 50px 0;
-    }
-
-    section {
-      background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-      margin-bottom: 40px;
-      padding: 30px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    section:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
-    }
-
-    h2 {
-      font-size: 2rem;
-      color: #1976D2;
-      margin-bottom: 20px;
-      position: relative;
-    }
-
-    h2::after {
-      content: "";
-      position: absolute;
-      width: 60px;
-      height: 4px;
-      background: #2196F3;
-      bottom: -8px;
-      left: 0;
-      border-radius: 2px;
-    }
-
-    ul {
-      list-style: none;
-      margin-top: 10px;
-    }
-
-    ul li {
-      font-size: 1.1rem;
-      padding: 8px 0;
-      padding-left: 25px;
-      position: relative;
-    }
-
-    ul li::before {
-      content: "✔";
-      position: absolute;
-      left: 0;
-      color: #2196F3;
-      font-weight: bold;
-    }
-
-    footer {
-      background-color: #222;
-      color: white;
-      padding: 25px 0;
-      text-align: center;
-      margin-top: 40px;
-    }
-
-    footer a {
-      color: #ffca28;
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    /* Sekcja o kotach */
-    .cats {
-      text-align: center;
-    }
-
-    .cat-images {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-top: 25px;
-    }
-
-    .cat-photo {
-      width: 280px;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
-      background: #fafafa;
-      transition: transform 0.3s ease;
-    }
-
-    .cat-photo:hover {
-      transform: scale(1.05);
-    }
-
-    .cat-photo img {
+    header, main, footer {
       width: 100%;
-      height: auto;
-      d
+      display:flex;
+      justify-content:center;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      color:#00ff66; /* NAPISY W HEADER TEŻ NA ZIELONO */
+    }
+    header {
+      padding:80px 20px;
+    }
+    header h1, header p {
+      color:#00ff66; /* na zielono */
+    }
+    header h1 {
+      font-size:3rem;
+      margin-bottom:20px;
+    }
+    header p {
+      font-size:1.3rem;
+      opacity:0.8;
+    }
+    main {
+      width:100%;
+    }
+    section {
+      width:80%;
+      max-width:800px;
+      margin:50px 0;
+      padding:40px;
+      background-color:#111;
+      border-radius:12px;
+      box-shadow:0 6px 16px rgba(0,255,102,0.2);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      color:#00ff66; /* tekst w sekcjach też zielony */
+    }
+    h2 {
+      font-size:2rem;
+      color:#00ff66;
+      margin-bottom:20px;
+      position:relative;
+    }
+    h2::after {
+      content:"";
+      position:absolute;
+      width:60px;
+      height:4px;
+      background:#00ff66;
+      bottom:-8px;
+      left:50%;
+      transform:translateX(-50%);
+      border-radius:2px;
+    }
+    p, li {
+      font-size:1.2rem;
+      line-height:1.5;
+      color:#00ff66; /* tekst paragrafów i list również zielony */
+    }
+    ul {
+      list-style:none;
+      padding-left:0;
+      text-align:center;
+      margin-top:15px;
+    }
+    ul li {
+      margin:8px 0;
+      position:relative;
+      padding-left:25px;
+    }
+    ul li::before {
+      content:"✔";
+      position:absolute;
+      left:0;
+      color:#00ff66;
+      font-weight:bold;
+    }
+    footer {
+      padding:40px 20px;
+      background-color:#111;
+      color:#00ff66;
+    }
+    footer a {
+      color:#00ff66;
+      text-decoration:none;
+      font-weight:600;
+    }
+    footer a:hover {
+      text-decoration:underline;
+    }
+    @media(max-width:768px){
+      header h1 {font-size:2.2rem;}
+      h2 {font-size:1.6rem;}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Witaj na mojej stronie!</h1>
+    <p>Poznaj moje pasje, zainteresowania i ulubione zajęcia.</p>
+  </header>
+
+  <main>
+    <section class="about-me">
+      <h2>O mnie</h2>
+      <p>Cześć! Nazywam się Michał. Moje życie pełne jest pasji i różnorodnych zainteresowań, które dają mi energię i radość.</p>
+    </section>
+
+    <section class="sports">
+      <h2>Sporty, które lubię</h2>
+      <ul>
+        <li>Siatkówka – uwielbiam treningi i wspólną grę z drużyną.</li>
+        <li>Bieganie – daje mi wolność i satysfakcję.</li>
+        <li>Koszykówka – świetna zabawa z przyjaciółmi.</li>
+      </ul>
+    </section>
+
+    <section class="hobbies">
+      <h2>Moje hobby</h2>
+      <ul>
+        <li>Gotowanie – najbardziej lubię przygotowywać coś dla innych.</li>
+        <li>Granie w gry komputerowe – szczególnie te, w które mogę grać ze znajomymi.</li>
+        <li>Spotykanie się ze znajomymi – poznawanie ludzi i wspólne chwile są dla mnie bezcenne.</li>
+      </ul>
+    </section>
+
+    <section class="favorite-game">
+      <h2>Ulubiona gra</h2>
+      <p>Moją ulubioną grą jest <strong>The Binding of Isaac</strong>. To tytuł z niesamowitą fabułą i wciągającą rozgrywką.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Kontakt: <a href="mailto:twojemail@example.com">twojemail@example.com</a></p>
+  </footer>
+</body>
+</html>
