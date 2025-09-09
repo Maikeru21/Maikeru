@@ -49,7 +49,7 @@
     }
 
     .container {
-      max-width: 900px;
+      max-width: 1000px;
       margin: 20px auto;
       padding: 20px;
     }
@@ -70,6 +70,38 @@
       padding: 20px;
       margin-bottom: 20px;
       box-shadow: 0 0 10px #00ff7f44;
+    }
+
+    .characters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .character {
+      background-color: #0f0f0f;
+      border: 1px solid #00ff7f;
+      border-radius: 10px;
+      overflow: hidden;
+      text-align: center;
+      box-shadow: 0 0 8px #00ff7f33;
+    }
+
+    .character img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-bottom: 1px solid #00ff7f;
+    }
+
+    .character h3 {
+      margin: 10px 0;
+      color: #00ff7f;
+    }
+
+    .character p {
+      padding: 0 10px 15px;
+      font-size: 0.95rem;
     }
 
     footer {
@@ -113,9 +145,49 @@
 
     <section id="bohaterowie" class="card">
       <h2>Bohaterowie</h2>
-      <p><strong>Dexter Morgan</strong> – główny bohater, morderca o „kodeksie”.</p>
-      <p><strong>Debra Morgan</strong> – siostra Dextera, policjantka w Miami Metro.</p>
-      <p><strong>Harry Morgan</strong> – ojciec adopcyjny Dextera, nauczył go „kodeksu”.</p>
+      <div class="characters">
+        <div class="character">
+          <img src="Dexter.jfif" alt="Dexter Morgan">
+          <h3>Dexter Morgan</h3>
+          <p>Analityk śladów krwi, który prowadzi podwójne życie jako seryjny morderca z kodeksem.</p>
+        </div>
+
+        <div class="character">
+          <img src="Debra.jfif" alt="Debra Morgan">
+          <h3>Debra Morgan</h3>
+          <p>Siostra Dextera i policjantka w Miami Metro, pełna energii i determinacji.</p>
+        </div>
+
+        <div class="character">
+          <img src="Harry.jfif" alt="Harry Morgan">
+          <h3>Harry Morgan</h3>
+          <p>Ojciec adopcyjny Dextera, nauczył go zasad „kodeksu”, by ukierunkować jego mroczne instynkty.</p>
+        </div>
+
+        <div class="character">
+          <img src="Rita.jfif" alt="Rita Bennett">
+          <h3>Rita Bennett</h3>
+          <p>Kobieta, z którą Dexter wchodzi w związek. Symbol jego pragnienia normalności.</p>
+        </div>
+
+        <div class="character">
+          <img src="La Pasion.jfif" alt="Angel Batista">
+          <h3>Angel Batista</h3>
+          <p>Detektyw w Miami Metro, przyjaciel Dextera, wierny i lojalny.</p>
+        </div>
+
+        <div class="character">
+          <img src="LaGuerta.jfif" alt="Maria LaGuerta">
+          <h3>Maria LaGuerta</h3>
+          <p>Ambitna przełożona policji w Miami Metro, często ściera się z Debrą.</p>
+        </div>
+
+        <div class="character">
+          <img src="Masuka.jfif" alt="Vince Masuka">
+          <h3>Vince Masuka</h3>
+          <p>Ekscentryczny technik kryminalistyczny w Miami Metro, znany z poczucia humoru i ciętych żartów.</p>
+        </div>
+      </div>
     </section>
 
     <section id="ciekawostki" class="card">
@@ -126,10 +198,9 @@
       </p>
     </section>
   </div>
-  <a href="index.html">Powrót do strony głównej</a>
-
+<a href="index.html">Powrót do strony głównej</a>
   <footer>
-    <p>Strona fanowska o serialu Dexter. | Stworzona przez <a href="#">Mnie</a></p>
+    <p>Strona fanowska o serialu Dexter | Stworzona przez <a href="#">Mnie</a></p>
   </footer>
 </body>
 </html>
