@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>The Binding of Isaac</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #000; /* czarne tło */
+      color: #00aaff; /* niebieski tekst */
+      transition: all 0.4s ease;
+    }
+
+    header {
+      padding: 20px;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+      line-height: 1.6;
+    }
+
+    button {
+      margin: 20px auto;
+      display: block;
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      background-color: #00aaff;
+      color: #000;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #0088cc;
+    }
+
+    /* Tryb alternatywny – czarno-żółty */
+    body.yellow-mode {
+      color: #ffdd00; /* żółty tekst */
+    }
+
+    body.yellow-mode button {
+      background-color: #ffdd00;
+      color: #000;
+    }
+
+    body.yellow-mode button:hover {
+      background-color: #e6c800;
+    }
+  </style>
+</head>
+<body>
+  <header>The Binding of Isaac</header>
+  <main>
+    <p>
+      <strong>The Binding of Isaac</strong> to popularna gra typu roguelike stworzona przez Edmunda McMillena. 
+      Gracz eksploruje losowo generowane lochy, zbiera przedmioty i walczy z potworami, aby przetrwać 
+      jak najdłużej.
+    </p>
+
+    <p>
+      Gra wyróżnia się mrocznym klimatem, dużą ilością sekretów oraz ogromną regrywalnością.
+    </p>
+
+    <button onclick="toggleMode()">Przełącz tryb (Dostępność)</button>
+  </main>
+
+  <script>
+    function toggleMode() {
+      document.body.classList.toggle("yellow-mode");
+    }
+  </script>
+</body>
+</html>
