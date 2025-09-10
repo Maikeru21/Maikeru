@@ -6,137 +6,180 @@
   <title>Michał – O mnie i moje pasje</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    * {margin:0;padding:0;box-sizing:border-box;}
-    body {
+   * {margin:0;padding:0;box-sizing:border-box;}
+body {
   font-family:'Poppins',sans-serif;
   background: url('tlo.gif') no-repeat center center fixed;
-  background-size: cover; /* GIF wypełnia całą stronę */
-  color: #00ff66;
+  background-size: cover;
+  color: #00ffcc;
   display: flex;
   flex-direction: column;
   align-items: center;
   line-height: 1.7;
   font-size: 1.1rem;
+  position: relative;
+  overflow-x: hidden;
 }
 
-    header, main, footer {
-      width: 100%;
-      display:flex;
-      justify-content:center;
-      flex-direction:column;
-      align-items:center;
-      text-align:center;
-      color:#00ff66;
-    }
-    header {
-      padding:80px 20px 60px;
-    }
-    header h1 {
-      font-size:3.2rem;
-      margin-bottom:20px;
-      letter-spacing:1px;
-    }
-    header p {
-      font-size:1.4rem;
-      opacity:0.85;
-      max-width:700px;
-    }
-    section {
-      width:80%;
-      max-width:800px;
-      margin:50px 0;
-      padding:40px;
-      background-color:#111;
-      border-radius:12px;
-      box-shadow:0 6px 16px rgba(0,255,102,0.2);
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      color:#00ff66;
-    }
-    h2 {
-      font-size:2.2rem;
-      margin-bottom:25px;
-      position:relative;
-    }
-    h2::after {
-      content:"";
-      position:absolute;
-      width:70px;
-      height:4px;
-      background:#00ff66;
-      bottom:-12px;
-      left:50%;
-      transform:translateX(-50%);
-      border-radius:2px;
-    }
-    p {font-size:1.15rem;margin-bottom:15px;}
-    ul {
+/* przyciemnienie tła dla czytelności */
+body::before {
+  content:"";
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.6);
+  z-index:-1;
+}
+
+/* nagłówek */
+header, main, footer {
+  width: 100%;
+  display:flex;
+  justify-content:center;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  color:#00ffcc;
+}
+header {
+  padding:80px 20px 60px;
+}
+header h1 {
+  font-size:3.2rem;
+  margin-bottom:20px;
+  letter-spacing:2px;
+  color:#00e6ff;
+  text-shadow:0 0 10px #00e6ff, 0 0 20px #00ffff, 0 0 40px #0088ff;
+  animation: neonPulse 2s infinite alternate;
+}
+header p {
+  font-size:1.4rem;
+  opacity:0.9;
+  max-width:700px;
+  text-shadow:0 0 6px #00ffcc;
+}
+
+/* sekcje */
+section {
+  width:80%;
+  max-width:800px;
+  margin:50px 0;
+  padding:40px;
+  background-color:rgba(20,20,20,0.85);
+  border-radius:16px;
+  border:1px solid rgba(0,255,204,0.4);
+  box-shadow:0 0 20px rgba(0,255,204,0.3);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  color:#00ffcc;
+  backdrop-filter: blur(6px);
+  transition: transform 0.3s;
+}
+section:hover {
+  transform: scale(1.02);
+  box-shadow:0 0 30px rgba(0,255,204,0.6);
+}
+h2 {
+  font-size:2.2rem;
+  margin-bottom:25px;
+  position:relative;
+  color:#00e6ff;
+  text-shadow:0 0 8px #00ffff, 0 0 16px #00ccff;
+}
+h2::after {
+  content:"";
+  position:absolute;
+  width:70px;
+  height:4px;
+  background:#00ffcc;
+  bottom:-12px;
+  left:50%;
+  transform:translateX(-50%);
+  border-radius:2px;
+  box-shadow:0 0 10px #00ffcc;
+}
+p {font-size:1.15rem;margin-bottom:15px;}
+
+/* listy */
+ul {
   list-style:none;
   padding-left:0;
   margin-top:20px;
   width:100%;
   max-width:700px;
 }
-
 ul li {
   margin:10px 0;
   display:flex;
-  align-items:flex-start; /* ✔ wyrówna się do góry przy długim tekście */
+  align-items:flex-start;
   gap:10px;
   font-size:1.15rem;
-  text-align:left; /* tekst normalnie z lewej */
+  text-align:left;
 }
-
 ul li::before {
-  content:"✔";
-  color:#00ff66;
+  content:"✦";
+  color:#00ffcc;
   font-weight:bold;
-  font-size:1.2rem;
-  flex-shrink:0; /* ✔ nie ściska się */
+  font-size:1.3rem;
+  flex-shrink:0;
+  text-shadow:0 0 6px #00ffcc;
 }
 
+/* przyciski */
+.link-btn {
+  display:inline-block;
+  margin-top:20px;
+  padding:14px 28px;
+  font-size:1rem;
+  font-weight:600;
+  color:#111;
+  background:linear-gradient(135deg,#00ffcc,#0088ff);
+  border-radius:12px;
+  text-decoration:none;
+  transition:all 0.3s ease;
+  box-shadow:0 0 12px #00ffcc, 0 0 24px #0088ff;
+}
+.link-btn:hover {
+  transform:scale(1.08);
+  background:linear-gradient(135deg,#00ffff,#00ff99);
+  box-shadow:0 0 18px #00ffff, 0 0 36px #00ff99;
+}
 
-    /* Linki jako przyciski */
-    .link-btn {
-      display:inline-block;
-      margin-top:20px;
-      padding:12px 24px;
-      font-size:1rem;
-      font-weight:600;
-      color:#000;
-      background-color:#00ff66;
-      border-radius:8px;
-      text-decoration:none;
-      transition:all 0.3s;
-    }
-    .link-btn:hover {
-      background-color:#00cc55;
-      transform:scale(1.05);
-    }
+/* stopka */
+footer {
+  padding:40px 20px;
+  background-color:rgba(15,15,15,0.9);
+  color:#00ffcc;
+  margin-top:40px;
+  font-size:1.1rem;
+  border-top:1px solid rgba(0,255,204,0.3);
+  text-shadow:0 0 6px #00ffcc;
+}
+footer a {
+  color:#00ffff;
+  text-decoration:none;
+  font-weight:600;
+}
+footer a:hover {
+  text-decoration:underline;
+  color:#00ff99;
+}
 
-    footer {
-      padding:40px 20px;
-      background-color:#111;
-      color:#00ff66;
-      margin-top:40px;
-      font-size:1.1rem;
-    }
-    footer a {
-      color:#00ff66;
-      text-decoration:none;
-      font-weight:600;
-    }
-    footer a:hover {
-      text-decoration:underline;
-    }
+/* animacje */
+@keyframes neonPulse {
+  from { text-shadow:0 0 10px #00e6ff, 0 0 20px #00ffff, 0 0 40px #0088ff; }
+  to { text-shadow:0 0 20px #00ffff, 0 0 40px #00ffcc, 0 0 80px #00e6ff; }
+}
 
-    @media(max-width:768px){
-      header h1 {font-size:2.4rem;}
-      header p {font-size:1.2rem;}
-      h2 {font-size:1.8rem;}
-      p, li {font-size:1rem;}
-    }
+/* responsywność */
+@media(max-width:768px){
+  header h1 {font-size:2.4rem;}
+  header p {font-size:1.2rem;}
+  h2 {font-size:1.8rem;}
+  p, li {font-size:1rem;}
+}
+
   </style>
 </head>
 <body>
