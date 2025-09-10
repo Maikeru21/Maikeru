@@ -8,13 +8,17 @@
   <style>
     * {margin:0;padding:0;box-sizing:border-box;}
     body {
-      font-family:'Poppins',sans-serif;
-      background-color:#000;
-      color:#00ff66; /* WSZYSTKIE NAPISY NA ZIELONO */
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-    }
+  font-family:'Poppins',sans-serif;
+  background: url('tlo.gif') no-repeat center center fixed;
+  background-size: cover; /* GIF wypełnia całą stronę */
+  color: #00ff66;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.7;
+  font-size: 1.1rem;
+}
+
     header, main, footer {
       width: 100%;
       display:flex;
@@ -22,24 +26,20 @@
       flex-direction:column;
       align-items:center;
       text-align:center;
-      color:#00ff66; /* NAPISY W HEADER TEŻ NA ZIELONO */
+      color:#00ff66;
     }
     header {
-      padding:80px 20px;
-    }
-    header h1, header p {
-      color:#00ff66; /* na zielono */
+      padding:80px 20px 60px;
     }
     header h1 {
-      font-size:3rem;
+      font-size:3.2rem;
       margin-bottom:20px;
+      letter-spacing:1px;
     }
     header p {
-      font-size:1.3rem;
-      opacity:0.8;
-    }
-    main {
-      width:100%;
+      font-size:1.4rem;
+      opacity:0.85;
+      max-width:700px;
     }
     section {
       width:80%;
@@ -52,52 +52,75 @@
       display:flex;
       flex-direction:column;
       align-items:center;
-      color:#00ff66; /* tekst w sekcjach też zielony */
+      color:#00ff66;
     }
     h2 {
-      font-size:2rem;
-      color:#00ff66;
-      margin-bottom:20px;
+      font-size:2.2rem;
+      margin-bottom:25px;
       position:relative;
     }
     h2::after {
       content:"";
       position:absolute;
-      width:60px;
+      width:70px;
       height:4px;
       background:#00ff66;
-      bottom:-8px;
+      bottom:-12px;
       left:50%;
       transform:translateX(-50%);
       border-radius:2px;
     }
-    p, li {
-      font-size:1.2rem;
-      line-height:1.5;
-      color:#00ff66; /* tekst paragrafów i list również zielony */
-    }
+    p {font-size:1.15rem;margin-bottom:15px;}
     ul {
-      list-style:none;
-      padding-left:0;
-      text-align:center;
-      margin-top:15px;
+  list-style:none;
+  padding-left:0;
+  margin-top:20px;
+  width:100%;
+  max-width:700px;
+}
+
+ul li {
+  margin:10px 0;
+  display:flex;
+  align-items:flex-start; /* ✔ wyrówna się do góry przy długim tekście */
+  gap:10px;
+  font-size:1.15rem;
+  text-align:left; /* tekst normalnie z lewej */
+}
+
+ul li::before {
+  content:"✔";
+  color:#00ff66;
+  font-weight:bold;
+  font-size:1.2rem;
+  flex-shrink:0; /* ✔ nie ściska się */
+}
+
+
+    /* Linki jako przyciski */
+    .link-btn {
+      display:inline-block;
+      margin-top:20px;
+      padding:12px 24px;
+      font-size:1rem;
+      font-weight:600;
+      color:#000;
+      background-color:#00ff66;
+      border-radius:8px;
+      text-decoration:none;
+      transition:all 0.3s;
     }
-    ul li {
-      margin:8px 0;
-      position:relative;
-      padding-left:25px;
+    .link-btn:hover {
+      background-color:#00cc55;
+      transform:scale(1.05);
     }
-    ul li::before {
-      content:"✔";
-      position:absolute;
-      left:0;
-      color:#00ff66;
-      font-weight:bold;
-    }
+
     footer {
       padding:40px 20px;
       background-color:#111;
       color:#00ff66;
+      margin-top:40px;
+      font-size:1.1rem;
     }
     footer a {
       color:#00ff66;
@@ -107,9 +130,12 @@
     footer a:hover {
       text-decoration:underline;
     }
+
     @media(max-width:768px){
-      header h1 {font-size:2.2rem;}
-      h2 {font-size:1.6rem;}
+      header h1 {font-size:2.4rem;}
+      header p {font-size:1.2rem;}
+      h2 {font-size:1.8rem;}
+      p, li {font-size:1rem;}
     }
   </style>
 </head>
@@ -135,30 +161,32 @@
     </section>
 
     <section class="hobbies">
-      <h2>Moje hobby</h2>
-      <ul>
-        <li>Gotowanie – najbardziej lubię przygotowywać coś dla innych.</li>
-        <li>Granie w gry komputerowe – szczególnie te, w które mogę grać ze znajomymi.</li>
-        <li>Spotykanie się ze znajomymi – poznawanie ludzi i wspólne chwile są dla mnie bezcenne.</li>
-      </ul>
-    </section>
+        <h2>Moje hobby</h2>
+        <ul>
+          <li>Gotowanie – najbardziej lubię przygotowywać coś dla innych.</li>
+          <li>Granie w gry komputerowe – szczególnie te, w które mogę grać ze znajomymi.</li>
+          <li>Spotykanie się ze znajomymi – poznawanie ludzi i wspólne chwile są dla mnie bezcenne.</li>
+        </ul>
+      </section>
 
     <section class="favorite-game">
       <h2>Ulubiona gra</h2>
       <p>Moją ulubioną grą jest <strong>The Binding of Isaac</strong>. To tytuł z niesamowitą fabułą i wciągającą rozgrywką.</p>
     </section>
+
     <section>
       <h2>Dexter</h2>
       <p>Strona o serialu Dexter</p>
-    <a href="Dexter.html">Dexter</a>
+      <a href="Dexter.html" class="link-btn">➡ Przejdź do strony Dexter</a>
     </section>
-     <section>
+
+    <section>
       <h2>Isaac</h2>
       <p>Strona o The Binding of Isaac</p>
-    <a href="isaac.html">Stronka</a>
+      <a href="isaac.html" class="link-btn">➡ Przejdź do strony Isaac</a>
     </section>
-    
   </main>
+
   <footer>
     <h3>Twórca strony Michał</h3>
   </footer>
