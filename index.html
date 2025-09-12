@@ -184,30 +184,33 @@ footer a:hover {
   </style>
 </head>
 <body>
-  <script>
-  // Alert - powitanie
-  document.getElementById('alertBtn').addEventListener('click', function() {
-    alert("Witaj na mojej stronie!");
-  });
-
-  // Confirm - zapytanie o przejście do strony Isaac
-  document.getElementById('confirmBtn').addEventListener('click', function() {
-    const goToIsaac = confirm("Czy chcesz przejść do strony o The Binding of Isaac?");
-    if (goToIsaac) {
-      window.location.href = "isaac.html";
-    }
-  });
-
-  // Prompt - pytanie o imię i powitanie
-  document.getElementById('promptBtn').addEventListener('click', function() {
-    const name = prompt("Jak masz na imię?");
-    if (name) {
-      alert("Cześć " + name + "! Miło Cię widzieć!");
-    } else {
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Alert - powitanie
+    document.getElementById('alertBtn').addEventListener('click', function() {
       alert("Witaj na mojej stronie!");
-    }
+    });
+
+    // Confirm - zapytanie o przejście do strony Isaac
+    document.getElementById('confirmBtn').addEventListener('click', function() {
+      const goToIsaac = confirm("Czy chcesz przejść do strony o The Binding of Isaac?");
+      if (goToIsaac) {
+        window.location.href = "isaac.html";
+      }
+    });
+
+    // Prompt - pytanie o imię i powitanie
+    document.getElementById('promptBtn').addEventListener('click', function() {
+      const name = prompt("Jak masz na imię?");
+      if (name) {
+        alert("Cześć " + name + "! Miło Cię widzieć!");
+      } else {
+        alert("Witaj na mojej stronie!");
+      }
+    });
   });
 </script>
+
   <header>
     <h1>Witaj na mojej stronie!</h1>
     <p>Poznaj moje pasje, zainteresowania i ulubione zajęcia.</p>
