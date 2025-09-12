@@ -184,6 +184,24 @@ footer a:hover {
   </style>
 </head>
 <body>
+  <script>
+  // Prompt – pytanie o imię
+  const userName = prompt("Jak masz na imię?");
+  if (userName) {
+    alert("Cześć " + userName + "! Miło Cię widzieć na mojej stronie 😊");
+  } else {
+    alert("Witaj na mojej stronie! 😊");
+  }
+
+  // Confirm – przed przejściem do strony Isaac
+  const isaacLink = document.querySelector('a[href="isaac.html"]');
+  isaacLink.addEventListener('click', function(e) {
+    const goToIsaac = confirm("Czy na pewno chcesz przejść do strony o The Binding of Isaac?");
+    if (!goToIsaac) {
+      e.preventDefault(); // zatrzymuje przejście
+    }
+  });
+</script>
   <header>
     <h1>Witaj na mojej stronie!</h1>
     <p>Poznaj moje pasje, zainteresowania i ulubione zajęcia.</p>
