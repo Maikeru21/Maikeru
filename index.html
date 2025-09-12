@@ -185,20 +185,26 @@ footer a:hover {
 </head>
 <body>
   <script>
-  // Prompt – pytanie o imię
-  const userName = prompt("Jak masz na imię?");
-  if (userName) {
-    alert("Cześć " + userName + "! Miło Cię widzieć na mojej stronie 😊");
-  } else {
-    alert("Witaj na mojej stronie! 😊");
-  }
+  // Alert - powitanie
+  document.getElementById('alertBtn').addEventListener('click', function() {
+    alert("Witaj na mojej stronie!");
+  });
 
-  // Confirm – przed przejściem do strony Isaac
-  const isaacLink = document.querySelector('a[href="isaac.html"]');
-  isaacLink.addEventListener('click', function(e) {
-    const goToIsaac = confirm("Czy na pewno chcesz przejść do strony o The Binding of Isaac?");
-    if (!goToIsaac) {
-      e.preventDefault(); // zatrzymuje przejście
+  // Confirm - zapytanie o przejście do strony Isaac
+  document.getElementById('confirmBtn').addEventListener('click', function() {
+    const goToIsaac = confirm("Czy chcesz przejść do strony o The Binding of Isaac?");
+    if (goToIsaac) {
+      window.location.href = "isaac.html";
+    }
+  });
+
+  // Prompt - pytanie o imię i powitanie
+  document.getElementById('promptBtn').addEventListener('click', function() {
+    const name = prompt("Jak masz na imię?");
+    if (name) {
+      alert("Cześć " + name + "! Miło Cię widzieć!");
+    } else {
+      alert("Witaj na mojej stronie!");
     }
   });
 </script>
@@ -248,6 +254,12 @@ footer a:hover {
       <a href="isaac.html" class="link-btn">➡ Przejdź do strony Isaac</a>
     </section>
   </main>
+<section class="interactions">
+  <h2>Interakcje z użytkownikiem</h2>
+  <button id="alertBtn" class="link-btn">Pokaż alert</button>
+  <button id="confirmBtn" class="link-btn">Pokaż confirm</button>
+  <button id="promptBtn" class="link-btn">Pokaż prompt</button>
+</section>
 
   <footer>
     <h3>Twórca strony Michał</h3>
