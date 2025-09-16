@@ -6,12 +6,13 @@
   <title>Ben 10 Classic - Konwerter Mocy</title>
   <style>
    * {margin:0;padding:0;box-sizing:border-box;}
-body {
+    body {
   font-family:'Poppins',sans-serif;
   /* animowane tło GIF + gradient */
   background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(0,30,0,0.8)),
-              url("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcnhuNGY0ODllb3B6MHp0eWpiMmhxNTV6amZ0bXI1azl2bmMwNTN0MyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/8Zaoyr0zW9NJLiF6Pv/giphy.gif") no-repeat center center fixed;
-  background-size: cover;
+              url("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcnhuNGY0ODllb3B6MHp0eWpiMmhxNTV6amZ0bXI1azl2bmMwNTN0MyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/8Zaoyr0zW9NJLiF6Pv/giphy.gif") center center fixed;
+  background-size: 60%;   /* zmniejsza tło */
+  background-repeat: repeat; /* powtarza tło dla pełnego efektu */
   color: #00ffcc;
   display: flex;
   flex-direction: column;
@@ -22,6 +23,7 @@ body {
   min-height:100vh;
   overflow-x:hidden;
 }
+
 
 body::before { 
   background: rgba(0,0,0,0.45);
