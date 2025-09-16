@@ -8,9 +8,9 @@
    * {margin:0;padding:0;box-sizing:border-box;}
 body {
   font-family:'Poppins',sans-serif;
-  /* gradient + kosmiczne tło */
-  background: linear-gradient(135deg, #001a00, #004d1a, #001a0d), 
-              url("https://i.ibb.co/rZqN4XW/space-green.jpg") no-repeat center center fixed;
+  /* animowane tło GIF + gradient */
+  background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(0,30,0,0.8)),
+              url("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcnhuNGY0ODllb3B6MHp0eWpiMmhxNTV6amZ0bXI1azl2bmMwNTN0MyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/8Zaoyr0zW9NJLiF6Pv/giphy.gif") no-repeat center center fixed;
   background-size: cover;
   color: #00ffcc;
   display: flex;
@@ -19,13 +19,12 @@ body {
   text-align:center;
   line-height: 1.7;
   font-size: 1.1rem;
-  position: relative;
   min-height:100vh;
   overflow-x:hidden;
 }
 
 body::before { 
-  background: rgba(0,0,0,0.55);
+  background: rgba(0,0,0,0.45);
   content:"";
   position:fixed;
   top:0; left:0;
@@ -33,7 +32,7 @@ body::before {
   z-index:-1;
 }
 
-/* kontener główny */
+/* kontener */
 .container {
   margin-top:80px;
   width:90%;
@@ -42,15 +41,16 @@ body::before {
   background-color:rgba(20,20,20,0.65);
   border-radius:16px;
   border:1px solid rgba(0,255,204,0.4);
-  box-shadow:0 0 20px rgba(0,255,204,0.4);
+  box-shadow:0 0 20px rgba(0,255,204,0.5);
   backdrop-filter: blur(6px);
   transition: transform 0.3s;
 }
 .container:hover {
   transform:scale(1.02);
-  box-shadow:0 0 30px rgba(0,255,204,0.7);
+  box-shadow:0 0 30px rgba(0,255,204,0.8);
 }
 
+/* nagłówek */
 h1 {
   font-size:2.8rem;
   margin-bottom:20px;
@@ -58,7 +58,6 @@ h1 {
   text-shadow:0 0 10px #00ff99, 0 0 20px #00ffcc, 0 0 40px #00e6ff;
   animation: neonPulse 2s infinite alternate;
 }
-
 p {
   font-size:1.2rem;
   margin-bottom:15px;
@@ -66,7 +65,7 @@ p {
   text-shadow:0 0 6px #00ffcc;
 }
 
-/* input i button */
+/* input */
 input {
   padding:14px;
   width:80%;
@@ -86,6 +85,7 @@ input:focus {
   box-shadow:0 0 15px #00ff99;
 }
 
+/* button */
 button {
   margin-top:20px;
   padding:14px 28px;
@@ -155,7 +155,7 @@ button:hover {
   </div>
 
   <div class="footer">
-    <p>Strona stworzona przez Maikeru</p>
+    <p> Strona stworzona przez Maikeru </p>
   </div>
 
   <script>
