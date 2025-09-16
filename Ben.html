@@ -4,80 +4,140 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ben 10 Classic - Konwerter Mocy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    /* Basic reset for margins and padding */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+   * {margin:0;padding:0;box-sizing:border-box;}
+body {
+  font-family:'Poppins',sans-serif;
+  background: url('https://i.ibb.co/0jzYcQP/galaxy.gif') no-repeat center center fixed;
+  background-size: cover;
+  color: #00ffcc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align:center;
+  line-height: 1.7;
+  font-size: 1.1rem;
+  position: relative;
+  min-height:100vh;
+  overflow-x:hidden;
+}
 
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
-      color: #333;
-      padding: 20px;
-      text-align: center;
-    }
+body::before { 
+  background: rgba(0,0,0,0.55);
+  content:"";
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  z-index:-1;
+}
 
-    h1 {
-      color: #3e8e41;
-      margin-bottom: 20px;
-    }
+/* kontener główny */
+.container {
+  margin-top:80px;
+  width:90%;
+  max-width:700px;
+  padding:40px;
+  background-color:rgba(20,20,20,0.6);
+  border-radius:16px;
+  border:1px solid rgba(0,255,204,0.4);
+  box-shadow:0 0 20px rgba(0,255,204,0.3);
+  backdrop-filter: blur(6px);
+  transition: transform 0.3s;
+}
+.container:hover {
+  transform:scale(1.02);
+  box-shadow:0 0 30px rgba(0,255,204,0.6);
+}
 
-    .container {
-      max-width: 600px;
-      margin: 0 auto;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
+h1 {
+  font-size:2.8rem;
+  margin-bottom:20px;
+  color:#00e6ff;
+  text-shadow:0 0 10px #00e6ff, 0 0 20px #00ffff, 0 0 40px #0088ff;
+  animation: neonPulse 2s infinite alternate;
+}
 
-    input {
-      padding: 10px;
-      width: 80%;
-      margin-top: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 16px;
-    }
+p {
+  font-size:1.2rem;
+  margin-bottom:15px;
+  color:#b8ffec;
+  text-shadow:0 0 6px #00ffcc;
+}
 
-    button {
-      padding: 10px 20px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      margin-top: 10px;
-      cursor: pointer;
-      font-size: 16px;
-    }
+/* input i button */
+input {
+  padding:14px;
+  width:80%;
+  margin-top:15px;
+  border:1px solid rgba(0,255,204,0.5);
+  border-radius:10px;
+  font-size:1.1rem;
+  background:rgba(0,0,0,0.4);
+  color:#00ffcc;
+  text-align:center;
+  box-shadow:0 0 10px rgba(0,255,204,0.4);
+  outline:none;
+  transition:all 0.3s ease;
+}
+input:focus {
+  border-color:#00ffff;
+  box-shadow:0 0 15px #00ffff;
+}
 
-    button:hover {
-      background-color: #45a049;
-    }
+button {
+  margin-top:20px;
+  padding:14px 28px;
+  font-size:1.1rem;
+  font-weight:600;
+  color:#111;
+  background:linear-gradient(135deg,#00ffcc,#0088ff);
+  border-radius:12px;
+  border:none;
+  cursor:pointer;
+  transition:all 0.3s ease;
+  box-shadow:0 0 12px #00ffcc, 0 0 24px #0088ff;
+}
+button:hover {
+  transform:scale(1.08);
+  background:linear-gradient(135deg,#00ffff,#00ff99);
+  box-shadow:0 0 18px #00ffff, 0 0 36px #00ff99;
+}
 
-    .wynik {
-      margin-top: 20px;
-      font-size: 18px;
-      font-weight: bold;
-    }
+/* wynik */
+.wynik {
+  margin-top:25px;
+  font-size:1.4rem;
+  font-weight:600;
+  color:#00ffcc;
+  text-shadow:0 0 8px #00ffcc, 0 0 20px #00ffff;
+}
 
-    hr {
-      margin: 30px 0;
-    }
+/* stopka */
+.footer {
+  margin-top:60px;
+  padding:20px;
+  background-color:rgba(15,15,15,0.85);
+  border-top:1px solid rgba(0,255,204,0.3);
+  width:100%;
+  text-align:center;
+  font-size:1rem;
+  color:#00ffcc;
+  text-shadow:0 0 6px #00ffcc;
+}
 
-    p {
-      font-size: 16px;
-      color: #666;
-    }
+/* animacja */
+@keyframes neonPulse {
+  from { text-shadow:0 0 10px #00e6ff, 0 0 20px #00ffff, 0 0 40px #0088ff; }
+  to { text-shadow:0 0 20px #00ffff, 0 0 40px #00ffcc, 0 0 80px #00e6ff; }
+}
 
-    .footer {
-      font-size: 14px;
-      color: #888;
-      margin-top: 40px;
-    }
+/* responsywność */
+@media(max-width:768px){
+  h1 {font-size:2.2rem;}
+  p {font-size:1rem;}
+  .wynik {font-size:1.2rem;}
+}
   </style>
 </head>
 <body>
@@ -87,32 +147,28 @@
 
     <label for="mocInput">Moc postaci (np. 9000):</label><br>
     <input type="text" id="mocInput" placeholder="Wpisz moc...">
+    <br>
     <button onclick="przeliczMoc()">Konwertuj</button>
 
     <p id="wynik" class="wynik"></p>
   </div>
 
-  <hr>
-
-  <p><strong>Ben 10 Classic</strong> to kultowy serial animowany o chłopcu, który znajduje kosmiczne urządzenie zwane Omnitrix i zmienia się w potężne istoty. 👽</p>
-
   <div class="footer">
-    <p>Strona stworzona przez fana Ben 10. 💚</p>
+    <p>💚 Strona stworzona przez fana Ben 10. 💚</p>
   </div>
 
   <script>
     function przeliczMoc() {
       var tekstowaMoc = document.getElementById("mocInput").value;
       let liczbowo = Number(tekstowaMoc);
-      const intro = "Moc Omnitrixa została ustawiona na: ";
+      const intro = "Moc Omnitrixa została ustawiona na";
 
       if (isNaN(liczbowo)) {
         document.getElementById("wynik").innerText = "🚫 To nie wygląda jak prawdziwa moc!";
       } else {
-        document.getElementById("wynik").innerText = intro + liczbowo + " punktów mocy 💥";
+        document.getElementById("wynik").innerText = `${intro}: ${liczbowo} punktów mocy 💥`;
       }
     }
   </script>
-
 </body>
 </html>
