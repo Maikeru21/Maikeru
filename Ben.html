@@ -8,7 +8,9 @@
    * {margin:0;padding:0;box-sizing:border-box;}
 body {
   font-family:'Poppins',sans-serif;
-  background: rgb (0,0,255);
+  /* gradient + kosmiczne tło */
+  background: linear-gradient(135deg, #001a00, #004d1a, #001a0d), 
+              url("https://i.ibb.co/rZqN4XW/space-green.jpg") no-repeat center center fixed;
   background-size: cover;
   color: #00ffcc;
   display: flex;
@@ -37,23 +39,23 @@ body::before {
   width:90%;
   max-width:700px;
   padding:40px;
-  background-color:rgba(20,20,20,0.6);
+  background-color:rgba(20,20,20,0.65);
   border-radius:16px;
   border:1px solid rgba(0,255,204,0.4);
-  box-shadow:0 0 20px rgba(0,255,204,0.3);
+  box-shadow:0 0 20px rgba(0,255,204,0.4);
   backdrop-filter: blur(6px);
   transition: transform 0.3s;
 }
 .container:hover {
   transform:scale(1.02);
-  box-shadow:0 0 30px rgba(0,255,204,0.6);
+  box-shadow:0 0 30px rgba(0,255,204,0.7);
 }
 
 h1 {
   font-size:2.8rem;
   margin-bottom:20px;
-  color:#00e6ff;
-  text-shadow:0 0 10px #00e6ff, 0 0 20px #00ffff, 0 0 40px #0088ff;
+  color:#00ff99;
+  text-shadow:0 0 10px #00ff99, 0 0 20px #00ffcc, 0 0 40px #00e6ff;
   animation: neonPulse 2s infinite alternate;
 }
 
@@ -80,8 +82,8 @@ input {
   transition:all 0.3s ease;
 }
 input:focus {
-  border-color:#00ffff;
-  box-shadow:0 0 15px #00ffff;
+  border-color:#00ff99;
+  box-shadow:0 0 15px #00ff99;
 }
 
 button {
@@ -127,8 +129,8 @@ button:hover {
 
 /* animacja */
 @keyframes neonPulse {
-  from { text-shadow:0 0 10px #00e6ff, 0 0 20px #00ffff, 0 0 40px #0088ff; }
-  to { text-shadow:0 0 20px #00ffff, 0 0 40px #00ffcc, 0 0 80px #00e6ff; }
+  from { text-shadow:0 0 10px #00ff99, 0 0 20px #00ffcc, 0 0 40px #00e6ff; }
+  to { text-shadow:0 0 20px #00ffff, 0 0 40px #00ff99, 0 0 80px #00ffcc; }
 }
 
 /* responsywność */
@@ -153,7 +155,7 @@ button:hover {
   </div>
 
   <div class="footer">
-    <p>Strona stworzona przez Maikeru. </p>
+    <p>Strona stworzona przez Maikeru 💚</p>
   </div>
 
   <script>
