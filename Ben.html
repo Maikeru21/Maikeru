@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ben 10 Classic - Konwerter Mocy</title>
+  <style>
+    /* Basic reset for margins and padding */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #3e8e41;
+      margin-bottom: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    input {
+      padding: 10px;
+      width: 80%;
+      margin-top: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      margin-top: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .wynik {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    hr {
+      margin: 30px 0;
+    }
+
+    p {
+      font-size: 16px;
+      color: #666;
+    }
+
+    .footer {
+      font-size: 14px;
+      color: #888;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Ben 10 Classic - Konwerter Mocy Omnitrixa</h1>
+    <p>Wpisz moc (jako tekst), a Omnitrix przekonwertuje ją na wartość liczbową!</p>
+
+    <label for="mocInput">Moc postaci (np. 9000):</label><br>
+    <input type="text" id="mocInput" placeholder="Wpisz moc...">
+    <button onclick="przeliczMoc()">Konwertuj</button>
+
+    <p id="wynik" class="wynik"></p>
+  </div>
+
+  <hr>
+
+  <p><strong>Ben 10 Classic</strong> to kultowy serial animowany o chłopcu, który znajduje kosmiczne urządzenie zwane Omnitrix i zmienia się w potężne istoty. 👽</p>
+
+  <div class="footer">
+    <p>Strona stworzona przez fana Ben 10. 💚</p>
+  </div>
+
+  <script>
+    function przeliczMoc() {
+      var tekstowaMoc = document.getElementById("mocInput").value;
+      let liczbowo = Number(tekstowaMoc);
+      const intro = "Moc Omnitrixa została ustawiona na: ";
+
+      if (isNaN(liczbowo)) {
+        document.getElementById("wynik").innerText = "🚫 To nie wygląda jak prawdziwa moc!";
+      } else {
+        document.getElementById("wynik").innerText = intro + liczbowo + " punktów mocy 💥";
+      }
+    }
+  </script>
+
+</body>
+</html>
