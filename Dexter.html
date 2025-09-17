@@ -68,13 +68,14 @@
 }
 
 /* Opcjonalnie dostosowanie samego kontenera postaci */
-.character {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px; /* Przestrzeń między obrazkiem a tekstem */
-  max-width: 180px; /* Ograniczenie maksymalnej szerokości dla postaci */
-}
+.characters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 30px;
+  justify-items: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
 
 
     /* Sekcje */
@@ -252,6 +253,53 @@
         font-size: 1rem;
       }
     }
+  nav {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #111;
+  background: linear-gradient(135deg, #00ffcc, #0088ff);
+  box-shadow: 0 0 10px #00ffcc, 0 0 20px #0088ff;
+  transition: all 0.3s ease;
+}
+
+nav a:hover {
+  transform: scale(1.1);
+  background: linear-gradient(135deg, #00ffff, #00ff99);
+  box-shadow: 0 0 15px #00ffff, 0 0 30px #00ff99;
+  color: #000;
+}
+
+/* Powrót – spójny przycisk */
+.return-container {
+  margin-top: 40px;
+}
+
+.return-container .btn {
+  display: inline-block;
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111;
+  background: linear-gradient(135deg, #00ffcc, #0088ff);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 12px #00ffcc, 0 0 24px #0088ff;
+}
+
+.return-container .btn:hover {
+  transform: scale(1.08);
+  background: linear-gradient(135deg, #00ffff, #00ff99);
+  box-shadow: 0 0 18px #00ffff, 0 0 36px #00ff99;
+}
   </style>
 
 </head>
