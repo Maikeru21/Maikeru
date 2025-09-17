@@ -58,6 +58,24 @@
       max-width: 700px;
       text-shadow: 0 0 6px #00ffcc;
     }
+      /* Dostosowanie obrazków postaci */
+.character img {
+  width: 100%; /* Obrazki wypełniają kontener, ale nie wykraczają poza jego granice */
+  max-width: 150px; /* Maksymalna szerokość obrazków */
+  height: auto; /* Utrzymanie proporcji */
+  border-radius: 8px; /* Lekko zaokrąglone rogi */
+  object-fit: cover; /* Zapewnia, że obrazki będą dobrze wypełniały kontener */
+}
+
+/* Opcjonalnie dostosowanie samego kontenera postaci */
+.character {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px; /* Przestrzeń między obrazkiem a tekstem */
+  max-width: 180px; /* Ograniczenie maksymalnej szerokości dla postaci */
+}
+
 
     /* Sekcje */
     section {
