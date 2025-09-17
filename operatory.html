@@ -1,7 +1,8 @@
-<html lang="pl"><head>
+<!DOCTYPE html>
+<html lang="pl">
+<head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Operacje Arytmetyczne w JavaScript</title>
+  <title>The Binding of Isaac</title>
   <style>
     * {margin:0;padding:0;box-sizing:border-box;}
 
@@ -17,11 +18,11 @@
       font-size: 1.1rem;
       position: relative;
       overflow-x: hidden;
+      transition: all 0.3s ease;
     }
 
-    /* Przyciemnienie tła dla czytelności */
     body::before { 
-      background: rgba(0,0,0,0.3); /* mniej ciemne */
+      background: rgba(0,0,0,0.4);
       content:"";
       position:fixed;
       top:0; left:0;
@@ -29,8 +30,7 @@
       z-index:-1;
     }
 
-    /* Nagłówek */
-    header, main, footer {
+    header, main {
       width: 100%;
       display: flex;
       justify-content: center;
@@ -39,102 +39,92 @@
       text-align: center;
       color: #00ffcc;
     }
+
     header {
-      padding: 80px 20px 60px;
-    }
-    header h1 {
-      font-size: 3.2rem;
-      margin-bottom: 20px;
+      padding: 60px 20px 40px;
+      font-size: 3rem;
       letter-spacing: 2px;
       color: #00e6ff;
       text-shadow: 0 0 10px #00e6ff, 0 0 20px #00ffff, 0 0 40px #0088ff;
       animation: neonPulse 2s infinite alternate;
     }
-    header p {
-      font-size: 1.4rem;
-      opacity: 0.9;
-      max-width: 700px;
-      text-shadow: 0 0 6px #00ffcc;
-    }
 
-    /* Sekcje */
-    section {
-      width: 80%;
-      max-width: 800px;
-      margin: 50px 0;
+    main {
+      width: 85%;
+      max-width: 900px;
       padding: 40px;
-      background-color: rgba(20, 20, 20, 0.6);
-      backdrop-filter: blur(4px);
+      margin-bottom: 40px;
+      background-color: rgba(20, 20, 20, 0.65);
+      backdrop-filter: blur(6px);
       border-radius: 16px;
       border: 1px solid rgba(0, 255, 204, 0.4);
       box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: #00ffcc;
-      backdrop-filter: blur(6px);
-      transition: transform 0.3s;
-    }
-    section:hover {
-      transform: scale(1.02);
-      box-shadow: 0 0 30px rgba(0, 255, 204, 0.6);
-    }
-
-    h2 {
-      font-size: 2.2rem;
-      margin-bottom: 25px;
-      position: relative;
-      color: #00e6ff;
-      text-shadow: 0 0 8px #00ffff, 0 0 16px #00ccff;
-    }
-
-    h2::after {
-      content: "";
-      position: absolute;
-      width: 70px;
-      height: 4px;
-      background: #00ffcc;
-      bottom: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      border-radius: 2px;
-      box-shadow: 0 0 10px #00ffcc;
     }
 
     p {
       font-size: 1.15rem;
-      margin-bottom: 15px;
-    }
-
-    /* Listy */
-    ul {
-      list-style: none;
-      padding-left: 0;
-      margin-top: 20px;
-      width: 100%;
-      max-width: 700px;
-    }
-    ul li {
-      margin: 10px 0;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 1.15rem;
-      text-align: left;
-    }
-    ul li::before {
-      content: "✦";
-      color: #00ffcc;
-      font-weight: bold;
-      font-size: 1.3rem;
-      flex-shrink: 0;
+      margin-bottom: 20px;
       text-shadow: 0 0 6px #00ffcc;
     }
 
-    /* Przycisk */
-    .link-btn {
+    /* Tabela */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+      font-size: 1.2rem;
+    }
+
+    th, td {
+      border: 1px solid rgba(0,255,204,0.5);
+      padding: 12px;
+      text-align: center;
+    }
+
+    th {
+      background: rgba(0,255,204,0.2);
+      color: #00ffff;
+      text-shadow: 0 0 8px #00e6ff;
+    }
+
+    td {
+      background: rgba(0,0,0,0.5);
+      color: #00ffcc;
+    }
+
+    td input, td select {
+      background: rgba(0,0,0,0.7);
+      border: 1px solid #00ffcc;
+      border-radius: 8px;
+      color: #00ffcc;
+      padding: 6px;
+      width: 100%;
+      text-align: center;
+      font-size: 1.1rem;
+      outline: none;
+    }
+
+    td input:focus, td select:focus {
+      box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffcc;
+    }
+
+    .result {
+      font-weight: bold;
+      color: #00e6ff;
+      text-shadow: 0 0 10px #00ffff;
+    }
+
+    /* Neonowe przyciski */
+    .buttons {
+      margin-top: 30px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
       display: inline-block;
-      margin-top: 20px;
       padding: 14px 28px;
       font-size: 1rem;
       font-weight: 600;
@@ -144,158 +134,90 @@
       text-decoration: none;
       transition: all 0.3s ease;
       box-shadow: 0 0 12px #00ffcc, 0 0 24px #0088ff;
+      cursor: pointer;
+      border: none;
     }
-    .link-btn:hover {
+
+    .btn:hover {
       transform: scale(1.08);
       background: linear-gradient(135deg, #00ffff, #00ff99);
       box-shadow: 0 0 18px #00ffff, 0 0 36px #00ff99;
     }
 
-    /* Tabela */
-    .container {
-      background-color: rgba(20, 20, 20, 0.7);
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-      text-align: center;
-      width: 80%;
-      max-width: 600px;
-    }
-
-    h1 {
-      color: #d81b60; /* Głęboki różowy */
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-
-    table, th, td {
-      border: 1px solid #f48fb1; /* Różowa ramka */
-    }
-
-    th {
-      background-color: #f06292; /* Różowe tło */
-      color: white;
-      padding: 12px;
-      border-radius: 6px 6px 0 0;
-    }
-
-    td {
-      padding: 10px;
-      text-align: center;
-      font-size: 1.2rem;
-      color: #d81b60;
-    }
-
-    .operation {
-      font-weight: bold;
-    }
-
-    .result {
-      color: #f06292;
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-
-    /* Delikatny efekt hover na wierszach tabeli */
-    tr:hover {
-      background-color: #f8bbd0;
-    }
-
-    /* Animacje */
     @keyframes neonPulse {
-      from {
-        text-shadow: 0 0 10px #00e6ff, 0 0 20px #00ffff, 0 0 40px #0088ff;
-      }
-      to {
-        text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffcc, 0 0 80px #00e6ff;
-      }
-    }
-
-    /* Responsywność */
-    @media(max-width: 768px) {
-      header h1 {
-        font-size: 2.4rem;
-      }
-      header p {
-        font-size: 1.2rem;
-      }
-      h2 {
-        font-size: 1.8rem;
-      }
-      p, li {
-        font-size: 1rem;
-      }
+      from { text-shadow: 0 0 10px #00e6ff, 0 0 20px #00ffff, 0 0 40px #0088ff; }
+      to { text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffcc, 0 0 80px #00e6ff; }
     }
   </style>
-
 </head>
 <body>
+  <header>The Binding of Isaac</header>
+  <main>
+    <p>
+      <strong>The Binding of Isaac</strong> to popularna gra typu roguelike stworzona przez Edmunda McMillena. 
+      Gracz eksploruje losowo generowane lochy, zbiera przedmioty i walczy z potworami, aby przetrwać jak najdłużej.
+    </p>
+    <p>
+      Gra wyróżnia się mrocznym klimatem, dużą ilością sekretów oraz ogromną regrywalnością.
+    </p>
 
-  <div class="container">
-    <h1>Operacje Arytmetyczne w JavaScript</h1>
-
+    <!-- Interaktywna tabela -->
     <table>
       <thead>
         <tr>
-          <th>Operacja</th>
+          <th>Liczba 1</th>
+          <th>Działanie</th>
+          <th>Liczba 2</th>
           <th>Wynik</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td class="operation">Dodawanie: 5 + 3</td>
-          <td class="result" id="addition">8</td>
-        </tr>
-        <tr>
-          <td class="operation">Odejmowanie: 5 - 3</td>
-          <td class="result" id="subtraction">2</td>
-        </tr>
-        <tr>
-          <td class="operation">Mnożenie: 5 * 3</td>
-          <td class="result" id="multiplication">15</td>
-        </tr>
-        <tr>
-          <td class="operation">Dzielenie: 5 / 2</td>
-          <td class="result" id="division">2.5</td>
-        </tr>
-        <tr>
-          <td class="operation">Dzielenie całkowite: Math.floor(5 / 2)</td>
-          <td class="result" id="floorDivision">2</td>
-        </tr>
-        <tr>
-          <td class="operation">Reszta z dzielenia: 5 % 2</td>
-          <td class="result" id="modulus">1</td>
-        </tr>
-        <tr>
-          <td class="operation">Potęgowanie: 5 ** 3</td>
-          <td class="result" id="exponentiation">125</td>
+          <td><input type="number" id="num1" placeholder="np. 5"></td>
+          <td>
+            <select id="operation">
+              <option value="+">+</option>
+              <option value="-">-</option>
+              <option value="*">×</option>
+              <option value="/">÷</option>
+            </select>
+          </td>
+          <td><input type="number" id="num2" placeholder="np. 4"></td>
+          <td class="result" id="result">–</td>
         </tr>
       </tbody>
     </table>
-  </div>
+
+    <div class="buttons">
+      <button class="btn" onclick="calculate()">Oblicz</button>
+      <a href="index.html" class="btn">⬅ Powrót do strony głównej</a>
+    </div>
+  </main>
 
   <script>
-    // Definiowanie zmiennych
-    let a = 5;
-    let b = 3;
-    let c = 2;
+    function calculate() {
+      let num1 = parseFloat(document.getElementById("num1").value);
+      let num2 = parseFloat(document.getElementById("num2").value);
+      let op = document.getElementById("operation").value;
+      let resultField = document.getElementById("result");
 
-    // Operacje
-    document.getElementById('addition').innerText = a + b;  // 8
-    document.getElementById('subtraction').innerText = a - b;  // 2
-    document.getElementById('multiplication').innerText = a * b;  // 15
-    document.getElementById('division').innerText = a / c;  // 2.5
-    document.getElementById('floorDivision').innerText = Math.floor(a / c);  // 2
-    document.getElementById('modulus').innerText = a % c;  // 1
-    document.getElementById('exponentiation').innerText = a ** b;  // 125
+      if (isNaN(num1) || isNaN(num2)) {
+        resultField.textContent = "Błąd!";
+        return;
+      }
+
+      let result;
+      switch(op) {
+        case "+": result = num1 + num2; break;
+        case "-": result = num1 - num2; break;
+        case "*": result = num1 * num2; break;
+        case "/": 
+          result = (num2 === 0) ? "∞" : (num1 / num2).toFixed(2); 
+          break;
+      }
+
+      resultField.textContent = result;
+    }
   </script>
-
-
-
-</body></html>
+</body>
+</html>
