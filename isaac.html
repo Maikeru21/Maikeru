@@ -162,22 +162,36 @@
 <body>
   <header>The Binding of Isaac</header>
   <main>
-    <p>
-      <strong>The Binding of Isaac</strong> to popularna gra typu roguelike stworzona przez Edmunda McMillena. 
-      Gracz eksploruje losowo generowane lochy, zbiera przedmioty i walczy z potworami, aby przetrwać 
-      jak najdłużej.
-    </p>
+  <p>
+    <strong>The Binding of Isaac</strong> to popularna gra typu roguelike stworzona przez Edmunda McMillena. 
+    Gracz eksploruje losowo generowane lochy, zbiera przedmioty i walczy z potworami, aby przetrwać jak najdłużej.
+  </p>
+  <p>
+    Gra wyróżnia się mrocznym klimatem, dużą ilością sekretów oraz ogromną regrywalnością.
+  </p>
 
-    <p>
-      Gra wyróżnia się mrocznym klimatem, dużą ilością sekretów oraz ogromną regrywalnością.
-    </p>
-
-    <!-- Przycisk przełącznika i powrotu -->
-    <div class="buttons">
-      <button class="btn" onclick="toggleMode()">Przełącz tryb (Dostępność)</button>
-      <a href="index.html" class="btn">⬅ Powrót do strony głównej</a>
+  <!-- Sekcja postaci -->
+  <section class="characters">
+    <div class="character-card">
+      <img src="isaac.png" alt="Isaac">
+      <h3>Isaac</h3>
+      <p>Główny bohater gry. Startuje z podstawowymi statystykami i łzami jako bronią.</p>
     </div>
-  </main>
+
+    <div class="character-card">
+      <img src="magdalena.png" alt="Magdalene">
+      <h3>Magdalene</h3>
+      <p>Znana jako Maggy. Ma więcej serc na start, ale mniejszą prędkość ruchu.</p>
+    </div>
+
+    <div class="character-card">
+      <img src="cain.jpg" alt="Cain">
+      <h3>Cain</h3>
+      <p>Szybszy bohater, zaczyna z kluczem i większą szansą na lepsze przedmioty.</p>
+    </div>
+  </section>
+</main>
+
 
   <script>
     function toggleMode() {
