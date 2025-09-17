@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>The Binding of Isaac</title>
+  <title>Interaktywne Operatory w JavaScript</title>
   <style>
     * {margin:0;padding:0;box-sizing:border-box;}
 
@@ -18,7 +18,6 @@
       font-size: 1.1rem;
       position: relative;
       overflow-x: hidden;
-      transition: all 0.3s ease;
     }
 
     body::before { 
@@ -30,7 +29,7 @@
       z-index:-1;
     }
 
-    header, main {
+    header, main, footer {
       width: 100%;
       display: flex;
       justify-content: center;
@@ -41,8 +40,12 @@
     }
 
     header {
-      padding: 60px 20px 40px;
+      padding: 80px 20px 40px;
+    }
+
+    header h1 {
       font-size: 3rem;
+      margin-bottom: 20px;
       letter-spacing: 2px;
       color: #00e6ff;
       text-shadow: 0 0 10px #00e6ff, 0 0 20px #00ffff, 0 0 40px #0088ff;
@@ -50,7 +53,7 @@
     }
 
     main {
-      width: 85%;
+      width: 80%;
       max-width: 900px;
       padding: 40px;
       margin-bottom: 40px;
@@ -59,89 +62,70 @@
       border-radius: 16px;
       border: 1px solid rgba(0, 255, 204, 0.4);
       box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
 
-    p {
-      font-size: 1.15rem;
-      margin-bottom: 20px;
+    main:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 30px rgba(0, 255, 204, 0.6);
+    }
+
+    section {
+      margin-bottom: 30px;
+      padding: 20px;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(0,255,204,0.4);
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,255,204,0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    section:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 20px rgba(0,255,204,0.6);
+    }
+
+    h2 {
+      color: #00e6ff;
+      margin-bottom: 15px;
       text-shadow: 0 0 6px #00ffcc;
     }
 
-    /* Tabela */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 30px;
-      font-size: 1.2rem;
-    }
-
-    th, td {
-      border: 1px solid rgba(0,255,204,0.5);
-      padding: 12px;
-      text-align: center;
-    }
-
-    th {
-      background: rgba(0,255,204,0.2);
-      color: #00ffff;
-      text-shadow: 0 0 8px #00e6ff;
-    }
-
-    td {
+    input, select {
+      margin: 5px;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(0,255,204,0.4);
       background: rgba(0,0,0,0.5);
       color: #00ffcc;
-    }
-
-    td input, td select {
-      background: rgba(0,0,0,0.7);
-      border: 1px solid #00ffcc;
-      border-radius: 8px;
-      color: #00ffcc;
-      padding: 6px;
-      width: 100%;
+      font-size: 1rem;
       text-align: center;
-      font-size: 1.1rem;
-      outline: none;
     }
 
-    td input:focus, td select:focus {
-      box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffcc;
-    }
-
-    .result {
-      font-weight: bold;
-      color: #00e6ff;
-      text-shadow: 0 0 10px #00ffff;
-    }
-
-    /* Neonowe przyciski */
-    .buttons {
-      margin-top: 30px;
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 14px 28px;
+    button {
+      margin-top: 10px;
+      padding: 12px 24px;
       font-size: 1rem;
       font-weight: 600;
       color: #111;
       background: linear-gradient(135deg, #00ffcc, #0088ff);
       border-radius: 12px;
-      text-decoration: none;
+      border: none;
+      cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: 0 0 12px #00ffcc, 0 0 24px #0088ff;
-      cursor: pointer;
-      border: none;
     }
 
-    .btn:hover {
+    button:hover {
       transform: scale(1.08);
       background: linear-gradient(135deg, #00ffff, #00ff99);
       box-shadow: 0 0 18px #00ffff, 0 0 36px #00ff99;
+    }
+
+    p {
+      margin-top: 10px;
+      font-size: 1.15rem;
+      text-shadow: 0 0 6px #00ffcc;
     }
 
     @keyframes neonPulse {
@@ -151,73 +135,110 @@
   </style>
 </head>
 <body>
-  <header>The Binding of Isaac</header>
+  <header>
+    <h1>Interaktywne Operatory w JavaScript</h1>
+  </header>
+
   <main>
-    <p>
-      <strong>The Binding of Isaac</strong> to popularna gra typu roguelike stworzona przez Edmunda McMillena. 
-      Gracz eksploruje losowo generowane lochy, zbiera przedmioty i walczy z potworami, aby przetrwać jak najdłużej.
-    </p>
-    <p>
-      Gra wyróżnia się mrocznym klimatem, dużą ilością sekretów oraz ogromną regrywalnością.
-    </p>
+    <!-- Operator arytmetyczny (dodawanie) -->
+    <section>
+      <h2>Operator arytmetyczny (+)</h2>
+      <input type="number" id="arytA" placeholder="Liczba A">
+      <input type="number" id="arytB" placeholder="Liczba B">
+      <button onclick="dodawanie()">Oblicz</button>
+      <p>Wynik: <span id="wynikAryt"></span></p>
+    </section>
 
-    <!-- Interaktywna tabela -->
-    <table>
-      <thead>
-        <tr>
-          <th>Liczba 1</th>
-          <th>Działanie</th>
-          <th>Liczba 2</th>
-          <th>Wynik</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><input type="number" id="num1" placeholder="np. 5"></td>
-          <td>
-            <select id="operation">
-              <option value="+">+</option>
-              <option value="-">-</option>
-              <option value="*">×</option>
-              <option value="/">÷</option>
-            </select>
-          </td>
-          <td><input type="number" id="num2" placeholder="np. 4"></td>
-          <td class="result" id="result">–</td>
-        </tr>
-      </tbody>
-    </table>
+    <!-- Operator logiczny (AND) -->
+    <section>
+      <h2>Operator logiczny (&&)</h2>
+      <select id="logA">
+        <option value="true">true</option>
+        <option value="false">false</option>
+      </select>
+      <select id="logB">
+        <option value="true">true</option>
+        <option value="false">false</option>
+      </select>
+      <button onclick="logiczny()">Sprawdź</button>
+      <p>Wynik: <span id="wynikLog"></span></p>
+    </section>
 
-    <div class="buttons">
-      <button class="btn" onclick="calculate()">Oblicz</button>
-      <a href="index.html" class="btn">⬅ Powrót do strony głównej</a>
-    </div>
+    <!-- Operator bitowy (OR) -->
+    <section>
+      <h2>Operator bitowy (|)</h2>
+      <input type="number" id="bitA" placeholder="Liczba A">
+      <input type="number" id="bitB" placeholder="Liczba B">
+      <button onclick="bitowy()">Oblicz</button>
+      <p>Wynik: <span id="wynikBit"></span></p>
+    </section>
+
+    <!-- Operator przypisania (+=) -->
+    <section>
+      <h2>Operator przypisania (+=)</h2>
+      <input type="number" id="przypA" placeholder="Liczba początkowa">
+      <input type="number" id="przypB" placeholder="Dodaj">
+      <button onclick="przypisanie()">Oblicz</button>
+      <p>Wynik: <span id="wynikPrzyp"></span></p>
+    </section>
+
+    <!-- Operator porównania (==) -->
+    <section>
+      <h2>Operator porównania (==)</h2>
+      <input type="text" id="porA" placeholder="Wartość A">
+      <input type="text" id="porB" placeholder="Wartość B">
+      <button onclick="porownanie()">Sprawdź</button>
+      <p>Wynik: <span id="wynikPor"></span></p>
+    </section>
+
+    <!-- Operator łańcuchowy (konkatenacja) -->
+    <section>
+      <h2>Operator łańcuchowy (+)</h2>
+      <input type="text" id="strA" placeholder="Tekst A">
+      <input type="text" id="strB" placeholder="Tekst B">
+      <button onclick="konkatenacja()">Połącz</button>
+      <p>Wynik: <span id="wynikStr"></span></p>
+    </section>
   </main>
 
   <script>
-    function calculate() {
-      let num1 = parseFloat(document.getElementById("num1").value);
-      let num2 = parseFloat(document.getElementById("num2").value);
-      let op = document.getElementById("operation").value;
-      let resultField = document.getElementById("result");
+    function dodawanie() {
+      let a = Number(document.getElementById("arytA").value);
+      let b = Number(document.getElementById("arytB").value);
+      document.getElementById("wynikAryt").textContent = a + b;
+    }
 
-      if (isNaN(num1) || isNaN(num2)) {
-        resultField.textContent = "Błąd!";
-        return;
-      }
+    function logiczny() {
+      let a = document.getElementById("logA").value === "true";
+      let b = document.getElementById("logB").value === "true";
+      document.getElementById("wynikLog").textContent = a && b;
+    }
 
-      let result;
-      switch(op) {
-        case "+": result = num1 + num2; break;
-        case "-": result = num1 - num2; break;
-        case "*": result = num1 * num2; break;
-        case "/": 
-          result = (num2 === 0) ? "∞" : (num1 / num2).toFixed(2); 
-          break;
-      }
+    function bitowy() {
+      let a = Number(document.getElementById("bitA").value);
+      let b = Number(document.getElementById("bitB").value);
+      document.getElementById("wynikBit").textContent = a | b;
+    }
 
-      resultField.textContent = result;
+    function przypisanie() {
+      let a = Number(document.getElementById("przypA").value);
+      let b = Number(document.getElementById("przypB").value);
+      a += b;
+      document.getElementById("wynikPrzyp").textContent = a;
+    }
+
+    function porownanie() {
+      let a = document.getElementById("porA").value;
+      let b = document.getElementById("porB").value;
+      document.getElementById("wynikPor").textContent = (a == b);
+    }
+
+    function konkatenacja() {
+      let a = document.getElementById("strA").value;
+      let b = document.getElementById("strB").value;
+      document.getElementById("wynikStr").textContent = a + b;
     }
   </script>
 </body>
 </html>
+
