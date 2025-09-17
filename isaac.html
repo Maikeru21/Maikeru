@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="pl">
+<!DOCTYPE html> 
+<html lang="pl"> 
 <head>
   <meta charset="UTF-8">
   <title>The Binding of Isaac</title>
@@ -21,7 +21,6 @@
       transition: all 0.3s ease;
     }
 
-    /* Przyciemnienie tła */
     body::before { 
       background: rgba(0,0,0,0.4);
       content:"";
@@ -31,7 +30,6 @@
       z-index:-1;
     }
 
-    /* Nagłówek */
     header, main, footer {
       width: 100%;
       display: flex;
@@ -46,7 +44,7 @@
       padding: 80px 20px 40px;
     }
 
-    header h1, header {
+    header h1 {
       font-size: 3rem;
       margin-bottom: 20px;
       letter-spacing: 2px;
@@ -55,10 +53,9 @@
       animation: neonPulse 2s infinite alternate;
     }
 
-    /* Sekcja główna w panelu */
     main {
       width: 80%;
-      max-width: 800px;
+      max-width: 900px;
       padding: 40px;
       margin-bottom: 40px;
       background-color: rgba(20, 20, 20, 0.65);
@@ -66,7 +63,7 @@
       border-radius: 16px;
       border: 1px solid rgba(0, 255, 204, 0.4);
       box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
-      transition: transform 0.3s;
+      transition: transform 0.3s, background-color 0.3s, color 0.3s;
     }
 
     main:hover {
@@ -80,28 +77,61 @@
       text-shadow: 0 0 6px #00ffcc;
     }
 
-    /* Przyciski */
+    /* Karty postaci */
+    .characters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .character-card {
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(0,255,204,0.4);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 0 12px rgba(0,255,204,0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .character-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0,255,204,0.6);
+    }
+
+    .character-card img {
+      width: 100%;
+      max-width: 150px;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .character-card h3 {
+      color: #00e6ff;
+      margin-bottom: 10px;
+      font-size: 1.4rem;
+    }
+
+    /* Przycisk */
     .buttons {
       margin-top: 30px;
       display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
       justify-content: center;
     }
 
     .btn {
-      display: inline-block;
       padding: 14px 28px;
       font-size: 1rem;
       font-weight: 600;
       color: #111;
       background: linear-gradient(135deg, #00ffcc, #0088ff);
       border-radius: 12px;
-      text-decoration: none;
+      border: none;
+      cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: 0 0 12px #00ffcc, 0 0 24px #0088ff;
-      cursor: pointer;
-      border: none;
     }
 
     .btn:hover {
@@ -110,88 +140,66 @@
       box-shadow: 0 0 18px #00ffff, 0 0 36px #00ff99;
     }
 
-    /* Tryb dostępności */
-    .yellow-mode {
+    /* Tryb żółty */
+    .yellow-mode main {
+      background-color: #000 !important;
+      border: 1px solid #ffeb3b;
+      box-shadow: 0 0 20px rgba(255,235,59,0.5);
       color: #ffeb3b;
     }
 
-    .yellow-mode main {
-      background-color: rgba(0,0,0,0.8) !important;
-      border: 1px solid #ffeb3b;
-      box-shadow: 0 0 20px rgba(255,235,59,0.5);
-    }
-
-    .yellow-mode p {
+    .yellow-mode p, 
+    .yellow-mode h3 {
+      color: #ffeb3b;
       text-shadow: none;
     }
 
-    .yellow-mode .btn {
-      background: rgba(0,0,0,0.85);
-      color: #ffeb3b;
-      border: 1px solid #ffeb3b;
-      box-shadow: 0 0 12px #ffeb3b, 0 0 24px #ff9800;
-    }
-
-    .yellow-mode .btn:hover {
-      background: rgba(30,30,30,0.95);
-      color: #fff176;
-      box-shadow: 0 0 18px #fff176, 0 0 36px #fdd835;
-    }
-
-    /* Animacje */
     @keyframes neonPulse {
-      from {
-        text-shadow: 0 0 10px #00e6ff, 0 0 20px #00ffff, 0 0 40px #0088ff;
-      }
-      to {
-        text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffcc, 0 0 80px #00e6ff;
-      }
-    }
-
-    /* Responsywność */
-    @media(max-width: 768px) {
-      header h1 {
-        font-size: 2.2rem;
-      }
-      p {
-        font-size: 1rem;
-      }
+      from { text-shadow: 0 0 10px #00e6ff, 0 0 20px #00ffff, 0 0 40px #0088ff; }
+      to { text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffcc, 0 0 80px #00e6ff; }
     }
   </style>
 </head>
 <body>
-  <header>The Binding of Isaac</header>
+  <header>
+    <h1>The Binding of Isaac</h1>
+  </header>
+
   <main>
-  <p>
-    <strong>The Binding of Isaac</strong> to popularna gra typu roguelike stworzona przez Edmunda McMillena. 
-    Gracz eksploruje losowo generowane lochy, zbiera przedmioty i walczy z potworami, aby przetrwać jak najdłużej.
-  </p>
-  <p>
-    Gra wyróżnia się mrocznym klimatem, dużą ilością sekretów oraz ogromną regrywalnością.
-  </p>
+    <p>
+      <strong>The Binding of Isaac</strong> to popularna gra typu roguelike stworzona przez Edmunda McMillena. 
+      Gracz eksploruje losowo generowane lochy, zbiera przedmioty i walczy z potworami, aby przetrwać jak najdłużej.
+    </p>
+    <p>
+      Gra wyróżnia się mrocznym klimatem, dużą liczbą sekretów oraz ogromną regrywalnością.
+    </p>
 
-  <!-- Sekcja postaci -->
-  <section class="characters">
-    <div class="character-card">
-      <img src="isaac.png" alt="Isaac">
-      <h3>Isaac</h3>
-      <p>Główny bohater gry. Startuje z podstawowymi statystykami i łzami jako bronią.</p>
+    <!-- Postacie -->
+    <section class="characters">
+      <div class="character-card">
+        <img src="isaac.png" alt="Isaac">
+        <h3>Isaac</h3>
+        <p>Główny bohater gry. Zaczyna z podstawowymi statystykami i łzami jako bronią.</p>
+      </div>
+
+      <div class="character-card">
+        <img src="magdalena.png" alt="Magdalene">
+        <h3>Magdalene</h3>
+        <p>Znana jako Maggy. Ma więcej serc na starcie, ale porusza się wolniej.</p>
+      </div>
+
+      <div class="character-card">
+        <img src="cain.png" alt="Cain">
+        <h3>Cain</h3>
+        <p>Szybszy bohater. Zaczyna z kluczem i ma większą szansę na lepsze przedmioty.</p>
+      </div>
+    </section>
+
+    <!-- Przycisk zmiany trybu -->
+    <div class="buttons">
+      <button class="btn" onclick="toggleMode()">Przełącz tryb (czarny + żółty)</button>
     </div>
-
-    <div class="character-card">
-      <img src="magdalena.png" alt="Magdalene">
-      <h3>Magdalene</h3>
-      <p>Znana jako Maggy. Ma więcej serc na start, ale mniejszą prędkość ruchu.</p>
-    </div>
-
-    <div class="character-card">
-      <img src="cain.jpg" alt="Cain">
-      <h3>Cain</h3>
-      <p>Szybszy bohater, zaczyna z kluczem i większą szansą na lepsze przedmioty.</p>
-    </div>
-  </section>
-</main>
-
+  </main>
 
   <script>
     function toggleMode() {
