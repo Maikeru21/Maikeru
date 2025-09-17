@@ -18,12 +18,12 @@
       font-size: 1.1rem;
       position: relative;
       overflow-x: hidden;
-      transition: background-color 0.3s ease; /* Dodano przejście */
+      transition: all 0.3s ease;
     }
 
-    /* Przyciemnienie tła dla czytelności */
+    /* Przyciemnienie tła */
     body::before { 
-      background: rgba(0,0,0,0.3); /* mniej ciemne */
+      background: rgba(0,0,0,0.4);
       content:"";
       position:fixed;
       top:0; left:0;
@@ -41,74 +41,54 @@
       text-align: center;
       color: #00ffcc;
     }
+
     header {
-      padding: 80px 20px 60px;
+      padding: 80px 20px 40px;
     }
-    header h1 {
-      font-size: 3.2rem;
+
+    header h1, header {
+      font-size: 3rem;
       margin-bottom: 20px;
       letter-spacing: 2px;
       color: #00e6ff;
       text-shadow: 0 0 10px #00e6ff, 0 0 20px #00ffff, 0 0 40px #0088ff;
       animation: neonPulse 2s infinite alternate;
     }
-    header p {
-      font-size: 1.4rem;
-      opacity: 0.9;
-      max-width: 700px;
-      text-shadow: 0 0 6px #00ffcc;
-    }
 
-    /* Sekcje */
-    section {
+    /* Sekcja główna w panelu */
+    main {
       width: 80%;
       max-width: 800px;
-      margin: 50px 0;
       padding: 40px;
-      background-color: rgba(20, 20, 20, 0.6);
-      backdrop-filter: blur(4px);
+      margin-bottom: 40px;
+      background-color: rgba(20, 20, 20, 0.65);
+      backdrop-filter: blur(6px);
       border-radius: 16px;
       border: 1px solid rgba(0, 255, 204, 0.4);
       box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: #00ffcc;
-      backdrop-filter: blur(6px);
       transition: transform 0.3s;
     }
-    section:hover {
+
+    main:hover {
       transform: scale(1.02);
       box-shadow: 0 0 30px rgba(0, 255, 204, 0.6);
     }
 
-    h2 {
-      font-size: 2.2rem;
-      margin-bottom: 25px;
-      position: relative;
-      color: #00e6ff;
-      text-shadow: 0 0 8px #00ffff, 0 0 16px #00ccff;
-    }
-
-    h2::after {
-      content: "";
-      position: absolute;
-      width: 70px;
-      height: 4px;
-      background: #00ffcc;
-      bottom: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      border-radius: 2px;
-      box-shadow: 0 0 10px #00ffcc;
-    }
-
     p {
       font-size: 1.15rem;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
+      text-shadow: 0 0 6px #00ffcc;
     }
 
-    /* Przycisk */
+    /* Przyciski */
+    .buttons {
+      margin-top: 30px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
     .btn {
       display: inline-block;
       padding: 14px 28px;
@@ -130,9 +110,32 @@
       box-shadow: 0 0 18px #00ffff, 0 0 36px #00ff99;
     }
 
+    /* Tryb dostępności */
     .yellow-mode {
-      background-color: #ffeb3b !important; /* Zmieniamy tło na żółte */
-      color: #111; /* Zmiana koloru tekstu */
+      color: #ffeb3b;
+    }
+
+    .yellow-mode main {
+      background-color: rgba(0,0,0,0.8) !important;
+      border: 1px solid #ffeb3b;
+      box-shadow: 0 0 20px rgba(255,235,59,0.5);
+    }
+
+    .yellow-mode p {
+      text-shadow: none;
+    }
+
+    .yellow-mode .btn {
+      background: rgba(0,0,0,0.85);
+      color: #ffeb3b;
+      border: 1px solid #ffeb3b;
+      box-shadow: 0 0 12px #ffeb3b, 0 0 24px #ff9800;
+    }
+
+    .yellow-mode .btn:hover {
+      background: rgba(30,30,30,0.95);
+      color: #fff176;
+      box-shadow: 0 0 18px #fff176, 0 0 36px #fdd835;
     }
 
     /* Animacje */
@@ -148,15 +151,9 @@
     /* Responsywność */
     @media(max-width: 768px) {
       header h1 {
-        font-size: 2.4rem;
+        font-size: 2.2rem;
       }
-      header p {
-        font-size: 1.2rem;
-      }
-      h2 {
-        font-size: 1.8rem;
-      }
-      p, li {
+      p {
         font-size: 1rem;
       }
     }
@@ -178,7 +175,7 @@
     <!-- Przycisk przełącznika i powrotu -->
     <div class="buttons">
       <button class="btn" onclick="toggleMode()">Przełącz tryb (Dostępność)</button>
-      <a href="index.html" class="btn">Powrót do strony głównej</a>
+      <a href="index.html" class="btn">⬅ Powrót do strony głównej</a>
     </div>
   </main>
 
