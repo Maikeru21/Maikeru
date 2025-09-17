@@ -119,6 +119,8 @@
       margin-top: 30px;
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
     }
 
     .btn {
@@ -132,6 +134,8 @@
       cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: 0 0 12px #00ffcc, 0 0 24px #0088ff;
+      text-decoration: none;
+      display: inline-block;
     }
 
     .btn:hover {
@@ -195,9 +199,10 @@
       </div>
     </section>
 
-    <!-- Przycisk zmiany trybu -->
+    <!-- Przyciski -->
     <div class="buttons">
       <button class="btn" onclick="toggleMode()">Przełącz tryb (czarny + żółty)</button>
+      <a href="index.html" class="btn">⬅ Powrót do strony głównej</a>
     </div>
   </main>
 
