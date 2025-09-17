@@ -7,258 +7,63 @@
     <style>
     * {margin:0;padding:0;box-sizing:border-box;}
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: url('tlo.gif') no-repeat center center fixed;
-      background-size: cover;
-      color: #00ffcc;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      line-height: 1.7;
-      font-size: 1.1rem;
-      position: relative;
-      overflow-x: hidden;
-    }
-
-    /* Przyciemnienie tła dla czytelności */
-    body::before { 
-      background: rgba(0,0,0,0.3); /* mniej ciemne */
-      content:"";
-      position:fixed;
-      top:0; left:0;
-      width:100%; height:100%;
-      z-index:-1;
-    }
-
-    /* Nagłówek */
-    header, main, footer {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      color: #00ffcc;
-    }
-    header {
-      padding: 80px 20px 60px;
-    }
-    header h1 {
-      font-size: 3.2rem;
-      margin-bottom: 20px;
-      letter-spacing: 2px;
-      color: #00e6ff;
-      text-shadow: 0 0 10px #00e6ff, 0 0 20px #00ffff, 0 0 40px #0088ff;
-      animation: neonPulse 2s infinite alternate;
-    }
-    header p {
-      font-size: 1.4rem;
-      opacity: 0.9;
-      max-width: 700px;
-      text-shadow: 0 0 6px #00ffcc;
-    }
-      /* Dostosowanie obrazków postaci */
-.character img {
-  width: 100%; /* Obrazki wypełniają kontener, ale nie wykraczają poza jego granice */
-  max-width: 150px; /* Maksymalna szerokość obrazków */
-  height: auto; /* Utrzymanie proporcji */
-  border-radius: 8px; /* Lekko zaokrąglone rogi */
-  object-fit: cover; /* Zapewnia, że obrazki będą dobrze wypełniały kontener */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: url('tlo.gif') no-repeat center center fixed;
+  background-size: cover;
+  color: #00ffcc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.7;
+  font-size: 1.1rem;
+  position: relative;
+  overflow-x: hidden;
 }
 
-/* Opcjonalnie dostosowanie samego kontenera postaci */
-.characters {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 30px;
-  justify-items: center;
+body::before { 
+  background: rgba(0,0,0,0.4);
+  content:"";
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  z-index:-1;
+}
+
+/* Nagłówek */
+header, main, footer {
   width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #00ffcc;
+}
+header {
+  padding: 80px 20px 40px;
+}
+header h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  color: #00e6ff;
+  text-shadow: 0 0 10px #00e6ff, 0 0 20px #00ffff, 0 0 40px #0088ff;
+  animation: neonPulse 2s infinite alternate;
+}
+header p {
+  font-size: 1.3rem;
+  opacity: 0.9;
+  max-width: 700px;
+  text-shadow: 0 0 6px #00ffcc;
+}
 
-
-    /* Sekcje */
-    section {
-      width: 80%;
-      max-width: 800px;
-      margin: 50px 0;
-      padding: 40px;
-      background-color: rgba(20, 20, 20, 0.6);
-      backdrop-filter: blur(4px);
-      border-radius: 16px;
-      border: 1px solid rgba(0, 255, 204, 0.4);
-      box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: #00ffcc;
-      backdrop-filter: blur(6px);
-      transition: transform 0.3s;
-    }
-    section:hover {
-      transform: scale(1.02);
-      box-shadow: 0 0 30px rgba(0, 255, 204, 0.6);
-    }
-
-    h2 {
-      font-size: 2.2rem;
-      margin-bottom: 25px;
-      position: relative;
-      color: #00e6ff;
-      text-shadow: 0 0 8px #00ffff, 0 0 16px #00ccff;
-    }
-
-    h2::after {
-      content: "";
-      position: absolute;
-      width: 70px;
-      height: 4px;
-      background: #00ffcc;
-      bottom: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      border-radius: 2px;
-      box-shadow: 0 0 10px #00ffcc;
-    }
-
-    p {
-      font-size: 1.15rem;
-      margin-bottom: 15px;
-    }
-
-    /* Listy */
-    ul {
-      list-style: none;
-      padding-left: 0;
-      margin-top: 20px;
-      width: 100%;
-      max-width: 700px;
-    }
-    ul li {
-      margin: 10px 0;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 1.15rem;
-      text-align: left;
-    }
-    ul li::before {
-      content: "✦";
-      color: #00ffcc;
-      font-weight: bold;
-      font-size: 1.3rem;
-      flex-shrink: 0;
-      text-shadow: 0 0 6px #00ffcc;
-    }
-
-    /* Przycisk */
-    .link-btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 14px 28px;
-      font-size: 1rem;
-      font-weight: 600;
-      color: #111;
-      background: linear-gradient(135deg, #00ffcc, #0088ff);
-      border-radius: 12px;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 12px #00ffcc, 0 0 24px #0088ff;
-    }
-    .link-btn:hover {
-      transform: scale(1.08);
-      background: linear-gradient(135deg, #00ffff, #00ff99);
-      box-shadow: 0 0 18px #00ffff, 0 0 36px #00ff99;
-    }
-
-    /* Tabela */
-    .container {
-      background-color: rgba(20, 20, 20, 0.7);
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-      text-align: center;
-      width: 80%;
-      max-width: 600px;
-    }
-
-    h1 {
-      color: #d81b60; /* Głęboki różowy */
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-
-    table, th, td {
-      border: 1px solid #f48fb1; /* Różowa ramka */
-    }
-
-    th {
-      background-color: #f06292; /* Różowe tło */
-      color: white;
-      padding: 12px;
-      border-radius: 6px 6px 0 0;
-    }
-
-    td {
-      padding: 10px;
-      text-align: center;
-      font-size: 1.2rem;
-      color: #d81b60;
-    }
-
-    .operation {
-      font-weight: bold;
-    }
-
-    .result {
-      color: #f06292;
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-
-    /* Delikatny efekt hover na wierszach tabeli */
-    tr:hover {
-      background-color: #f8bbd0;
-    }
-
-    /* Animacje */
-    @keyframes neonPulse {
-      from {
-        text-shadow: 0 0 10px #00e6ff, 0 0 20px #00ffff, 0 0 40px #0088ff;
-      }
-      to {
-        text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffcc, 0 0 80px #00e6ff;
-      }
-    }
-
-    /* Responsywność */
-    @media(max-width: 768px) {
-      header h1 {
-        font-size: 2.4rem;
-      }
-      header p {
-        font-size: 1.2rem;
-      }
-      h2 {
-        font-size: 1.8rem;
-      }
-      p, li {
-        font-size: 1rem;
-      }
-    }
-  nav {
+/* Nawigacja */
+nav {
   margin-top: 20px;
   display: flex;
   gap: 20px;
 }
-
 nav a {
   text-decoration: none;
   font-weight: 600;
@@ -269,7 +74,6 @@ nav a {
   box-shadow: 0 0 10px #00ffcc, 0 0 20px #0088ff;
   transition: all 0.3s ease;
 }
-
 nav a:hover {
   transform: scale(1.1);
   background: linear-gradient(135deg, #00ffff, #00ff99);
@@ -277,9 +81,125 @@ nav a:hover {
   color: #000;
 }
 
-/* Powrót – spójny przycisk */
+/* Sekcje */
+section {
+  width: 80%;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 40px;
+  background-color: rgba(20, 20, 20, 0.65);
+  backdrop-filter: blur(6px);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 255, 204, 0.4);
+  box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;   /* WYŚRODKOWANIE CAŁEJ TREŚCI */
+  color: #00ffcc;
+  transition: transform 0.3s;
+}
+section:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 30px rgba(0, 255, 204, 0.6);
+}
+
+h2 {
+  font-size: 2.2rem;
+  margin-bottom: 25px;
+  position: relative;
+  color: #00e6ff;
+  text-shadow: 0 0 8px #00ffff, 0 0 16px #00ccff;
+}
+h2::after {
+  content: "";
+  position: absolute;
+  width: 70px;
+  height: 4px;
+  background: #00ffcc;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+  box-shadow: 0 0 10px #00ffcc;
+}
+
+p {
+  font-size: 1.15rem;
+  margin-bottom: 15px;
+  text-shadow: 0 0 6px #00ffcc;
+}
+
+/* Karty postaci */
+.characters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+  width: 100%;
+}
+.character {
+  background: rgba(0,0,0,0.6);
+  border: 1px solid rgba(0,255,204,0.4);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 0 12px rgba(0,255,204,0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.character:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0,255,204,0.6);
+}
+.character img {
+  width: 100%;
+  max-width: 150px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+.character h3 {
+  color: #00e6ff;
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+}
+
+/* Listy ciekawostek */
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* WYŚRODKOWANIE ELEMENTÓW */
+}
+
+ul li {
+  margin: 10px 0;
+  display: flex;
+  justify-content: center; /* Tekst + gwiazdka wyśrodkowane */
+  align-items: center;
+  gap: 10px;
+  font-size: 1.15rem;
+  text-align: center;   /* Tekst na środku */
+}
+ul li::before {
+  content: "✦";
+  color: #00ffcc;
+  font-weight: bold;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  text-shadow: 0 0 6px #00ffcc;
+}
+
+/* Powrót */
+/* Powrót */
 .return-container {
   margin-top: 40px;
+  display: flex;
+  justify-content: center; /* WYŚRODKOWANIE przycisku */
+  width: 100%;
 }
 
 .return-container .btn {
@@ -294,12 +214,51 @@ nav a:hover {
   transition: all 0.3s ease;
   box-shadow: 0 0 12px #00ffcc, 0 0 24px #0088ff;
 }
-
 .return-container .btn:hover {
   transform: scale(1.08);
   background: linear-gradient(135deg, #00ffff, #00ff99);
   box-shadow: 0 0 18px #00ffff, 0 0 36px #00ff99;
 }
+
+/* Stopka */
+footer {
+  margin: 40px 0 20px;
+  font-size: 0.95rem;
+  color: #00ffcc;
+  text-shadow: 0 0 6px #00ffcc;
+}
+footer a {
+  color: #00ffff;
+  text-decoration: none;
+  font-weight: bold;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Animacja neonowa */
+@keyframes neonPulse {
+  from {
+    text-shadow: 0 0 10px #00e6ff, 0 0 20px #00ffff, 0 0 40px #0088ff;
+  }
+  to {
+    text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffcc, 0 0 80px #00e6ff;
+  }
+}
+
+/* Responsywność */
+@media(max-width: 768px) {
+  header h1 {
+    font-size: 2.4rem;
+  }
+  h2 {
+    font-size: 1.8rem;
+  }
+  p, li {
+    font-size: 1rem;
+  }
+}
+
   </style>
 
 </head>
