@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>The Binding of Isaac</title>
-    <style>
+  <style>
     * {margin:0;padding:0;box-sizing:border-box;}
 
     body {
@@ -18,6 +18,7 @@
       font-size: 1.1rem;
       position: relative;
       overflow-x: hidden;
+      transition: background-color 0.3s ease; /* Dodano przejście */
     }
 
     /* Przyciemnienie tła dla czytelności */
@@ -107,35 +108,9 @@
       margin-bottom: 15px;
     }
 
-    /* Listy */
-    ul {
-      list-style: none;
-      padding-left: 0;
-      margin-top: 20px;
-      width: 100%;
-      max-width: 700px;
-    }
-    ul li {
-      margin: 10px 0;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 1.15rem;
-      text-align: left;
-    }
-    ul li::before {
-      content: "✦";
-      color: #00ffcc;
-      font-weight: bold;
-      font-size: 1.3rem;
-      flex-shrink: 0;
-      text-shadow: 0 0 6px #00ffcc;
-    }
-
     /* Przycisk */
-    .link-btn {
+    .btn {
       display: inline-block;
-      margin-top: 20px;
       padding: 14px 28px;
       font-size: 1rem;
       font-weight: 600;
@@ -145,67 +120,19 @@
       text-decoration: none;
       transition: all 0.3s ease;
       box-shadow: 0 0 12px #00ffcc, 0 0 24px #0088ff;
+      cursor: pointer;
+      border: none;
     }
-    .link-btn:hover {
+
+    .btn:hover {
       transform: scale(1.08);
       background: linear-gradient(135deg, #00ffff, #00ff99);
       box-shadow: 0 0 18px #00ffff, 0 0 36px #00ff99;
     }
 
-    /* Tabela */
-    .container {
-      background-color: rgba(20, 20, 20, 0.7);
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-      text-align: center;
-      width: 80%;
-      max-width: 600px;
-    }
-
-    h1 {
-      color: #d81b60; /* Głęboki różowy */
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-
-    table, th, td {
-      border: 1px solid #f48fb1; /* Różowa ramka */
-    }
-
-    th {
-      background-color: #f06292; /* Różowe tło */
-      color: white;
-      padding: 12px;
-      border-radius: 6px 6px 0 0;
-    }
-
-    td {
-      padding: 10px;
-      text-align: center;
-      font-size: 1.2rem;
-      color: #d81b60;
-    }
-
-    .operation {
-      font-weight: bold;
-    }
-
-    .result {
-      color: #f06292;
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-
-    /* Delikatny efekt hover na wierszach tabeli */
-    tr:hover {
-      background-color: #f8bbd0;
+    .yellow-mode {
+      background-color: #ffeb3b !important; /* Zmieniamy tło na żółte */
+      color: #111; /* Zmiana koloru tekstu */
     }
 
     /* Animacje */
@@ -234,7 +161,6 @@
       }
     }
   </style>
-
 </head>
 <body>
   <header>The Binding of Isaac</header>
