@@ -2,33 +2,34 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>Interaktywne Operatory w JavaScript</title>
+  <title>Cuphead – Interaktywne Operatory</title>
   <style>
-    * {margin:0;padding:0;box-sizing:border-box;}
+* {margin:0;padding:0;box-sizing:border-box;}
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: url('tlo.gif') no-repeat center center fixed;
-      background-size: cover;
-      color: #00ffcc;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      line-height: 1.7;
-      font-size: 1.1rem;
-      position: relative;
-      overflow-x: hidden;
-    }
+body {
+  font-family: 'Luckiest Guy', cursive;
+  background: url('cup.gif') no-repeat center center fixed;
+  background-size: cover;
+  color: #e0e0e0; /* jasny szary tekst */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.6;
+  font-size: 1.1rem;
+  position: relative;
+  overflow-x: hidden;
+}
 
-    body::before { 
-      background: rgba(0,0,0,0.4);
-      content:"";
-      position:fixed;
-      top:0; left:0;
-      width:100%; height:100%;
-      z-index:-1;
-    }
-    .return-container {
+body::before { 
+  background: rgba(0,0,0,0.5);
+  content:"";
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  z-index:-1;
+}
+
+.return-container {
   margin: 30px 0 60px;
   display: flex;
   justify-content: center;
@@ -40,142 +41,141 @@
   padding: 14px 28px;
   font-size: 1rem;
   font-weight: 600;
-  color: #111;
-  background: linear-gradient(135deg, #00ffcc, #0088ff);
+  color: #fff;
+  background: linear-gradient(135deg, #666, #222);
   border-radius: 12px;
   text-decoration: none;
   transition: all 0.3s ease;
-  box-shadow: 0 0 12px #00ffcc, 0 0 24px #0088ff;
+  box-shadow: 0 0 12px #888, 0 0 24px #000;
 }
 .link-btn:hover {
   transform: scale(1.08);
-  background: linear-gradient(135deg, #00ffff, #00ff99);
-  box-shadow: 0 0 18px #00ffff, 0 0 36px #00ff99;
+  background: linear-gradient(135deg, #aaa, #444);
+  box-shadow: 0 0 18px #ccc, 0 0 36px #555;
 }
 
-    header, main, footer {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      color: #00ffcc;
-    }
+header, main, footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #e0e0e0;
+}
 
-    header {
-      padding: 80px 20px 40px;
-    }
+header {
+  padding: 80px 20px 40px;
+}
 
-    header h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-      letter-spacing: 2px;
-      color: #00e6ff;
-      text-shadow: 0 0 10px #00e6ff, 0 0 20px #00ffff, 0 0 40px #0088ff;
-      animation: neonPulse 2s infinite alternate;
-    }
+header h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  color: #f5f5f5;
+  text-shadow: 3px 3px #111, 0 0 20px #777;
+  animation: bounce 2s infinite;
+}
 
-    main {
-      width: 80%;
-      max-width: 900px;
-      padding: 40px;
-      margin-bottom: 40px;
-      background-color: rgba(20, 20, 20, 0.65);
-      backdrop-filter: blur(6px);
-      border-radius: 16px;
-      border: 1px solid rgba(0, 255, 204, 0.4);
-      box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
+main {
+  width: 80%;
+  max-width: 900px;
+  padding: 40px;
+  margin-bottom: 40px;
+  background-color: rgba(20, 20, 20, 0.7);
+  backdrop-filter: blur(6px);
+  border-radius: 16px;
+  border: 3px solid #555;
+  box-shadow: 0 0 20px rgba(0,0,0,0.7);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
 
-    main:hover {
-      transform: scale(1.02);
-      box-shadow: 0 0 30px rgba(0, 255, 204, 0.6);
-    }
+main:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 40px rgba(255,255,255,0.2);
+}
 
-    section {
-      margin-bottom: 30px;
-      padding: 20px;
-      background: rgba(0,0,0,0.6);
-      border: 1px solid rgba(0,255,204,0.4);
-      border-radius: 12px;
-      box-shadow: 0 0 12px rgba(0,255,204,0.3);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
+section {
+  margin-bottom: 30px;
+  padding: 20px;
+  background: rgba(0,0,0,0.6);
+  border: 2px solid #777;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(200,200,200,0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
 
-    section:hover {
-      transform: scale(1.02);
-      box-shadow: 0 0 20px rgba(0,255,204,0.6);
-    }
+section:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(255,255,255,0.4);
+}
 
-    h2 {
-      color: #00e6ff;
-      margin-bottom: 15px;
-      text-shadow: 0 0 6px #00ffcc;
-    }
+h2 {
+  color: #ccc;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px #000, 0 0 8px #555;
+}
 
-    input, select {
-      margin: 5px;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid rgba(0,255,204,0.4);
-      background: rgba(0,0,0,0.5);
-      color: #00ffcc;
-      font-size: 1rem;
-      text-align: center;
-    }
+input, select {
+  margin: 5px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid #777;
+  background: rgba(0,0,0,0.7);
+  color: #f0f0f0;
+  font-size: 1rem;
+  text-align: center;
+}
 
-    button {
-      margin-top: 10px;
-      padding: 12px 24px;
-      font-size: 1rem;
-      font-weight: 600;
-      color: #111;
-      background: linear-gradient(135deg, #00ffcc, #0088ff);
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 12px #00ffcc, 0 0 24px #0088ff;
-    }
+button {
+  margin-top: 10px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #666, #222);
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 12px #888, 0 0 24px #000;
+}
 
-    button:hover {
-      transform: scale(1.08);
-      background: linear-gradient(135deg, #00ffff, #00ff99);
-      box-shadow: 0 0 18px #00ffff, 0 0 36px #00ff99;
-    }
+button:hover {
+  transform: scale(1.08);
+  background: linear-gradient(135deg, #aaa, #444);
+  box-shadow: 0 0 18px #ccc, 0 0 36px #555;
+}
 
-    p {
-      margin-top: 10px;
-      font-size: 1.15rem;
-      text-shadow: 0 0 6px #00ffcc;
-    }
+p {
+  margin-top: 10px;
+  font-size: 1.15rem;
+  text-shadow: 2px 2px #000, 0 0 6px #666;
+}
 
-    @keyframes neonPulse {
-      from { text-shadow: 0 0 10px #00e6ff, 0 0 20px #00ffff, 0 0 40px #0088ff; }
-      to { text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffcc, 0 0 80px #00e6ff; }
-    }
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
   </style>
 </head>
 <body>
   <header>
-    <h1>Interaktywne Operatory w JavaScript</h1>
+    <h1>Cuphead – Interaktywne Operatory</h1>
   </header>
 
   <main>
-    <!-- Operator arytmetyczny (dodawanie) -->
     <section>
-      <h2>Operator arytmetyczny (+)</h2>
+      <h2>Dodawanie (+)</h2>
       <input type="number" id="arytA" placeholder="Liczba A">
       <input type="number" id="arytB" placeholder="Liczba B">
       <button onclick="dodawanie()">Oblicz</button>
       <p>Wynik: <span id="wynikAryt"></span></p>
     </section>
 
-    <!-- Operator logiczny (AND) -->
     <section>
-      <h2>Operator logiczny (&&)</h2>
+      <h2>Logiczny (&&)</h2>
       <select id="logA">
         <option value="true">true</option>
         <option value="false">false</option>
@@ -188,42 +188,39 @@
       <p>Wynik: <span id="wynikLog"></span></p>
     </section>
 
-    <!-- Operator bitowy (OR) -->
     <section>
-      <h2>Operator bitowy (|)</h2>
+      <h2>Bitowy (|)</h2>
       <input type="number" id="bitA" placeholder="Liczba A">
       <input type="number" id="bitB" placeholder="Liczba B">
       <button onclick="bitowy()">Oblicz</button>
       <p>Wynik: <span id="wynikBit"></span></p>
     </section>
 
-    <!-- Operator przypisania (+=) -->
     <section>
-      <h2>Operator przypisania (+=)</h2>
+      <h2>Przypisanie (+=)</h2>
       <input type="number" id="przypA" placeholder="Liczba początkowa">
       <input type="number" id="przypB" placeholder="Dodaj">
       <button onclick="przypisanie()">Oblicz</button>
       <p>Wynik: <span id="wynikPrzyp"></span></p>
     </section>
 
-    <!-- Operator porównania (==) -->
     <section>
-      <h2>Operator porównania (==)</h2>
+      <h2>Porównanie (==)</h2>
       <input type="text" id="porA" placeholder="Wartość A">
       <input type="text" id="porB" placeholder="Wartość B">
       <button onclick="porownanie()">Sprawdź</button>
       <p>Wynik: <span id="wynikPor"></span></p>
     </section>
 
-    <!-- Operator łańcuchowy (konkatenacja) -->
     <section>
-      <h2>Operator łańcuchowy (+)</h2>
+      <h2>Konkatenacja tekstu (+)</h2>
       <input type="text" id="strA" placeholder="Tekst A">
       <input type="text" id="strB" placeholder="Tekst B">
       <button onclick="konkatenacja()">Połącz</button>
       <p>Wynik: <span id="wynikStr"></span></p>
     </section>
   </main>
+
   <div class="return-container">
     <a href="index.html" class="link-btn">⬅ Powrót do strony głównej</a>
   </div>
@@ -234,32 +231,27 @@
       let b = Number(document.getElementById("arytB").value);
       document.getElementById("wynikAryt").textContent = a + b;
     }
-
     function logiczny() {
       let a = document.getElementById("logA").value === "true";
       let b = document.getElementById("logB").value === "true";
       document.getElementById("wynikLog").textContent = a && b;
     }
-
     function bitowy() {
       let a = Number(document.getElementById("bitA").value);
       let b = Number(document.getElementById("bitB").value);
       document.getElementById("wynikBit").textContent = a | b;
     }
-
     function przypisanie() {
       let a = Number(document.getElementById("przypA").value);
       let b = Number(document.getElementById("przypB").value);
       a += b;
       document.getElementById("wynikPrzyp").textContent = a;
     }
-
     function porownanie() {
       let a = document.getElementById("porA").value;
       let b = document.getElementById("porB").value;
       document.getElementById("wynikPor").textContent = (a == b);
     }
-
     function konkatenacja() {
       let a = document.getElementById("strA").value;
       let b = document.getElementById("strB").value;
