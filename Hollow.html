@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hollow Knight – Przykłady IF</title>
+  <style>
+    * {margin:0;padding:0;box-sizing:border-box;}
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url('https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDEyMjB1ZXo2NmRuazhyMDgwODZydWRmNmQ3d3JydDlvNHpxam91MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KufI7NaMR1Epa/giphy.gif') no-repeat center center fixed;
+      background-size: cover;
+      color: #b3d9ff; /* jasny błękit */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1.6;
+      font-size: 1.05rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before { 
+      background: rgba(0,0,20,0.6);
+      content:"";
+      position:fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      z-index:-1;
+    }
+
+    .container {
+      background-color: rgba(10, 10, 25, 0.75);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(150,200,255,0.3);
+      text-align: center;
+      width: 85%;
+      max-width: 700px;
+      margin-top: 60px;
+      border: 1px solid rgba(180,220,255,0.3);
+      backdrop-filter: blur(6px);
+      transition: transform 0.3s;
+    }
+    .container:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 30px rgba(180,220,255,0.6);
+    }
+
+    h1 {
+      color: #99ccff;
+      font-size: 2.4rem;
+      margin-bottom: 15px;
+      text-shadow: 0 0 12px #b3d9ff, 0 0 24px #80b3ff;
+      animation: neonPulse 2s infinite alternate;
+    }
+
+    p {
+      font-size: 1.15rem;
+      margin-bottom: 20px;
+      text-shadow: 0 0 6px #99ccff;
+    }
+
+    button {
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #111;
+      background: linear-gradient(135deg, #99ccff, #3366cc);
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 12px #99ccff, 0 0 24px #3366cc;
+      margin: 8px;
+      display: inline-block;
+    }
+    button:hover {
+      transform: scale(1.08);
+      background: linear-gradient(135deg, #cce0ff, #6699ff);
+      box-shadow: 0 0 18px #cce0ff, 0 0 36px #6699ff;
+    }
+
+    h2 {
+      margin-top: 30px;
+      font-size: 1.5rem;
+      color: #cce0ff;
+      text-shadow: 0 0 6px #99ccff;
+    }
+
+    #log {
+      font-size: 1.05rem;
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 12px;
+      background: rgba(0,0,30,0.6);
+      border: 1px solid rgba(150,200,255,0.3);
+      text-align: left;
+      min-height: 120px;
+      box-shadow: inset 0 0 12px rgba(150,200,255,0.25);
+    }
+
+    .footer {
+      margin: 40px 0 20px;
+      text-align: center;
+      color: #99ccff;
+      font-size: 1rem;
+      text-shadow: 0 0 6px #99ccff;
+    }
+
+    @keyframes neonPulse {
+      from { text-shadow: 0 0 10px #80b3ff, 0 0 20px #99ccff, 0 0 40px #3366cc; }
+      to { text-shadow: 0 0 20px #cce0ff, 0 0 40px #99ccff, 0 0 80px #80b3ff; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Hollow Knight – Przykłady IF</h1>
+    <p>Kliknij przycisk, aby zobaczyć różne formy warunków <code>if</code> w JavaScript.</p>
+
+    <div>
+      <button onclick="basicIf()">basic if</button>
+      <button onclick="ifWithoutBraces()">if bez {}</button>
+      <button onclick="ifElse()">if / else</button>
+      <button onclick="ifElseIfElse()">if / else if / else</button>
+      <button onclick="nestedIf()">zagnieżdżone if</button>
+      <button onclick="ternaryExample()">ternary ? :</button>
+      <button onclick="logicalAndExample()">&& jako if</button>
+      <button onclick="logicalOrExample()">|| domyślne</button>
+      <button onclick="earlyReturnExample()">return guard</button>
+    </div>
+
+    <h2>Log</h2>
+    <pre id="log"></pre>
+  </div>
+
+   <div class="footer">
+    <p>Strona stworzona przez Maikeru</p>
+  </div>
+
+  <script>
+    const logEl = document.getElementById('log');
+
+    function clearLog() {
+      logEl.textContent = '';
+    }
+
+    function write(...parts) {
+      logEl.textContent += parts.join(' ') + '\\n';
+    }
+
+    function basicIf() {
+      clearLog();
+      const x = 5;
+      if (x > 3) {
+        write('basicIf: x jest większe niż 3 (x =', x + ')');
+      }
+    }
+
+    function ifWithoutBraces() {
+      clearLog();
+      const ok = true;
+      if (ok) write('ifWithoutBraces: jedna instrukcja bez {} działa');
+      write('Ale uważaj: kolejne linie nie będą objęte if!');
+    }
+
+    function ifElse() {
+      clearLog();
+      const score = 42;
+      if (score >= 50) {
+        write('ifElse: zaliczone (wynik', score + ')');
+      } else {
+        write('ifElse: niezaliczone (wynik', score + ')');
+      }
+    }
+
+    function ifElseIfElse() {
+      clearLog();
+      const n = 0;
+      if (n > 0) {
+        write('ifElseIfElse: dodatnia');
+      } else if (n < 0) {
+        write('ifElseIfElse: ujemna');
+      } else {
+        write('ifElseIfElse: zero');
+      }
+    }
+
+    function nestedIf() {
+      clearLog();
+      const user = { loggedIn: true, role: 'knight' };
+      if (user.loggedIn) {
+        write('nestedIf: zalogowany');
+        if (user.role === 'knight') {
+          write('nestedIf: rycerz pustki – dostęp pełny');
+        } else {
+          write('nestedIf: inna postać – dostęp ograniczony');
+        }
+      } else {
+        write('nestedIf: niezalogowany');
+      }
+    }
+
+    function ternaryExample() {
+      clearLog();
+      const age = 17;
+      const canFight = (age >= 18) ? 'tak' : 'nie';
+      write('ternary: może walczyć?', canFight, '(age =', age + ')');
+    }
+
+    function logicalAndExample() {
+      clearLog();
+      const isReady = true;
+      isReady && write('logicalAnd: wykonało się bo isReady = true');
+    }
+
+    function logicalOrExample() {
+      clearLog();
+      let name = '';
+      const displayName = name || 'Anon-Rycerz';
+      write('logicalOr: displayName =', displayName);
+    }
+
+    function earlyReturnExample() {
+      clearLog();
+      function process(value) {
+        if (value == null) return write('return: brak wartości – kończę wcześnie');
+        write('return: przetwarzam', value);
+      }
+      process(null);
+      process('Gwóźdź');
+    }
+  </script>
+</body>
+</html>
