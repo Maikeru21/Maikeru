@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="JM13">
+  <title>Zadania Pana Sz.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+   * {margin:0;padding:0;box-sizing:border-box;}
+body {
+  font-family:'Poppins',sans-serif;
+  background: url('tlo/tlo.gif') no-repeat center center fixed;
+  background-size: cover;
+  color: #00ffcc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.7;
+  font-size: 1.1rem;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* przyciemnienie tła dla czytelności */
+body::before { 
+  background: rgba(0,0,0,0.3); /* mniej ciemne */
+  content:"";
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  z-index:-1;
+}
+
+/* nagłówek */
+header, main, footer {
+  width: 100%;
+  display:flex;
+  justify-content:center;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  color:#00ffcc;
+}
+header {
+  padding:80px 20px 60px;
+}
+header h1 {
+  font-size:3.2rem;
+  margin-bottom:20px;
+  letter-spacing:2px;
+  color:#00e6ff;
+  text-shadow:0 0 10px #00e6ff, 0 0 20px #00ffff, 0 0 40px #0088ff;
+  animation: neonPulse 2s infinite alternate;
+}
+header p {
+  font-size:1.4rem;
+  opacity:0.9;
+  max-width:700px;
+  text-shadow:0 0 6px #00ffcc;
+}
+
+/* sekcje */
+section {
+  width:80%;
+  max-width:800px;
+  margin:50px 0;
+  padding:40px;
+  background-color:rgba(20,20,20,0.6);
+  backdrop-filter: blur(4px);
+  border-radius:16px;
+  border:1px solid rgba(0,255,204,0.4);
+  box-shadow:0 0 20px rgba(0,255,204,0.3);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  color:#00ffcc;
+  backdrop-filter: blur(6px);
+  transition: transform 0.3s;
+}
+section:hover {
+  transform: scale(1.02);
+  box-shadow:0 0 30px rgba(0,255,204,0.6);
+}
+h2 {
+  font-size:2.2rem;
+  margin-bottom:25px;
+  position:relative;
+  color:#00e6ff;
+  text-shadow:0 0 8px #00ffff, 0 0 16px #00ccff;
+}
+h2::after {
+  content:"";
+  position:absolute;
+  width:70px;
+  height:4px;
+  background:#00ffcc;
+  bottom:-12px;
+  left:50%;
+  transform:translateX(-50%);
+  border-radius:2px;
+  box-shadow:0 0 10px #00ffcc;
+}
+p {font-size:1.15rem;margin-bottom:15px;}
+
+/* listy */
+ul {
+  list-style:none;
+  padding-left:0;
+  margin-top:20px;
+  width:100%;
+  max-width:700px;
+}
+ul li {
+  margin:10px 0;
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  font-size:1.15rem;
+  text-align:left;
+}
+ul li::before {
+  content:"✦";
+  color:#00ffcc;
+  font-weight:bold;
+  font-size:1.3rem;
+  flex-shrink:0;
+  text-shadow:0 0 6px #00ffcc;
+}
+
+/* przyciski */
+.link-btn {
+  display:inline-block;
+  margin-top:20px;
+  padding:14px 28px;
+  font-size:1rem;
+  font-weight:600;
+  color:#111;
+  background:linear-gradient(135deg,#00ffcc,#0088ff);
+  border-radius:12px;
+  text-decoration:none;
+  transition:all 0.3s ease;
+  box-shadow:0 0 12px #00ffcc, 0 0 24px #0088ff;
+}
+.link-btn:hover {
+  transform:scale(1.08);
+  background:linear-gradient(135deg,#00ffff,#00ff99);
+  box-shadow:0 0 18px #00ffff, 0 0 36px #00ff99;
+}
+
+/* stopka */
+footer {
+  padding:40px 20px;
+  background-color:rgba(15,15,15,0.9);
+  color:#00ffcc;
+  margin-top:40px;
+  font-size:1.1rem;
+  border-top:1px solid rgba(0,255,204,0.3);
+  text-shadow:0 0 6px #00ffcc;
+}
+footer a {
+  color:#00ffff;
+  text-decoration:none;
+  font-weight:600;
+}
+footer a:hover {
+  text-decoration:underline;
+  color:#00ff99;
+}
+
+/* animacje */
+@keyframes neonPulse {
+  from { text-shadow:0 0 10px #00e6ff, 0 0 20px #00ffff, 0 0 40px #0088ff; }
+  to { text-shadow:0 0 20px #00ffff, 0 0 40px #00ffcc, 0 0 80px #00e6ff; }
+}
+
+/* responsywność */
+@media(max-width:768px){
+  header h1 {font-size:2.4rem;}
+  header p {font-size:1.2rem;}
+  h2 {font-size:1.8rem;}
+  p, li {font-size:1rem;}
+}
+
+  </style>
+</head>
+<body>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Alert - powitanie
+    document.getElementById('alertBtn').addEventListener('click', function() {
+      alert("Witaj na mojej stronie!");
+    });
+
+    // Confirm - zapytanie o przejście do strony Isaac
+    document.getElementById('confirmBtn').addEventListener('click', function() {
+      const goToIsaac = confirm("Czy chcesz przejść do strony o The Binding of Isaac?");
+      if (goToIsaac) {
+        window.location.href = "isaac.html";
+      }
+    });
+
+    // Prompt - pytanie o imię i powitanie
+    document.getElementById('promptBtn').addEventListener('click', function() {
+      const name = prompt("Jak masz na imię?");
+      if (name) {
+        alert("Cześć " + name + "! Miło Cię widzieć!");
+      } else {
+        alert("Witaj na mojej stronie!");
+      }
+    });
+  });
+</script>
+  <header>
+    <h1>Maikeru</h1>
+    <p>Zadania na lekcje pana Sz.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>Dexter</h2>
+      <p>Strona o serialu Dexter</p>
+      <a href="Dexter.html" class="link-btn">➡ Przejdź do strony Dexter</a>
+    </section>
+
+    <section>
+      <h2>Isaac</h2>
+      <p>Strona o The Binding of Isaac</p>
+      <a href="isaac.html" class="link-btn">➡ Przejdź do strony Isaac</a>
+    </section>
+    <section>
+      <h2>Ben 10 Classic</h2>
+      <p>Strona o Ben10</p>
+      <a href="Ben.html" class="link-btn">➡ Przejdź do strony Ben</a>
+    </section>
+    <section>
+      <h2>Cuphead</h2>
+      <p>Strona o Cuphead</p>
+      <a href="operatory.html" class="link-btn">➡ Przejdź do strony Cuphead</a>
+    </section>
+    <section>
+      <h2>Five Nights at Freddy’s</h2>
+      <p>Strona o Five Nights at Freddy’s</p>
+      <a href="ifswitchfortowhile.html" class="link-btn">➡ Przejdź do strony Five Nights at Freddy’s</a>
+    </section>
+    <section>
+      <h2>Hollow Knight</h2>
+      <p>Strona o Hollow Knight</p>
+      <a href="Hollow.html" class="link-btn">➡ Przejdź do strony Hollow Knight</a>
+    </section>
+    <section>
+      <h2>Terraria</h2>
+      <p>Strona o Terraria</p>
+      <a href="funkcje.html" class="link-btn">➡ Przejdź do strony Terraria</a>
+    </section>
+  </main>
+<section class="interactions">
+  <h2>Interakcje z użytkownikiem</h2>
+  <button id="alertBtn" class="link-btn">Pokaż alert</button>
+  <button id="confirmBtn" class="link-btn">Pokaż confirm</button>
+  <button id="promptBtn" class="link-btn">Pokaż prompt</button>
+</section>
+
+  <footer>
+    <h3>Twórca strony Maikeru</h3>
+  </footer>
+</body>
+</html>

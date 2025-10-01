@@ -1,0 +1,319 @@
+<!DOCTYPE html> 
+<html lang="pl"> 
+<head>
+  <meta charset="UTF-8">
+  <title>The Binding of Isaac</title>
+  <style>
+    * {margin:0;padding:0;box-sizing:border-box;}
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url('1361930.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      color: #00ffcc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1.7;
+      font-size: 1.1rem;
+      position: relative;
+      overflow-x: hidden;
+      transition: all 0.3s ease;
+    }
+
+    body::before { 
+      background: rgba(0,0,0,0.4);
+      content:"";
+      position:fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      z-index:-1;
+    }
+
+    header, main, footer {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: #00ffcc;
+    }
+
+    header {
+      padding: 80px 20px 40px;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+      color: #00e6ff;
+      text-shadow: 0 0 10px #00e6ff, 0 0 20px #00ffff, 0 0 40px #0088ff;
+      animation: neonPulse 2s infinite alternate;
+    }
+
+    main {
+      width: 80%;
+      max-width: 1100px;
+      padding: 40px;
+      margin-bottom: 40px;
+      background-color: rgba(20, 20, 20, 0.65);
+      backdrop-filter: blur(6px);
+      border-radius: 16px;
+      border: 1px solid rgba(0, 255, 204, 0.4);
+      box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
+      transition: transform 0.3s, background-color 0.3s, color 0.3s;
+    }
+
+    main:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 30px rgba(0, 255, 204, 0.6);
+    }
+
+    p {
+      font-size: 1.15rem;
+      margin-bottom: 20px;
+      text-shadow: 0 0 6px #00ffcc;
+    }
+
+    /* Karty postaci */
+    .characters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .character-card {
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(0,255,204,0.4);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 0 12px rgba(0,255,204,0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .character-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0,255,204,0.6);
+    }
+
+    .character-card img {
+      width: 100%;
+      max-width: 150px;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .character-card h3 {
+      color: #00e6ff;
+      margin-bottom: 10px;
+      font-size: 1.4rem;
+    }
+
+    /* Przycisk */
+    .buttons {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .btn {
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #111;
+      background: linear-gradient(135deg, #00ffcc, #0088ff);
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 12px #00ffcc, 0 0 24px #0088ff;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      transform: scale(1.08);
+      background: linear-gradient(135deg, #00ffff, #00ff99);
+      box-shadow: 0 0 18px #00ffff, 0 0 36px #00ff99;
+    }
+
+    /* Tryb żółty */
+    .yellow-mode main {
+      background-color: #000 !important;
+      border: 1px solid #ffeb3b;
+      box-shadow: 0 0 20px rgba(255,235,59,0.5);
+      color: #ffeb3b;
+    }
+
+    .yellow-mode p, 
+    .yellow-mode h3 {
+      color: #ffeb3b;
+      text-shadow: none;
+    }
+
+    @keyframes neonPulse {
+      from { text-shadow: 0 0 10px #00e6ff, 0 0 20px #00ffff, 0 0 40px #0088ff; }
+      to { text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffcc, 0 0 80px #00e6ff; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>The Binding of Isaac</h1>
+  </header>
+
+  <main>
+    <p>
+      <strong>The Binding of Isaac</strong> to popularna gra typu roguelike stworzona przez Edmunda McMillena. 
+      Gracz eksploruje losowo generowane lochy, zbiera przedmioty i walczy z potworami, aby przetrwać jak najdłużej.
+    </p>
+    <p>
+      Gra wyróżnia się mrocznym klimatem, dużą liczbą sekretów oraz ogromną regrywalnością.
+    </p>
+
+    <!-- Postacie -->
+    <section class="characters">
+        <div class="character-card">
+          <img src="issac/issac.webp" alt="Isaac">
+          <h3>Isaac</h3>
+          <p>Podstawowa postać gry. Zaczyna z <strong>3 czerwonymi sercami</strong>, zwykłymi łzami jako bronią i balansem statystyk. 
+             Uniwersalny bohater dla nowych graczy.</p>
+        </div>
+      
+        <div class="character-card">
+          <img src="issac/magdalena.png" alt="Magdalene">
+          <h3>Magdalene</h3>
+          <p>Startuje z <strong>4 czerwonymi sercami</strong> oraz aktywnym przedmiotem <em>Yum Heart</em>, który leczy pół serca. 
+             Ma dużą wytrzymałość, ale porusza się wolniej od innych postaci.</p>
+        </div>
+      
+        <div class="character-card">
+          <img src="issac/cain.jpg" alt="Cain">
+          <h3>Cain</h3>
+          <p>Posiada <strong>2 czerwone serca</strong>, wyższy współczynnik szczęścia i startuje z <em>kluczem</em>. 
+             Dzięki temu łatwiej otwiera skarbce i zdobywa lepsze przedmioty.</p>
+        </div>
+      
+        <div class="character-card">
+          <img src="issac/judas.webp" alt="Judas">
+          <h3>Judas</h3>
+          <p>Ma tylko <strong>1 czerwone serce</strong>, ale w zamian otrzymuje aktywny przedmiot <em>Book of Belial</em>, 
+             który zwiększa obrażenia. Gra nim to balansowanie między ryzykiem a ogromną siłą.</p>
+        </div>
+      
+        <div class="character-card">
+          <img src="issac/BlueBaby.webp" alt="Blue Baby">
+          <h3>??? (Blue Baby)</h3>
+          <p>Startuje z <strong>3 niebieskimi sercami</strong>, które nie mogą być uzupełniane zwykłymi sercami. 
+             Może używać <em>The Poop</em>, jednak jego siła leży w synergii z przedmiotami opartymi o duszne serca.</p>
+        </div>
+      
+        <div class="character-card">
+          <img src="issac/eve.webp" alt="Eve">
+          <h3>Eve</h3>
+          <p>Zaczyna ze <em>Whore of Babylon</em> oraz <em>Dead Bird</em>. 
+             Gdy jej zdrowie spadnie do 1 czerwonego serca, włącza się efekt Babilonu zwiększający obrażenia. 
+             Postać nagradza ryzykowny styl gry.</p>
+        </div>
+      
+        <div class="character-card">
+          <img src="issac/samson.webp" alt="Samson">
+          <h3>Samson</h3>
+          <p>Każde obrażenie zwiększa jego <strong>obrażenia</strong> w tym samym pokoju (pasyw <em>Bloody Lust</em>). 
+             Zaczyna z 1 czerwonym sercem i 1 dusznym sercem, co czyni go ofensywnym bohaterem.</p>
+        </div>
+      
+        <div class="character-card">
+          <img src="issac/azazel.webp" alt="Azazel">
+          <h3>Azazel</h3>
+          <p>Lata od początku gry i używa <strong>krótkiego lasera Brimstone</strong>. 
+             Ma tylko 3 czarne serca, ale ogromny potencjał ofensywny, szczególnie na wczesnych etapach.</p>
+        </div>
+      
+        <div class="character-card">
+          <img src="issac/lazarus.webp" alt="Lazarus">
+          <h3>Lazarus</h3>
+          <p>Posiada umiejętność <strong>wskrzeszenia</strong> – po śmierci odradza się jako Lazarus Risen z lepszymi statystykami. 
+             Zaczyna z 3 czerwonymi sercami i losowym przedmiotem.</p>
+        </div>
+      
+        <div class="character-card">
+          <img src="issac/eden.webp" alt="Eden">
+          <h3>Eden</h3>
+          <p>Każdy run jest inny – Eden zaczyna z <strong>losowymi statystykami</strong>, 
+             losowym pasywnym i aktywnym przedmiotem. Do odblokowania wymaga <em>żetonu Edena</em> zdobywanego po pokonaniu Mom’s Heart.</p>
+        </div>
+      
+        <div class="character-card">
+          <img src="issac/lost.webp" alt="The Lost">
+          <h3>The Lost</h3>
+          <p>Nie ma żadnych punktów zdrowia – <strong>ginie od jednego uderzenia</strong>. 
+             Jednak wszystkie przedmioty są dla niego darmowe. Gra nim wymaga perfekcji i nagradza dużą mocą.</p>
+        </div>
+      
+        <div class="character-card">
+          <img src="issac/lilith.webp" alt="Lilith">
+          <h3>Lilith</h3>
+          <p>Nie strzela łzami – atakuje przez swojego familiara <em>Incubus</em>. 
+             Zaczyna również z aktywnym przedmiotem <em>Box of Friends</em>, który podwaja familiary w pokoju.</p>
+        </div>
+      
+        <div class="character-card">
+          <img src="issac/keeper.webp" alt="Keeper">
+          <h3>Keeper</h3>
+          <p>Ma <strong>2 monetowe serca</strong>, które można leczyć tylko przez zbieranie monet. 
+             Zaczyna z <em>Wooden Nickel</em>, który może generować dodatkowe pieniądze. Gra nim jest trudniejsza, ale satysfakcjonująca.</p>
+        </div>
+      
+        <div class="character-card">
+          <img src="issac/apollyon.webp" alt="Apollyon">
+          <h3>Apollyon</h3>
+          <p>Jego unikalny przedmiot to <em>Void</em>, który może <strong>pochłaniać itemy</strong>. 
+             Aktywne zamienia w efekt do użycia, a pasywne w bonus do statystyk. Dzięki temu gracz sam buduje swoją siłę.</p>
+        </div>
+      
+        <div class="character-card">
+          <img src="issac/forgotten.webp" alt="The Forgotten">
+          <h3>The Forgotten</h3>
+          <p>Podwójna postać – walczy <strong>wręcz</strong> kością, a w dowolnym momencie może przełączyć się na ducha (The Soul), który strzela łzami. 
+             Bardzo wszechstronny, ale wymagający.</p>
+        </div>
+      
+        <div class="character-card">
+          <img src="issac/bethany.webp" alt="Bethany">
+          <h3>Bethany</h3>
+          <p>Nie może używać dusznych serc jako HP – zamienia je w <strong>ładunki aktywnych przedmiotów</strong>. 
+             Startuje z <em>Book of Virtues</em>, które przywołuje orbitujące duszki.</p>
+        </div>
+      
+        <div class="character-card">
+          <img src="issac/jacob.webp" alt="Jacob & Esau">
+          <h3>Jacob & Esau</h3>
+          <p>Unikalna para bohaterów – gracz steruje <strong>dwoma postaciami jednocześnie</strong>. 
+             Każdy ma osobne przedmioty i HP, co czyni ich potężnymi, ale trudnymi do kontrolowania.</p>
+        </div>
+      </section>
+      
+
+    <!-- Przyciski -->
+    <div class="buttons">
+      <button class="btn" onclick="toggleMode()">Przełącz tryb (czarny + żółty)</button>
+      <a href="index.html" class="btn">⬅ Powrót do strony głównej</a>
+      <a href="tainted.html" class="btn">🌑 Zobacz Tainted postacie</a>
+    </div>
+  </main>
+
+  <script>
+    function toggleMode() {
+      document.body.classList.toggle("yellow-mode");
+    }
+  </script>
+</body>
+</html>

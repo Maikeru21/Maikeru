@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <title>Funkcje JS — Terraria Style</title>
+  <style>
+    * {margin:0;padding:0;box-sizing:border-box;}
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url('gif.gif') no-repeat center center fixed;
+      background-size: cover;
+      color: #aaffaa;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1.6;
+      font-size: 1.05rem;
+      overflow-x: hidden;
+    }
+
+    body::before { 
+      background: rgba(0,0,0,0.55);
+      content:"";
+      position:fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      z-index:-1;
+    }
+
+    .container {
+      background-color: rgba(25, 25, 25, 0.8);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(100,255,150,0.3);
+      text-align: center;
+      width: 85%;
+      max-width: 800px;
+      margin: 40px 0;
+      border: 1px solid rgba(100,255,150,0.4);
+      backdrop-filter: blur(5px);
+      transition: transform 0.3s;
+    }
+    .container:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 30px rgba(150,255,200,0.6);
+    }
+
+    h1, h2 {
+      color: #55ff99;
+      text-shadow: 0 0 12px #55ff99, 0 0 20px #00cc66;
+      margin-bottom: 15px;
+      animation: neonPulse 2s infinite alternate;
+    }
+
+    p, li, label {
+      text-shadow: 0 0 6px #55ff99;
+    }
+
+    input {
+      padding: 10px;
+      width: 70%;
+      max-width: 260px;
+      border-radius: 10px;
+      border: 1px solid #55ff99;
+      background: rgba(0,0,0,0.6);
+      color: #aaffaa;
+      font-size: 1rem;
+      text-align: center;
+      outline: none;
+      margin: 8px 0;
+      box-shadow: 0 0 12px rgba(100,255,150,0.3);
+    }
+    input:focus {
+      border-color: #55ff99;
+      box-shadow: 0 0 18px #55ff99;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #111;
+      background: linear-gradient(135deg, #55ff99, #009933);
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 12px #55ff99, 0 0 24px #009933;
+      margin: 5px;
+      display: inline-block;
+    }
+    button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, #77ffbb, #33cc77);
+      box-shadow: 0 0 18px #77ffbb, 0 0 36px #33cc77;
+    }
+
+    pre {
+      background: rgba(0,0,0,0.7);
+      border: 1px solid #55ff99;
+      border-radius: 8px;
+      padding: 10px;
+      margin-top: 10px;
+      color: #ddffdd;
+      text-align: left;
+      white-space: pre-wrap;
+    }
+
+    footer {
+      margin: 30px 0;
+      text-align: center;
+      color: #aaffaa;
+      font-size: 0.95rem;
+      text-shadow: 0 0 6px #55ff99;
+    }
+
+    @keyframes neonPulse {
+      from { text-shadow: 0 0 10px #55ff99, 0 0 20px #55ff99, 0 0 40px #009933; }
+      to { text-shadow: 0 0 20px #77ffbb, 0 0 40px #55ff99, 0 0 80px #00cc66; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Terraria-Funkcje w JS</h1>
+    <p>parseInt(), parseFloat(), Number(), isNaN()<strong>Terraria</strong>. Wpisz własne dane i sprawdź wynik.</p>
+
+    <section>
+      <h2>parseInt()</h2>
+      <label>Wprowadź wartość: <input id="pint-input" value="123abc"></label>
+      <label>Radix: <input id="pint-radix" placeholder="np. 10"></label>
+      <button onclick="runParseInt()">Wykonaj</button>
+      <pre id="pint-out"></pre>
+    </section>
+
+    <section>
+      <h2>parseFloat()</h2>
+      <label>Wprowadź wartość: <input id="pfloat-input" value="3.14pies"></label>
+      <button onclick="runParseFloat()">Wykonaj</button>
+      <pre id="pfloat-out"></pre>
+    </section>
+
+    <section>
+      <h2>Number()</h2>
+      <label>Wprowadź wartość: <input id="num-input" value="123abc"></label>
+      <button onclick="runNumber()">Wykonaj</button>
+      <pre id="num-out"></pre>
+    </section>
+
+    <section>
+      <h2>isNaN()</h2>
+      <label>Wprowadź wartość: <input id="isnan-input" value="abc"></label>
+      <button onclick="runIsNaN()">Wykonaj</button>
+      <pre id="isnan-out"></pre>
+    </section>
+
+    <section>
+      <h2>Historia testów</h2>
+      <pre id="log"></pre>
+      <button onclick="clearLog()">Wyczyść log</button>
+    </section>
+    
+    <section>
+  <h2>Wyrażenie funkcyjne vs Deklaracja funkcji</h2>
+  <button onclick="runFunctionTests()">Uruchom test</button>
+  <pre id="function-out"></pre>
+</section>
+
+<section>
+    <h2>Hoisting (windowanie)</h2>
+    <button onclick="runHoisting()">Pokaż przykład</button>
+    <pre id="hoisting-out"></pre>
+  </section>
+  
+
+  </div>
+
+  <footer>
+    <p>Styl inspirowany <em>Terrarią</em>. Korzystaj z <code>Number.isNaN</code> dla dokładniejszych testów.</p>
+  </footer>
+
+  <script>
+    function log(msg){
+      const el = document.getElementById('log');
+      const time = new Date().toLocaleTimeString();
+      el.textContent = '['+time+'] ' + msg + '\n' + el.textContent;
+    }
+
+    function show(elId, value){
+      document.getElementById(elId).textContent = String(value);
+    }
+
+    function runParseInt(){
+      const s = document.getElementById('pint-input').value;
+      const radixRaw = document.getElementById('pint-radix').value.trim();
+      const radix = radixRaw === '' ? undefined : parseInt(radixRaw, 10);
+      let result;
+      try{
+        result = radix === undefined ? parseInt(s) : parseInt(s, radix);
+      }catch(e){
+        result = 'error: '+e.message;
+      }
+      show('pint-out', 'parseInt("'+s+'"' + (radix===undefined ? '' : (', '+radix)) + ') => ' + result);
+      log('parseInt — input: "'+s+'" radix: '+(radix===undefined? 'auto':radix) + ' → ' + result);
+    }
+
+    function runParseFloat(){
+      const s = document.getElementById('pfloat-input').value;
+      const result = parseFloat(s);
+      show('pfloat-out', 'parseFloat("'+s+'") => ' + result);
+      log('parseFloat — input: "'+s+'" → ' + result);
+    }
+
+    function runNumber(){
+      const s = document.getElementById('num-input').value;
+      const result = Number(s);
+      show('num-out', 'Number("'+s+'") => ' + result);
+      log('Number — input: "'+s+'" → ' + result);
+    }
+
+    function runIsNaN(){
+      const s = document.getElementById('isnan-input').value;
+      const global = isNaN(s);
+      const strict = Number.isNaN ? Number.isNaN(s) : 'Number.isNaN not available';
+      show('isnan-out', 'isNaN("'+s+'") => ' + global + '\nNumber.isNaN("'+s+'") => ' + strict);
+      log('isNaN — input: "'+s+'" → global: '+global+' strict: '+strict);
+    }
+    
+    // Deklaracja funkcji
+function declaredFunction(name) {
+  return `Deklaracja funkcji: Witaj, ${name}!`;
+}
+
+// Wyrażenie funkcyjne z użyciem const
+const expressionFunction = function(name) {
+  return `Wyrażenie funkcyjne: Miło Cię widzieć, ${name}!`;
+};
+
+// Funkcja do uruchomienia testu obu powyższych
+function runFunctionTests() {
+  const name = "Terrarianin";
+  const output = [
+    declaredFunction(name),
+    expressionFunction(name)
+  ].join('\n');
+
+  show('function-out', output);
+  log('Uruchomiono funkcje: deklaracja i wyrażenie funkcyjne.');
+}
+
+function runHoisting() {
+  let output = '';
+
+  // ✅ Funkcja może być wywołana PRZED deklaracją
+  output += hoistedFunction() + '\n';
+
+  // ❌ Zmienna var dostępna wcześniej, ale jako undefined
+  output += 'var przed deklaracją: ' + hoistedVar + '\n';
+
+  // ❌ let/const nie są dostępne przed deklaracją – powodują błąd
+  try {
+    output += 'let przed deklaracją: ' + hoistedLet + '\n';
+  } catch (e) {
+    output += 'let przed deklaracją: Błąd → ' + e.message + '\n';
+  }
+
+  try {
+    output += 'const przed deklaracją: ' + hoistedConst + '\n';
+  } catch (e) {
+    output += 'const przed deklaracją: Błąd → ' + e.message + '\n';
+  }
+
+  // Deklaracje
+  function hoistedFunction() {
+    return '✅ Funkcja hoistowana działa przed deklaracją';
+  }
+
+  var hoistedVar = 'Działa po przypisaniu';
+  let hoistedLet = 'let zadziałał po deklaracji';
+  const hoistedConst = 'const też zadziałał po deklaracji';
+
+  show('hoisting-out', output);
+  log('Przykład hoistingu wykonany.');
+}
+
+
+
+    function clearLog(){ document.getElementById('log').textContent = ''; }
+
+    log('Strona Terraria Style załadowana.');
+  </script>
+</body>
+</html>

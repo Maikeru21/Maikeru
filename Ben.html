@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ben 10 Classic - Konwerter Mocy</title>
+  <style>
+    * {margin:0;padding:0;box-sizing:border-box;}
+body {
+  font-family: 'Poppins', sans-serif;
+  background: url('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXRieWJrdm9yeWxwbGEweXZwcTYybGcyM2VxaWluc2JkNDM2MGEzZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/bPXKfpvkn9tQc/giphy.gif') no-repeat center center fixed;
+  background-size: cover;
+  color: #00ff99; /* neonowa zieleń */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.7;
+  font-size: 1.1rem;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before { 
+  background: rgba(0,0,0,0.45);
+  content:"";
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  z-index:-1;
+}
+
+.container {
+  background-color: rgba(20, 20, 20, 0.7);
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0,255,153,0.3);
+  text-align: center;
+  width: 85%;
+  max-width: 600px;
+  margin-top: 80px;
+  border: 1px solid rgba(0,255,153,0.4);
+  backdrop-filter: blur(6px);
+  transition: transform 0.3s;
+}
+.container:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 30px rgba(0,255,153,0.6);
+}
+
+h1 {
+  color: #00ff66;
+  font-size: 2.4rem;
+  margin-bottom: 15px;
+  text-shadow: 0 0 12px #00ff99, 0 0 24px #00cc66;
+  animation: neonPulse 2s infinite alternate;
+}
+
+p {
+  font-size: 1.15rem;
+  margin-bottom: 20px;
+  text-shadow: 0 0 6px #00ff99;
+}
+
+label {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  display: block;
+  text-shadow: 0 0 6px #00ff99;
+}
+
+input {
+  padding: 12px;
+  width: 80%;
+  max-width: 300px;
+  border-radius: 10px;
+  border: 1px solid #00ff99;
+  background: rgba(0,0,0,0.6);
+  color: #00ff99;
+  font-size: 1.1rem;
+  text-align: center;
+  outline: none;
+  margin-bottom: 20px;
+  box-shadow: 0 0 12px rgba(0,255,153,0.3);
+}
+input:focus {
+  border-color: #00ff66;
+  box-shadow: 0 0 18px #00ff66;
+}
+
+button, .btn {
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111;
+  background: linear-gradient(135deg, #00ff99, #009933);
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 12px #00ff99, 0 0 24px #009933;
+  margin: 10px;
+  text-decoration: none;
+  display: inline-block;
+}
+button:hover, .btn:hover {
+  transform: scale(1.08);
+  background: linear-gradient(135deg, #00ffcc, #00ff66);
+  box-shadow: 0 0 18px #00ffcc, 0 0 36px #00ff66;
+}
+
+#wynik {
+  font-size: 1.3rem;
+  margin-top: 20px;
+  font-weight: bold;
+  color: #00ff66;
+  text-shadow: 0 0 8px #00ff99;
+}
+
+.footer {
+  margin: 40px 0 20px;
+  text-align: center;
+  color: #00ff99;
+  font-size: 1rem;
+  text-shadow: 0 0 6px #00ff99;
+}
+
+@keyframes neonPulse {
+  from { text-shadow: 0 0 10px #00ff66, 0 0 20px #00ff99, 0 0 40px #009933; }
+  to { text-shadow: 0 0 20px #00ffcc, 0 0 40px #00ff66, 0 0 80px #00ff99; }
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Ben 10 Classic - Konwerter Mocy Omnitrixa</h1>
+    <p>Wpisz moc (jako tekst), a Omnitrix przekonwertuje ją na wartość liczbową!</p>
+
+    <label for="mocInput">Moc postaci:</label>
+    <input type="text" id="mocInput" placeholder="np. 9000">
+
+    <br>
+    <button onclick="przeliczMoc()">Konwertuj</button>
+    <a href="index.html" class="btn">⬅ Powrót do strony głównej</a>
+
+    <p id="wynik"></p>
+  </div>
+
+  <div class="footer">
+    <p>Strona stworzona przez Maikeru</p>
+  </div>
+
+  <script>
+    function przeliczMoc() {
+      var tekstowaMoc = document.getElementById("mocInput").value;
+      let liczbowo = Number(tekstowaMoc);
+      const intro = "Moc Omnitrixa została ustawiona na";
+
+      if (isNaN(liczbowo)) {
+        document.getElementById("wynik").innerText = "🚫 To nie wygląda jak prawdziwa moc!";
+      } else {
+        document.getElementById("wynik").innerText = `${intro}: ${liczbowo} punktów mocy 💥`;
+      }
+    }
+  </script>
+</body>
+</html>

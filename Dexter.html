@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dexter – Serial</title>
+    <style>
+    * {margin:0;padding:0;box-sizing:border-box;}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: url('https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGY5Ymo1bGl6NDFldzA0M25wZHRxMWJrbHo4MmtzYzdoajRoa2Z1eiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/CFJqC6fgQF4pG/giphy.gif') no-repeat center center fixed;
+  background-size: cover;
+  color: #00ffcc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.7;
+  font-size: 1.1rem;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before { 
+  background: rgba(0,0,0,0.4);
+  content:"";
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  z-index:-1;
+}
+
+/* Nagłówek */
+header, main, footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #00ffcc;
+}
+header {
+  padding: 80px 20px 40px;
+}
+header h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  color: #00e6ff;
+  text-shadow: 0 0 10px #00e6ff, 0 0 20px #00ffff, 0 0 40px #0088ff;
+  animation: neonPulse 2s infinite alternate;
+}
+header p {
+  font-size: 1.3rem;
+  opacity: 0.9;
+  max-width: 700px;
+  text-shadow: 0 0 6px #00ffcc;
+}
+
+/* Nawigacja */
+nav {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+}
+nav a {
+  text-decoration: none;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #111;
+  background: linear-gradient(135deg, #00ffcc, #0088ff);
+  box-shadow: 0 0 10px #00ffcc, 0 0 20px #0088ff;
+  transition: all 0.3s ease;
+}
+nav a:hover {
+  transform: scale(1.1);
+  background: linear-gradient(135deg, #00ffff, #00ff99);
+  box-shadow: 0 0 15px #00ffff, 0 0 30px #00ff99;
+  color: #000;
+}
+
+/* Sekcje */
+section {
+  width: 80%;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 40px;
+  background-color: rgba(20, 20, 20, 0.65);
+  backdrop-filter: blur(6px);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 255, 204, 0.4);
+  box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;   /* WYŚRODKOWANIE CAŁEJ TREŚCI */
+  color: #00ffcc;
+  transition: transform 0.3s;
+}
+section:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 30px rgba(0, 255, 204, 0.6);
+}
+
+h2 {
+  font-size: 2.2rem;
+  margin-bottom: 25px;
+  position: relative;
+  color: #00e6ff;
+  text-shadow: 0 0 8px #00ffff, 0 0 16px #00ccff;
+}
+h2::after {
+  content: "";
+  position: absolute;
+  width: 70px;
+  height: 4px;
+  background: #00ffcc;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+  box-shadow: 0 0 10px #00ffcc;
+}
+
+p {
+  font-size: 1.15rem;
+  margin-bottom: 15px;
+  text-shadow: 0 0 6px #00ffcc;
+}
+
+/* Karty postaci */
+.characters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+  width: 100%;
+}
+.character {
+  background: rgba(0,0,0,0.6);
+  border: 1px solid rgba(0,255,204,0.4);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 0 12px rgba(0,255,204,0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.character:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0,255,204,0.6);
+}
+.character img {
+  width: 100%;
+  max-width: 150px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+.character h3 {
+  color: #00e6ff;
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+}
+
+/* Listy ciekawostek */
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* WYŚRODKOWANIE ELEMENTÓW */
+}
+
+ul li {
+  margin: 10px 0;
+  display: flex;
+  justify-content: center; /* Tekst + gwiazdka wyśrodkowane */
+  align-items: center;
+  gap: 10px;
+  font-size: 1.15rem;
+  text-align: center;   /* Tekst na środku */
+}
+ul li::before {
+  content: "✦";
+  color: #00ffcc;
+  font-weight: bold;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  text-shadow: 0 0 6px #00ffcc;
+}
+
+/* Powrót */
+/* Powrót */
+.return-container {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center; /* WYŚRODKOWANIE przycisku */
+  width: 100%;
+}
+
+.return-container .btn {
+  display: inline-block;
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111;
+  background: linear-gradient(135deg, #00ffcc, #0088ff);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 12px #00ffcc, 0 0 24px #0088ff;
+}
+.return-container .btn:hover {
+  transform: scale(1.08);
+  background: linear-gradient(135deg, #00ffff, #00ff99);
+  box-shadow: 0 0 18px #00ffff, 0 0 36px #00ff99;
+}
+
+/* Stopka */
+footer {
+  margin: 40px 0 20px;
+  font-size: 0.95rem;
+  color: #00ffcc;
+  text-shadow: 0 0 6px #00ffcc;
+}
+footer a {
+  color: #00ffff;
+  text-decoration: none;
+  font-weight: bold;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Animacja neonowa */
+@keyframes neonPulse {
+  from {
+    text-shadow: 0 0 10px #00e6ff, 0 0 20px #00ffff, 0 0 40px #0088ff;
+  }
+  to {
+    text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffcc, 0 0 80px #00e6ff;
+  }
+}
+
+/* Responsywność */
+@media(max-width: 768px) {
+  header h1 {
+    font-size: 2.4rem;
+  }
+  h2 {
+    font-size: 1.8rem;
+  }
+  p, li {
+    font-size: 1rem;
+  }
+}
+
+  </style>
+
+</head>
+<body>
+  <header>
+    <h1>Dexter</h1>
+    <nav>
+      <a href="#fabula">Fabula</a>
+      <a href="#bohaterowie">Bohaterowie</a>
+      <a href="#ciekawostki">Ciekawostki</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <section id="fabula" class="card">
+      <h2>Fabula</h2>
+      <p>
+        „Dexter” to amerykański serial kryminalny opowiadający o Dexterze Morganie,
+        analityku śladów krwi pracującym dla policji w Miami, który prowadzi podwójne życie
+        jako seryjny morderca wymierzający sprawiedliwość przestępcom, których wymiar prawa nie dosięgnął.
+      </p>
+    </section>
+
+    <section id="bohaterowie" class="card">
+      <h2>Bohaterowie</h2>
+      <div class="characters">
+        <div class="character">
+          <img src="d/Dexter.jfif" alt="Dexter Morgan">
+          <h3>Dexter Morgan</h3>
+          <p>Analityk śladów krwi, który prowadzi podwójne życie jako seryjny morderca z kodeksem.</p>
+        </div>
+
+        <div class="character">
+          <img src="d/Debra.jfif" alt="Debra Morgan">
+          <h3>Debra Morgan</h3>
+          <p>Siostra Dextera i policjantka w Miami Metro, pełna energii i determinacji.</p>
+        </div>
+
+        <div class="character">
+          <img src="d/Harry.jfif" alt="Harry Morgan">
+          <h3>Harry Morgan</h3>
+          <p>Ojciec adopcyjny Dextera, nauczył go zasad „kodeksu”, by ukierunkować jego mroczne instynkty.</p>
+        </div>
+
+        <div class="character">
+          <img src="d/Rita.jfif" alt="Rita Bennett">
+          <h3>Rita Bennett</h3>
+          <p>Kobieta, z którą Dexter wchodzi w związek. Symbol jego pragnienia normalności.</p>
+        </div>
+
+        <div class="character">
+          <img src="d/La Pasion.jfif" alt="Angel Batista">
+          <h3>Angel Batista</h3>
+          <p>Detektyw w Miami Metro, przyjaciel Dextera, wierny i lojalny. LA PASION</p>
+        </div>
+
+        <div class="character">
+          <img src="d/LaGuerta.jfif" alt="Maria LaGuerta">
+          <h3>Maria LaGuerta</h3>
+          <p>Ambitna przełożona policji w Miami Metro, często ściera się z Debrą.</p>
+        </div>
+
+        <div class="character">
+          <img src="d/Masuka.jfif" alt="Vince Masuka">
+          <h3>Vince Masuka</h3>
+          <p>Ekscentryczny technik kryminalistyczny w Miami Metro, znany z poczucia humoru i ciętych żartów.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ciekawostki" class="card">
+      <h2>Ciekawostki</h2>
+      <ul>
+        <li>Pierwszy sezon oparto na powieści Jeffa Lindsaya „Darkly Dreaming Dexter”.</li>
+        <li>Michael C. Hall (Dexter) zmagał się z rakiem podczas kręcenia 5. sezonu, a mimo to nie przerwał pracy.</li>
+        <li>Serial zdobył 2 nagrody Emmy i Złoty Glob dla Michaela C. Halla.</li>
+        <li>Dexter emitowany był w latach 2006–2013, a w 2021 powrócił jako „Dexter: New Blood”.</li>
+        <li>Twórcy konsultowali się z prawdziwymi technikami kryminalistycznymi, aby realistycznie odwzorować śledztwa.</li>
+        <li>Postać Vince’a Masuki miała początkowo być drugoplanowa, ale zyskała ogromną sympatię fanów.</li>
+        <li>Mroczne intro serialu, pokazujące codzienne czynności Dextera, stało się jednym z najbardziej rozpoznawalnych w telewizji, została wymyślona przez samego aktora, Michaela C. Halla.</li>
+      </ul>
+    </section>
+
+    <!-- Ładny przycisk powrotu -->
+    <div class="return-container">
+      <a href="index.html" class="btn">⬅ Powrót do strony głównej</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>Strona fanowska o serialu Dexter | Stworzona przez <a href="#">Maikeru</a></p>
+  </footer>
+</body>
+</html>
