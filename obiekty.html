@@ -1,0 +1,308 @@
+\<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Obiekty w CS2 Style</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+       * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: url('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHU3enp4cmJhOXdzN3QycnJsZGE3dGV4c280NnozaDZheGVmMm5nZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/TgvOsOZ91BCdp2Mivs/giphy.gif') no-repeat center center fixed;
+  background-size: cover;
+  color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.7;
+  font-size: 1.1rem;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 10, 0.75);
+  z-index: -1;
+}
+
+/* Nagłówek */
+header {
+  padding: 60px 20px 30px;
+  text-align: center;
+}
+header h1 {
+  font-size: 3rem;
+  color: #d4af37;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+}
+header p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 15px auto;
+  color: #ccc;
+}
+
+/* Nawigacja */
+nav {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+nav a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #fdfdfd;
+  background-color: #2e3b4e;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgba(212, 175, 55, 0.3);
+  transition: all 0.3s ease;
+}
+nav a:hover {
+  transform: scale(1.05);
+  background-color: #c2b280;
+  color: #111;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+}
+
+/* Sekcje */
+section {
+  width: 90%;
+  max-width: 900px;
+  margin: 40px 0;
+  padding: 40px;
+  background-color: rgba(46, 59, 78, 0.85);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+  text-align: center;
+  transition: transform 0.3s;
+}
+section:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 25px;
+  color: #d4af37;
+  position: relative;
+}
+h2::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: #d4af37;
+  box-shadow: 0 0 6px rgba(212, 175, 55, 0.5);
+  border-radius: 2px;
+}
+
+/* Lista */
+ul {
+  list-style: none;
+  margin-top: 20px;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+ul li {
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+}
+ul li::before {
+  content: "🔹";
+  color: #d4af37;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* Przycisk */
+.return-container {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+}
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #111;
+  background-color: #d4af37;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+.btn:hover {
+  transform: scale(1.05);
+  background-color: #e6c965;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+}
+
+/* Stopka */
+footer {
+  margin: 40px 0 20px;
+  font-size: 0.95rem;
+  color: #ccc;
+  text-align: center;
+}
+footer a {
+  color: #d4af37;
+  text-decoration: none;
+  font-weight: bold;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2.2rem;
+  }
+  h2 {
+    font-size: 1.6rem;
+  }
+  p, li {
+    font-size: 1rem;
+  }
+}
+
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Obiekty JavaScript w Stylu CS2</h1>
+        <p>Programista to jak gracz CS2 – każdy obiekt to Twoje narzędzie do wygranej rundy!</p>
+        <nav>
+            <a href="#date">Date</a>
+            <a href="#math">Math</a>
+            <a href="#array">Array</a>
+            <a href="#location">Location</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- Sekcja Date -->
+        <section id="date">
+            <h2>🕒 Obiekt Date</h2>
+            <p>Twoja aktualna runda (data i godzina):</p>
+            <ul>
+                <li>Pełna data: <span id="currentDate"></span></li>
+                <li>Rok: <span id="year"></span></li>
+                <li>Miesiąc: <span id="month"></span></li>
+                <li>Dzień: <span id="day"></span></li>
+                <li>Godzina: <span id="hours"></span></li>
+                <li>Minuty: <span id="minutes"></span></li>
+            </ul>
+        </section>
+
+        <!-- Sekcja Math -->
+        <section id="math">
+            <h2>🎯 Obiekt Math</h2>
+            <p>Twoje obliczenia – jak celownik snajpera:</p>
+            <ul>
+                <li>Wartość PI (celność): <span id="piValue"></span></li>
+                <li>Wartość e (energia): <span id="eValue"></span></li>
+                <li>Losowa liczba (drop z paczki): <span id="randomNumber"></span></li>
+                <li>Zaokrąglona liczba: <span id="roundedNumber"></span></li>
+            </ul>
+        </section>
+
+        <!-- Sekcja Array -->
+        <section id="array">
+            <h2>🔫 Obiekt Array</h2>
+            <p>Twój ekwipunek (tablica broni):</p>
+            <ul>
+                <li>Bronie: <span id="arrayExample"></span></li>
+                <li>Pierwsza broń: <span id="firstElement"></span></li>
+                <li>Ostatnia broń: <span id="lastElement"></span></li>
+            </ul>
+        </section>
+
+        <!-- Sekcja Location -->
+        <section id="location">
+            <h2>📍 Obiekt Location</h2>
+            <p>Twoja lokalizacja na mapie:</p>
+            <ul>
+                <li>href: <span id="href"></span></li>
+                <li>protocol: <span id="protocol"></span></li>
+                <li>host: <span id="host"></span></li>
+                <li>hostname: <span id="hostname"></span></li>
+                <li>port: <span id="port"></span></li>
+                <li>pathname: <span id="pathname"></span></li>
+            </ul>
+        </section>
+
+        <!-- Przycisk powrotu -->
+        <div class="return-container">
+            <a class="btn" href="#">🔁 Odśwież stronę</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>Strona edukacyjna JavaScript w stylu CS2 – zaprojektowana przez <a href="#">Twoje Imię</a></p>
+    </footer>
+
+    <!-- Skrypt JS -->
+    <script>
+        // Date
+        const currentDate = new Date();
+        document.getElementById("currentDate").textContent = currentDate.toString();
+        document.getElementById("year").textContent = currentDate.getFullYear();
+        document.getElementById("month").textContent = currentDate.getMonth() + 1;
+        document.getElementById("day").textContent = currentDate.getDate();
+        document.getElementById("hours").textContent = currentDate.getHours();
+        document.getElementById("minutes").textContent = currentDate.getMinutes();
+
+        // Math
+        document.getElementById("piValue").textContent = Math.PI.toFixed(5);
+        document.getElementById("eValue").textContent = Math.E.toFixed(5);
+        document.getElementById("randomNumber").textContent = Math.random().toFixed(5);
+        document.getElementById("roundedNumber").textContent = Math.round(Math.random() * 100);
+
+        // Array
+        const weapons = ["AWP", "AK-47", "M4A1-S", "Desert Eagle", "Glock-18"];
+        document.getElementById("arrayExample").textContent = weapons.join(", ");
+        document.getElementById("firstElement").textContent = weapons[0];
+        document.getElementById("lastElement").textContent = weapons[weapons.length - 1];
+
+        // Location
+        document.getElementById("href").textContent = window.location.href;
+        document.getElementById("protocol").textContent = window.location.protocol;
+        document.getElementById("host").textContent = window.location.host;
+        document.getElementById("hostname").textContent = window.location.hostname;
+        document.getElementById("port").textContent = window.location.port || "brak";
+        document.getElementById("pathname").textContent = window.location.pathname;
+    </script>
+
+</body>
+</html>
