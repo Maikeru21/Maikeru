@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Lethal Company – Zbieranie Złomu (DOM)</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  color: #c9ff6b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.7;
+}
+
+/* ===== TŁO GIF ===== */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: url("https://media.gifdb.com/lethal-company-walking-at-line-44z4th7gz9pijheu.gif") no-repeat center center;
+  background-size: cover;
+  filter: brightness(0.6); /* przyciemnia GIF, żeby tekst był czytelny */
+}
+
+/* ===== HEADER ===== */
+header {
+  padding: 70px 20px 40px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 3rem;
+  letter-spacing: 3px;
+  color: #e6ff3f;
+  text-shadow: 0 0 10px #e6ff3f;
+  animation: pulse 2s infinite alternate;
+}
+
+header p {
+  margin-top: 10px;
+  color: #b6c94a;
+}
+
+/* ===== MAIN ===== */
+main {
+  width: 85%;
+  max-width: 1000px;
+  background: rgba(20, 20, 20, 0.85); /* lekko przezroczyste tło dla czytelności */
+  border: 1px solid rgba(200, 255, 100, 0.3);
+  border-radius: 14px;
+  padding: 40px;
+  margin-bottom: 60px;
+  box-shadow: 0 0 25px rgba(200, 255, 100, 0.15);
+  position: relative;
+  z-index: 1;
+}
+
+h2 {
+  color: #f3ff9b;
+  margin-bottom: 15px;
+}
+
+p {
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 14px 28px;
+  margin: 10px 10px 20px 0;
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #111;
+  background: linear-gradient(135deg, #f1ff4d, #9fb300);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(230, 255, 63, 0.5);
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+ul {
+  list-style: none;
+  margin-top: 25px;
+}
+
+li {
+  background: rgba(0, 0, 0, 0.8);
+  border-left: 6px solid #dfff3f;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slider {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.slider img {
+  width: 100%;
+  max-width: 520px;
+  border-radius: 12px;
+  border: 2px solid rgba(230,255,63,0.5);
+}
+
+@keyframes pulse {
+  from { text-shadow: 0 0 8px #e6ff3f; }
+  to   { text-shadow: 0 0 18px #f3ff9b; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>LETHAL COMPANY</h1>
+  <p>Zbieraj złom i spełnij normę firmy</p>
+</header>
+
+<main>
+  <h2>Zbieranie złomu – Document Object Model</h2>
+
+  <button id="addScrap">Zbierz złom</button>
+  <button id="clearScrap">Wyrzuć cały złom</button>
+
+  <ul id="scrapList"></ul>
+
+  <hr><br>
+
+  <h2>Slider obrazów (sth else)</h2>
+
+  <div class="slider">
+    <img id="sliderImg" src="img/1.jpg" alt="Planeta">
+    <br><br>
+    <button id="prev">Poprzedni</button>
+    <button id="next">Następny</button>
+  </div>
+</main>
+
+<script>
+/* ===== DOM – ZŁOM ===== */
+const addBtn = document.querySelector("#addScrap");
+const clearBtn = document.querySelector("#clearScrap");
+const list = document.querySelector("#scrapList");
+
+const scrapItems = [
+  "Zardzewiała rura 🔩",
+  "Stary monitor 📺",
+  "Złamany robot 🤖",
+  "Metalowa sprężyna 🧲",
+  "Porzucona bateria 🔋",
+  "Uszkodzony silnik 🚀",
+  "Stare narzędzia 🧰",
+  "Element pancerza 🛡️",
+  "Moduł energetyczny ⚡",
+  "Złom elektroniczny 💾",
+  "Uszkodzony radar 📡",
+  "Fragment maszyny ⚙️"
+];
+
+addBtn.addEventListener("click", () => {
+  const li = document.createElement("li");
+  li.textContent = scrapItems[Math.floor(Math.random()*scrapItems.length)];
+
+  const removeBtn = document.createElement("button");
+  removeBtn.textContent = "Usuń";
+  removeBtn.addEventListener("click", () => li.remove());
+
+  li.appendChild(removeBtn);
+  list.appendChild(li);
+});
+
+clearBtn.addEventListener("click", () => {
+  list.innerHTML = "";
+});
+
+/* ===== SLIDER ===== */
+const images = ["img/1.jpg", "img/2.jpg", "img/3.jpg"];
+let index = 0;
+const sliderImg = document.querySelector("#sliderImg");
+
+document.querySelector("#next").addEventListener("click", () => {
+  index = (index + 1) % images.length;
+  sliderImg.src = images[index];
+});
+
+document.querySelector("#prev").addEventListener("click", () => {
+  index = (index - 1 + images.length) % images.length;
+  sliderImg.src = images[index];
+});
+</script>
+
+</body>
+</html>
