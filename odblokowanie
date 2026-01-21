@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Odblokowywanie postaci – The Binding of Isaac</title>
+
+  <style>
+    * {margin:0;padding:0;box-sizing:border-box;}
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url('tlo/1361930.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      color: #00ffcc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1.7;
+    }
+
+    body::before {
+      content:"";
+      position:fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background: rgba(0,0,0,0.45);
+      z-index:-1;
+    }
+
+    header {
+      padding: 70px 20px 40px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      color: #00e6ff;
+      text-shadow: 0 0 10px #00e6ff, 0 0 30px #00ffff;
+    }
+
+    main {
+      width: 80%;
+      max-width: 1100px;
+      background: rgba(20,20,20,0.65);
+      backdrop-filter: blur(6px);
+      padding: 40px;
+      border-radius: 16px;
+      border: 1px solid rgba(0,255,204,0.4);
+      box-shadow: 0 0 25px rgba(0,255,204,0.3);
+      margin-bottom: 40px;
+    }
+
+    .unlock-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .unlock-card {
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(0,255,204,0.4);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 0 12px rgba(0,255,204,0.3);
+      transition: transform 0.3s;
+    }
+
+    .unlock-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 22px rgba(0,255,204,0.6);
+    }
+
+    .unlock-card h3 {
+      color: #00e6ff;
+      margin-bottom: 10px;
+    }
+
+    .buttons {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #111;
+      background: linear-gradient(135deg, #00ffcc, #0088ff);
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 0 12px #00ffcc;
+      transition: transform 0.3s;
+    }
+
+    .btn:hover {
+      transform: scale(1.08);
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🔓 Jak odblokować postacie</h1>
+</header>
+
+<main>
+  <p>
+    W <strong>The Binding of Isaac</strong> większość postaci jest blokowana na początku gry.
+    Aby je odblokować, musisz spełnić konkretne warunki podczas rozgrywek.
+  </p>
+
+  <section class="unlock-grid">
+
+    <div class="unlock-card">
+      <h3>Magdalene</h3>
+      <p>Posiadaj <strong>7 czerwonych serc</strong> jednocześnie.</p>
+    </div>
+
+    <div class="unlock-card">
+      <h3>Cain</h3>
+      <p>Miej <strong>55 monet</strong> w jednym runie.</p>
+    </div>
+
+    <div class="unlock-card">
+      <h3>Judas</h3>
+      <p>Pokonaj <strong>Mom's Heart</strong> po raz pierwszy.</p>
+    </div>
+
+    <div class="unlock-card">
+      <h3>Blue Baby (???)</h3>
+      <p>Pokonaj <strong>Mom's Heart</strong> 10 razy.</p>
+    </div>
+
+    <div class="unlock-card">
+      <h3>Eve</h3>
+      <p>Nie podnieś ani jednego czerwonego serca przez <strong>2 piętra</strong>.</p>
+    </div>
+
+    <div class="unlock-card">
+      <h3>Samson</h3>
+      <p>Ukończ grę bez leczenia się przez <strong>2 piętra</strong>.</p>
+    </div>
+
+    <div class="unlock-card">
+      <h3>Azazel</h3>
+      <p>Zawrzyj <strong>3 paktów z diabłem</strong> w jednym runie.</p>
+    </div>
+
+    <div class="unlock-card">
+      <h3>Lazarus</h3>
+      <p>Zgiń <strong>4 razy</strong>.</p>
+    </div>
+
+    <div class="unlock-card">
+      <h3>Eden</h3>
+      <p>Pokonaj <strong>Mom's Heart</strong> (wymaga żetonów Edena).</p>
+    </div>
+
+    <div class="unlock-card">
+      <h3>The Lost</h3>
+      <p>Zgiń trzymając <strong>Missing Poster</strong> w pokoju z kolcami.</p>
+    </div>
+
+    <div class="unlock-card">
+      <h3>Keeper</h3>
+      <p>Wrzuć <strong>1000 monet</strong> do Greed Donation Machine.</p>
+    </div>
+
+    <div class="unlock-card">
+      <h3>Apollyon</h3>
+      <p>Pokonaj <strong>Mega Satan</strong>.</p>
+    </div>
+
+    <div class="unlock-card">
+      <h3>The Forgotten</h3>
+      <p>Specjalny quest: Bombarduj pierwszego bossa + Dark Room.</p>
+    </div>
+
+    <div class="unlock-card">
+      <h3>Bethany</h3>
+      <p>Pokonaj <strong>Mom's Heart</strong> jako Lazarus bez śmierci.</p>
+    </div>
+
+    <div class="unlock-card">
+      <h3>Jacob & Esau</h3>
+      <p>Pokonaj <strong>Mother</strong>.</p>
+    </div>
+
+  </section>
+
+  <div class="buttons">
+    <a href="isaac.html" class="btn">⬅ Powrót do postaci</a>
+    <a href="index.html" class="btn">🏠 Strona główna</a>
+  </div>
+
+</main>
+
+</body>
+</html>
