@@ -2,107 +2,69 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<title>Lethal Company – Zbieranie Złomu (DOM)</title>
+<title>Lethal Company – Terminal Statku</title>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-body, html {
-  height: 100%;
+body {
   font-family: Arial, sans-serif;
-  color: #c9ff6b;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  line-height: 1.7;
+  color: #caff6a;
+  min-height: 100vh;
+  background: url("https://media.gifdb.com/lethal-company-walking-at-line-44z4th7gz9pijheu.gif") center/cover fixed;
 }
 
-/* ===== TŁO GIF ===== */
 body::before {
   content: "";
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
   z-index: -1;
-  background: url("https://media.gifdb.com/lethal-company-walking-at-line-44z4th7gz9pijheu.gif") no-repeat center center;
-  background-size: cover;
-  filter: brightness(0.6); /* przyciemnia GIF, żeby tekst był czytelny */
 }
 
-/* ===== HEADER ===== */
 header {
-  padding: 70px 20px 40px;
   text-align: center;
+  padding: 60px 20px;
 }
 
 header h1 {
   font-size: 3rem;
-  letter-spacing: 3px;
-  color: #e6ff3f;
-  text-shadow: 0 0 10px #e6ff3f;
-  animation: pulse 2s infinite alternate;
+  color: #f2ff58;
+  text-shadow: 0 0 15px #f2ff58;
 }
 
-header p {
-  margin-top: 10px;
-  color: #b6c94a;
-}
-
-/* ===== MAIN ===== */
 main {
-  width: 85%;
-  max-width: 1000px;
-  background: rgba(20, 20, 20, 0.85); /* lekko przezroczyste tło dla czytelności */
-  border: 1px solid rgba(200, 255, 100, 0.3);
+  max-width: 950px;
+  margin: 0 auto 60px;
+  background: rgba(20,20,20,0.9);
   border-radius: 14px;
-  padding: 40px;
-  margin-bottom: 60px;
-  box-shadow: 0 0 25px rgba(200, 255, 100, 0.15);
-  position: relative;
-  z-index: 1;
+  padding: 35px;
 }
 
 h2 {
-  color: #f3ff9b;
-  margin-bottom: 15px;
-}
-
-p {
-  margin-bottom: 20px;
+  margin: 25px 0 15px;
+  color: #f7ff9a;
 }
 
 button {
-  padding: 14px 28px;
-  margin: 10px 10px 20px 0;
-  font-size: 0.95rem;
-  font-weight: bold;
-  color: #111;
-  background: linear-gradient(135deg, #f1ff4d, #9fb300);
+  padding: 12px 22px;
+  margin: 6px;
   border: none;
   border-radius: 10px;
+  font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 0 15px rgba(230, 255, 63, 0.5);
-}
-
-button:hover {
-  transform: scale(1.05);
+  background: linear-gradient(135deg,#f1ff4d,#9fb300);
 }
 
 ul {
   list-style: none;
-  margin-top: 25px;
+  margin-top: 20px;
 }
 
 li {
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0,0,0,0.85);
   border-left: 6px solid #dfff3f;
-  padding: 14px 16px;
+  padding: 14px;
   margin-bottom: 12px;
   border-radius: 8px;
   display: flex;
@@ -110,21 +72,27 @@ li {
   align-items: center;
 }
 
-.slider {
-  margin-top: 40px;
-  text-align: center;
+li.scrap {
+  cursor: grab;
 }
 
-.slider img {
-  width: 100%;
-  max-width: 520px;
-  border-radius: 12px;
-  border: 2px solid rgba(230,255,63,0.5);
+li.dragging {
+  opacity: 0.4;
 }
 
-@keyframes pulse {
-  from { text-shadow: 0 0 8px #e6ff3f; }
-  to   { text-shadow: 0 0 18px #f3ff9b; }
+span {
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+.log {
+  margin-top: 20px;
+  background: #000;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  max-height: 130px;
+  overflow-y: auto;
 }
 </style>
 </head>
@@ -132,80 +100,125 @@ li {
 <body>
 
 <header>
-  <h1>LETHAL COMPANY</h1>
-  <p>Zbieraj złom i spełnij normę firmy</p>
+  <h1>LETHAL COMPANY ☣️</h1>
+  <p>Zarządzanie załogą i złomem statku 🚀</p>
 </header>
 
 <main>
-  <h2>Zbieranie złomu – Document Object Model</h2>
 
+  <!-- ZŁOM -->
+  <h2>Złom statku 🔩</h2>
   <button id="addScrap">Zbierz złom</button>
-  <button id="clearScrap">Wyrzuć cały złom</button>
-
+  <button id="clearScrap">Wyrzuć wszystko 💥</button>
   <ul id="scrapList"></ul>
 
-  <hr><br>
+  <!-- ZAŁOGA -->
+  <h2>Załoga 👨‍🚀</h2>
+  <button id="addCrew">Dodaj gracza</button>
+  <ul id="crewList"></ul>
 
-  <h2>Slider obrazów (sth else)</h2>
+  <!-- LOG -->
+  <h2>Log systemowy 📟</h2>
+  <div class="log" id="log"></div>
 
-  <div class="slider">
-    <img id="sliderImg" src="img/1.jpg" alt="Planeta">
-    <br><br>
-    <button id="prev">Poprzedni</button>
-    <button id="next">Następny</button>
-  </div>
 </main>
 
 <script>
-/* ===== DOM – ZŁOM ===== */
-const addBtn = document.querySelector("#addScrap");
-const clearBtn = document.querySelector("#clearScrap");
-const list = document.querySelector("#scrapList");
-
+/* ===== DANE ===== */
 const scrapItems = [
   "Zardzewiała rura 🔩",
   "Stary monitor 📺",
-  "Złamany robot 🤖",
-  "Metalowa sprężyna 🧲",
-  "Porzucona bateria 🔋",
-  "Uszkodzony silnik 🚀",
-  "Stare narzędzia 🧰",
-  "Element pancerza 🛡️",
-  "Moduł energetyczny ⚡",
   "Złom elektroniczny 💾",
-  "Uszkodzony radar 📡",
-  "Fragment maszyny ⚙️"
+  "Fragment pancerza 🛡️",
+  "Moduł energii ⚡",
+  "Uszkodzony radar 📡"
 ];
 
-addBtn.addEventListener("click", () => {
+const crewNames = ["Adam", "Kasia", "Marek", "Ola", "Piotr", "Zosia"];
+
+/* ===== ELEMENTY ===== */
+const scrapList = document.querySelector("#scrapList");
+const crewList = document.querySelector("#crewList");
+const logBox = document.querySelector("#log");
+
+function log(text) {
+  const p = document.createElement("p");
+  p.textContent = "• " + text;
+  logBox.prepend(p);
+}
+
+/* ===== ZŁOM ===== */
+let draggedItem = null;
+
+document.querySelector("#addScrap").addEventListener("click", () => {
   const li = document.createElement("li");
-  li.textContent = scrapItems[Math.floor(Math.random()*scrapItems.length)];
+  li.classList.add("scrap");
+  li.draggable = true;
+  li.textContent = scrapItems[Math.floor(Math.random() * scrapItems.length)];
 
-  const removeBtn = document.createElement("button");
-  removeBtn.textContent = "Usuń";
-  removeBtn.addEventListener("click", () => li.remove());
+  const btn = document.createElement("button");
+  btn.textContent = "Usuń ❌";
+  btn.addEventListener("click", () => {
+    li.remove();
+    log("Złom wyrzucony 🗑️");
+  });
 
-  li.appendChild(removeBtn);
-  list.appendChild(li);
+  li.appendChild(btn);
+  addDrag(li);
+  scrapList.appendChild(li);
+  log("Zebrano złom 💰");
 });
 
-clearBtn.addEventListener("click", () => {
-  list.innerHTML = "";
+document.querySelector("#clearScrap").addEventListener("click", () => {
+  scrapList.innerHTML = "";
+  log("Cały złom usunięty 💥");
 });
 
-/* ===== SLIDER ===== */
-const images = ["img/1.jpg", "img/2.jpg", "img/3.jpg"];
-let index = 0;
-const sliderImg = document.querySelector("#sliderImg");
+function addDrag(item) {
+  item.addEventListener("dragstart", () => {
+    draggedItem = item;
+    item.classList.add("dragging");
+  });
 
-document.querySelector("#next").addEventListener("click", () => {
-  index = (index + 1) % images.length;
-  sliderImg.src = images[index];
-});
+  item.addEventListener("dragend", () => {
+    draggedItem = null;
+    item.classList.remove("dragging");
+  });
 
-document.querySelector("#prev").addEventListener("click", () => {
-  index = (index - 1 + images.length) % images.length;
-  sliderImg.src = images[index];
+  item.addEventListener("dragover", e => e.preventDefault());
+
+  item.addEventListener("drop", () => {
+    if (draggedItem && draggedItem !== item) {
+      const temp = document.createElement("div");
+      scrapList.insertBefore(temp, draggedItem);
+      scrapList.insertBefore(draggedItem, item);
+      scrapList.insertBefore(item, temp);
+      temp.remove();
+      log("Zamieniono złom miejscami 🔄");
+    }
+  });
+}
+
+/* ===== ZAŁOGA ===== */
+document.querySelector("#addCrew").addEventListener("click", () => {
+  const li = document.createElement("li");
+
+  const name = crewNames[Math.floor(Math.random() * crewNames.length)];
+  const id = Math.floor(Math.random() * 1000);
+
+  li.dataset.id = id;
+  li.innerHTML = `<strong>${name} 👨‍🚀</strong> <span>ID: ${id}</span>`;
+
+  const btn = document.createElement("button");
+  btn.textContent = "Zabity ☠️";
+  btn.addEventListener("click", () => {
+    log(`Gracz ${name} (ID ${id}) zginął 💀`);
+    li.remove();
+  });
+
+  li.appendChild(btn);
+  crewList.appendChild(li);
+  log("Dodano gracza do załogi 🧑‍🚀");
 });
 </script>
 
