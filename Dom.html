@@ -214,13 +214,6 @@
     });
     </script>
 
-<!-- ===== DOM ===== -->
-<section>
-  <h2>🧩 Tworzenie / usuwanie DOM</h2>
-  <button id="addItem">Dodaj element</button>
-  <ul id="list"></ul>
-</section>
-
 <!-- ===== GALERIA ===== -->
 <section>
   <h2>🖼️ Galeria (Lightbox)</h2>
@@ -248,24 +241,6 @@
 </div>
 
 <script>
-/* ===== DOM: DODAWANIE / USUWANIE ===== */
-const list = document.getElementById("list");
-const addBtn = document.getElementById("addItem");
-let counter = 1;
-
-addBtn.addEventListener("click", () => {
-  const li = document.createElement("li");
-  li.textContent = "Element DOM #" + counter++;
-
-  const del = document.createElement("button");
-  del.textContent = "Usuń";
-
-  del.addEventListener("click", () => li.remove());
-
-  li.appendChild(del);
-  list.appendChild(li);
-});
-
 /* ===== LIGHTBOX ===== */
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightboxImg");
@@ -313,3 +288,4 @@ document.getElementById("prev").addEventListener("click", () => {
 
 </body>
 </html>
+
