@@ -2,223 +2,312 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<title>Lethal Company – Terminal Statku</title>
+<title>Lethal Company – DOM Demo</title>
 
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  font-family: Arial, sans-serif;
-  color: #caff6a;
-  min-height: 100vh;
-  background: url("https://media.gifdb.com/lethal-company-walking-at-line-44z4th7gz9pijheu.gif") center/cover fixed;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.75);
-  z-index: -1;
-}
-
-header {
-  text-align: center;
-  padding: 60px 20px;
-}
-
-header h1 {
-  font-size: 3rem;
-  color: #f2ff58;
-  text-shadow: 0 0 15px #f2ff58;
-}
-
-main {
-  max-width: 950px;
-  margin: 0 auto 60px;
-  background: rgba(20,20,20,0.9);
-  border-radius: 14px;
-  padding: 35px;
-}
-
-h2 {
-  margin: 25px 0 15px;
-  color: #f7ff9a;
-}
-
-button {
-  padding: 12px 22px;
-  margin: 6px;
-  border: none;
-  border-radius: 10px;
-  font-weight: bold;
-  cursor: pointer;
-  background: linear-gradient(135deg,#f1ff4d,#9fb300);
-}
-
-ul {
-  list-style: none;
-  margin-top: 20px;
-}
-
-li {
-  background: rgba(0,0,0,0.85);
-  border-left: 6px solid #dfff3f;
-  padding: 14px;
-  margin-bottom: 12px;
-  border-radius: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-li.scrap {
-  cursor: grab;
-}
-
-li.dragging {
-  opacity: 0.4;
-}
-
-span {
-  opacity: 0.7;
-  font-size: 0.9rem;
-}
-
-.log {
-  margin-top: 20px;
-  background: #000;
-  padding: 15px;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  max-height: 130px;
-  overflow-y: auto;
-}
-</style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg,#0a0a0a,#1b1b1b);
+      color: #dfff3f;
+      padding: 30px;
+    }
+    
+    /* ===== NAGŁÓWKI ===== */
+    h1, h2 {
+      color: #f2ff58;
+      margin-bottom: 15px;
+    }
+    
+    /* ===== SEKCJE ===== */
+    section {
+      margin-bottom: 40px;
+    }
+    
+    .controls {
+      margin-bottom: 15px;
+    }
+    
+    button {
+      background: #dfff3f;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    
+    button:hover {
+      background: #f2ff58;
+    }
+    
+    /* ===== LISTY ===== */
+    ul {
+      list-style: none;
+    }
+    
+    li {
+      background: #000;
+      padding: 16px;
+      margin-bottom: 14px;
+      border-radius: 12px;
+      border-left: 6px solid #dfff3f;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    /* ===== ZŁOM ===== */
+    li.scrap {
+      cursor: grab;
+    }
+    
+    li.dragging {
+      opacity: 0.4;
+    }
+    
+    /* ===== TEKST ===== */
+    .item-name {
+      font-size: 1.1rem;
+    }
+    
+    .item-id {
+      font-size: 0.9rem;
+      opacity: 0.7;
+      margin-left: 10px;
+    }
+    
+    /* ===== PRZYCISKI W LI ===== */
+    li button {
+      background: #dfff3f;
+    }
+    
+    /* ===== RESPONSYWNOŚĆ ===== */
+    @media (max-width: 700px) {
+      li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+    }
+    </style>
 </head>
 
 <body>
 
-<header>
-  <h1>LETHAL COMPANY ☣️</h1>
-  <p>Zarządzanie załogą i złomem statku 🚀</p>
-</header>
+    <h1>☣️ LETHAL COMPANY</h1>
+    
+    <!-- ===== ZŁOM ===== -->
+    <section>
+      <h2>Złom statku 🔩</h2>
+    
+      <div class="controls">
+        <button id="addScrap">Zbierz złom</button>
+        <button id="clearScrap">Wyrzuć wszystko 💥</button>
+      </div>
+    
+      <ul id="scrapList"></ul>
+    </section>
+    
+    <!-- ===== ZAŁOGA ===== -->
+    <section>
+      <h2>Załoga 👨‍🚀</h2>
+    
+      <div class="controls">
+        <button id="addCrew">Dodaj gracza</button>
+      </div>
+    
+      <ul id="crewList"></ul>
+    </section>
+    
+    <script>
+    /* ===== DANE ===== */
+    const scrapItems = [
+      "Zardzewiała rura 🔧",
+      "Złom elektroniczny 💾",
+      "Stary monitor 📺",
+      "Fragment pancerza 🛡️",
+      "Moduł energii ⚡"
+    ];
+    
+    const crewNames = ["Ola", "Adam", "Kasia", "Marek", "Piotr"];
+    
+    /* ===== ELEMENTY ===== */
+    const scrapList = document.getElementById("scrapList");
+    const crewList = document.getElementById("crewList");
+    
+    /* ===== ZŁOM – DRAG & DROP ===== */
+    let dragged = null;
+    
+    function addDragAndDrop(li) {
+      li.addEventListener("dragstart", () => {
+        dragged = li;
+        li.classList.add("dragging");
+      });
+    
+      li.addEventListener("dragend", () => {
+        dragged = null;
+        li.classList.remove("dragging");
+      });
+    
+      li.addEventListener("dragover", e => e.preventDefault());
+    
+      li.addEventListener("drop", () => {
+        if (dragged && dragged !== li) {
+          const temp = document.createElement("div");
+          scrapList.insertBefore(temp, dragged);
+          scrapList.insertBefore(dragged, li);
+          scrapList.insertBefore(li, temp);
+          temp.remove();
+        }
+      });
+    }
+    
+    /* ===== DODAWANIE ZŁOMU ===== */
+    document.getElementById("addScrap").addEventListener("click", () => {
+      const li = document.createElement("li");
+      li.classList.add("scrap");
+      li.draggable = true;
+    
+      li.innerHTML = `
+        <span class="item-name">${scrapItems[Math.floor(Math.random()*scrapItems.length)]}</span>
+      `;
+    
+      const btn = document.createElement("button");
+      btn.textContent = "Usuń ❌";
+      btn.addEventListener("click", () => li.remove());
+    
+      li.appendChild(btn);
+      addDragAndDrop(li);
+      scrapList.appendChild(li);
+    });
+    
+    /* ===== USUŃ WSZYSTKO ===== */
+    document.getElementById("clearScrap").addEventListener("click", () => {
+      scrapList.innerHTML = "";
+    });
+    
+    /* ===== ZAŁOGA ===== */
+    document.getElementById("addCrew").addEventListener("click", () => {
+      const li = document.createElement("li");
+    
+      const name = crewNames[Math.floor(Math.random()*crewNames.length)];
+      const id = Math.floor(Math.random()*100);
+    
+      li.innerHTML = `
+        <span class="item-name">${name} 👨‍🚀</span>
+        <span class="item-id">ID: ${id}</span>
+      `;
+    
+      const btn = document.createElement("button");
+      btn.textContent = "Zabity ☠️";
+      btn.addEventListener("click", () => li.remove());
+    
+      li.appendChild(btn);
+      crewList.appendChild(li);
+    });
+    </script>
 
-<main>
+<!-- ===== DOM ===== -->
+<section>
+  <h2>🧩 Tworzenie / usuwanie DOM</h2>
+  <button id="addItem">Dodaj element</button>
+  <ul id="list"></ul>
+</section>
 
-  <!-- ZŁOM -->
-  <h2>Złom statku 🔩</h2>
-  <button id="addScrap">Zbierz złom</button>
-  <button id="clearScrap">Wyrzuć wszystko 💥</button>
-  <ul id="scrapList"></ul>
+<!-- ===== GALERIA ===== -->
+<section>
+  <h2>🖼️ Galeria (Lightbox)</h2>
+  <div id="gallery">
+    <img src="https://picsum.photos/600/400?1">
+    <img src="https://picsum.photos/600/400?2">
+    <img src="https://picsum.photos/600/400?3">
+  </div>
+</section>
 
-  <!-- ZAŁOGA -->
-  <h2>Załoga 👨‍🚀</h2>
-  <button id="addCrew">Dodaj gracza</button>
-  <ul id="crewList"></ul>
+<!-- ===== SLIDER ===== -->
+<section>
+  <h2>🎞️ Slider</h2>
+  <div id="slider">
+    <button id="prev">⬅</button>
+    <img id="slide">
+    <button id="next">➡</button>
+  </div>
+</section>
 
-  <!-- LOG -->
-  <h2>Log systemowy 📟</h2>
-  <div class="log" id="log"></div>
-
-</main>
+<!-- ===== LIGHTBOX ===== -->
+<div id="lightbox">
+  <span id="close">✖</span>
+  <img id="lightboxImg">
+</div>
 
 <script>
-/* ===== DANE ===== */
-const scrapItems = [
-  "Zardzewiała rura 🔩",
-  "Stary monitor 📺",
-  "Złom elektroniczny 💾",
-  "Fragment pancerza 🛡️",
-  "Moduł energii ⚡",
-  "Uszkodzony radar 📡"
+/* ===== DOM: DODAWANIE / USUWANIE ===== */
+const list = document.getElementById("list");
+const addBtn = document.getElementById("addItem");
+let counter = 1;
+
+addBtn.addEventListener("click", () => {
+  const li = document.createElement("li");
+  li.textContent = "Element DOM #" + counter++;
+
+  const del = document.createElement("button");
+  del.textContent = "Usuń";
+
+  del.addEventListener("click", () => li.remove());
+
+  li.appendChild(del);
+  list.appendChild(li);
+});
+
+/* ===== LIGHTBOX ===== */
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightboxImg");
+const closeBtn = document.getElementById("close");
+
+document.querySelectorAll("#gallery img").forEach(img => {
+  img.addEventListener("click", () => {
+    lightboxImg.src = img.src;
+    lightbox.classList.add("active");
+  });
+});
+
+closeBtn.addEventListener("click", () => {
+  lightbox.classList.remove("active");
+});
+
+/* ESC zamyka lightbox */
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") {
+    lightbox.classList.remove("active");
+  }
+});
+
+/* ===== SLIDER ===== */
+const slides = [
+  "https://picsum.photos/700/400?10",
+  "https://picsum.photos/700/400?11",
+  "https://picsum.photos/700/400?12"
 ];
 
-const crewNames = ["Adam", "Kasia", "Marek", "Ola", "Piotr", "Zosia"];
+let index = 0;
+const slideImg = document.getElementById("slide");
+slideImg.src = slides[index];
 
-/* ===== ELEMENTY ===== */
-const scrapList = document.querySelector("#scrapList");
-const crewList = document.querySelector("#crewList");
-const logBox = document.querySelector("#log");
-
-function log(text) {
-  const p = document.createElement("p");
-  p.textContent = "• " + text;
-  logBox.prepend(p);
-}
-
-/* ===== ZŁOM ===== */
-let draggedItem = null;
-
-document.querySelector("#addScrap").addEventListener("click", () => {
-  const li = document.createElement("li");
-  li.classList.add("scrap");
-  li.draggable = true;
-  li.textContent = scrapItems[Math.floor(Math.random() * scrapItems.length)];
-
-  const btn = document.createElement("button");
-  btn.textContent = "Usuń ❌";
-  btn.addEventListener("click", () => {
-    li.remove();
-    log("Złom wyrzucony 🗑️");
-  });
-
-  li.appendChild(btn);
-  addDrag(li);
-  scrapList.appendChild(li);
-  log("Zebrano złom 💰");
+document.getElementById("next").addEventListener("click", () => {
+  index = (index + 1) % slides.length;
+  slideImg.src = slides[index];
 });
 
-document.querySelector("#clearScrap").addEventListener("click", () => {
-  scrapList.innerHTML = "";
-  log("Cały złom usunięty 💥");
-});
-
-function addDrag(item) {
-  item.addEventListener("dragstart", () => {
-    draggedItem = item;
-    item.classList.add("dragging");
-  });
-
-  item.addEventListener("dragend", () => {
-    draggedItem = null;
-    item.classList.remove("dragging");
-  });
-
-  item.addEventListener("dragover", e => e.preventDefault());
-
-  item.addEventListener("drop", () => {
-    if (draggedItem && draggedItem !== item) {
-      const temp = document.createElement("div");
-      scrapList.insertBefore(temp, draggedItem);
-      scrapList.insertBefore(draggedItem, item);
-      scrapList.insertBefore(item, temp);
-      temp.remove();
-      log("Zamieniono złom miejscami 🔄");
-    }
-  });
-}
-
-/* ===== ZAŁOGA ===== */
-document.querySelector("#addCrew").addEventListener("click", () => {
-  const li = document.createElement("li");
-
-  const name = crewNames[Math.floor(Math.random() * crewNames.length)];
-  const id = Math.floor(Math.random() * 1000);
-
-  li.dataset.id = id;
-  li.innerHTML = `<strong>${name} 👨‍🚀</strong> <span>ID: ${id}</span>`;
-
-  const btn = document.createElement("button");
-  btn.textContent = "Zabity ☠️";
-  btn.addEventListener("click", () => {
-    log(`Gracz ${name} (ID ${id}) zginął 💀`);
-    li.remove();
-  });
-
-  li.appendChild(btn);
-  crewList.appendChild(li);
-  log("Dodano gracza do załogi 🧑‍🚀");
+document.getElementById("prev").addEventListener("click", () => {
+  index = (index - 1 + slides.length) % slides.length;
+  slideImg.src = slides[index];
 });
 </script>
 
