@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Przekierowanie do kalkulatora</title>
+
+    <!-- Automatyczne przekierowanie po 3 sekundach -->
+    <meta http-equiv="refresh" content="3;url=kalkulator.html">
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #4e73df, #1cc88a);
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            border-radius: 15px;
+        }
+
+        h1 {
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 25px;
+        }
+
+        a {
+            text-decoration: none;
+            background: white;
+            color: #333;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            background: #f8f9fc;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Witaj 👋</h1>
+    <p>Za chwilę zostaniesz przekierowany do kalkulatora...</p>
+    <a href="kod.html">Przejdź teraz</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let table = new Array(11);
+for(let i = 0; i < table.length; i++)
+{
+    table[i] = new Array(10);
+}
+
+for(let row = 0; row < table.length; row++)
+{
+    for(let col = 0; col < table[row].length; col++)
+    {
+        table[row][col] = row*col;
+    }
+}
+console.table(table);
+    </script>
+</body>
+</html>
