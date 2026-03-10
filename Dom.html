@@ -5,287 +5,421 @@
 <title>Lethal Company – DOM Demo</title>
 
 <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg,#0a0a0a,#1b1b1b);
-      color: #dfff3f;
-      padding: 30px;
-    }
-    
-    /* ===== NAGŁÓWKI ===== */
-    h1, h2 {
-      color: #f2ff58;
-      margin-bottom: 15px;
-    }
-    
-    /* ===== SEKCJE ===== */
-    section {
-      margin-bottom: 40px;
-    }
-    
-    .controls {
-      margin-bottom: 15px;
-    }
-    
-    button {
-      background: #dfff3f;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-right: 10px;
-    }
-    
-    button:hover {
-      background: #f2ff58;
-    }
-    
-    /* ===== LISTY ===== */
-    ul {
-      list-style: none;
-    }
-    
-    li {
-      background: #000;
-      padding: 16px;
-      margin-bottom: 14px;
-      border-radius: 12px;
-      border-left: 6px solid #dfff3f;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    /* ===== ZŁOM ===== */
-    li.scrap {
-      cursor: grab;
-    }
-    
-    li.dragging {
-      opacity: 0.4;
-    }
-    
-    /* ===== TEKST ===== */
-    .item-name {
-      font-size: 1.1rem;
-    }
-    
-    .item-id {
-      font-size: 0.9rem;
-      opacity: 0.7;
-      margin-left: 10px;
-    }
-    
-    /* ===== PRZYCISKI W LI ===== */
-    li button {
-      background: #dfff3f;
-    }
-    
-    /* ===== RESPONSYWNOŚĆ ===== */
-    @media (max-width: 700px) {
-      li {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-      }
-    }
-    </style>
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#0a0a0a,#1b1b1b);
+color:#dfff3f;
+padding:30px;
+}
+
+/* ===== NAGŁÓWKI ===== */
+
+h1,h2{
+color:#f2ff58;
+margin-bottom:15px;
+}
+
+/* ===== SEKCJE ===== */
+
+section{
+margin-bottom:40px;
+}
+
+.controls{
+margin-bottom:15px;
+}
+
+button{
+background:#dfff3f;
+border:none;
+padding:10px 18px;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+margin-right:10px;
+}
+
+button:hover{
+background:#f2ff58;
+}
+
+/* ===== LISTY ===== */
+
+ul{
+list-style:none;
+}
+
+li{
+background:#000;
+padding:16px;
+margin-bottom:14px;
+border-radius:12px;
+border-left:6px solid #dfff3f;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+/* ===== ZŁOM ===== */
+
+li.scrap{
+cursor:grab;
+}
+
+li.dragging{
+opacity:0.4;
+}
+
+/* ===== TEKST ===== */
+
+.item-name{
+font-size:1.1rem;
+}
+
+.item-id{
+font-size:0.9rem;
+opacity:0.7;
+margin-left:10px;
+}
+
+/* ===== PRZYCISKI ===== */
+
+li button{
+background:#dfff3f;
+margin-left:5px;
+}
+
+/* ===== GALERIA ===== */
+
+#gallery{
+display:flex;
+gap:10px;
+}
+
+#gallery img{
+width:200px;
+cursor:pointer;
+border-radius:10px;
+}
+
+/* ===== LIGHTBOX ===== */
+
+#lightbox{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.9);
+display:none;
+justify-content:center;
+align-items:center;
+}
+
+#lightbox.active{
+display:flex;
+}
+
+#lightbox img{
+max-width:80%;
+border-radius:10px;
+}
+
+#close{
+position:absolute;
+top:20px;
+right:40px;
+font-size:30px;
+cursor:pointer;
+color:white;
+}
+
+/* ===== SLIDER ===== */
+
+#slider{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+#slider img{
+width:500px;
+border-radius:10px;
+}
+
+/* ===== RESPONSYWNOŚĆ ===== */
+
+@media(max-width:700px){
+li{
+flex-direction:column;
+align-items:flex-start;
+gap:10px;
+}
+}
+</style>
 </head>
 
 <body>
 
-    <h1>☣️ LETHAL COMPANY</h1>
-    
-    <!-- ===== ZŁOM ===== -->
-    <section>
-      <h2>Złom statku 🔩</h2>
-    
-      <div class="controls">
-        <button id="addScrap">Zbierz złom</button>
-        <button id="clearScrap">Wyrzuć wszystko 💥</button>
-      </div>
-    
-      <ul id="scrapList"></ul>
-    </section>
-    
-    <!-- ===== ZAŁOGA ===== -->
-    <section>
-      <h2>Załoga 👨‍🚀</h2>
-    
-      <div class="controls">
-        <button id="addCrew">Dodaj gracza</button>
-      </div>
-    
-      <ul id="crewList"></ul>
-    </section>
-    
-    <script>
-    /* ===== DANE ===== */
-    const scrapItems = [
-      "Zardzewiała rura 🔧",
-      "Złom elektroniczny 💾",
-      "Stary monitor 📺",
-      "Fragment pancerza 🛡️",
-      "Moduł energii ⚡"
-    ];
-    
-    const crewNames = ["Ola", "Adam", "Kasia", "Marek", "Piotr"];
-    
-    /* ===== ELEMENTY ===== */
-    const scrapList = document.getElementById("scrapList");
-    const crewList = document.getElementById("crewList");
-    
-    /* ===== ZŁOM – DRAG & DROP ===== */
-    let dragged = null;
-    
-    function addDragAndDrop(li) {
-      li.addEventListener("dragstart", () => {
-        dragged = li;
-        li.classList.add("dragging");
-      });
-    
-      li.addEventListener("dragend", () => {
-        dragged = null;
-        li.classList.remove("dragging");
-      });
-    
-      li.addEventListener("dragover", e => e.preventDefault());
-    
-      li.addEventListener("drop", () => {
-        if (dragged && dragged !== li) {
-          const temp = document.createElement("div");
-          scrapList.insertBefore(temp, dragged);
-          scrapList.insertBefore(dragged, li);
-          scrapList.insertBefore(li, temp);
-          temp.remove();
-        }
-      });
-    }
-    
-    /* ===== DODAWANIE ZŁOMU ===== */
-    document.getElementById("addScrap").addEventListener("click", () => {
-      const li = document.createElement("li");
-      li.classList.add("scrap");
-      li.draggable = true;
-    
-      li.innerHTML = `
-        <span class="item-name">${scrapItems[Math.floor(Math.random()*scrapItems.length)]}</span>
-      `;
-    
-      const btn = document.createElement("button");
-      btn.textContent = "Usuń ❌";
-      btn.addEventListener("click", () => li.remove());
-    
-      li.appendChild(btn);
-      addDragAndDrop(li);
-      scrapList.appendChild(li);
-    });
-    
-    /* ===== USUŃ WSZYSTKO ===== */
-    document.getElementById("clearScrap").addEventListener("click", () => {
-      scrapList.innerHTML = "";
-    });
-    
-    /* ===== ZAŁOGA ===== */
-    document.getElementById("addCrew").addEventListener("click", () => {
-      const li = document.createElement("li");
-    
-      const name = crewNames[Math.floor(Math.random()*crewNames.length)];
-      const id = Math.floor(Math.random()*100);
-    
-      li.innerHTML = `
-        <span class="item-name">${name} 👨‍🚀</span>
-        <span class="item-id">ID: ${id}</span>
-      `;
-    
-      const btn = document.createElement("button");
-      btn.textContent = "Zabity ☠️";
-      btn.addEventListener("click", () => li.remove());
-    
-      li.appendChild(btn);
-      crewList.appendChild(li);
-    });
-    </script>
+<h1>☣️ LETHAL COMPANY</h1>
+
+<!-- ===== ZŁOM ===== -->
+
+<section>
+
+<h2>Złom statku 🔩</h2>
+
+<div class="controls">
+<button id="addScrapTop">Dodaj złom na górę ⬆️</button>
+<button id="addScrapBottom">Dodaj złom na dół ⬇️</button>
+<button id="clearScrap">Wyrzuć wszystko 💥</button>
+</div>
+
+<ul id="scrapList"></ul>
+
+</section>
+
+<!-- ===== ZAŁOGA ===== -->
+
+<section>
+
+<h2>Załoga 👨‍🚀</h2>
+
+<div class="controls">
+<button id="addCrew">Dodaj gracza</button>
+</div>
+
+<ul id="crewList"></ul>
+
+</section>
 
 <!-- ===== GALERIA ===== -->
+
 <section>
-  <h2>🖼️ Galeria (Lightbox)</h2>
-  <div id="gallery">
-    <img src="https://picsum.photos/600/400?1">
-    <img src="https://picsum.photos/600/400?2">
-    <img src="https://picsum.photos/600/400?3">
-  </div>
+<h2>🖼️ Galeria (Lightbox)</h2>
+
+<div id="gallery">
+<img src="https://picsum.photos/600/400?1">
+<img src="https://picsum.photos/600/400?2">
+<img src="https://picsum.photos/600/400?3">
+</div>
+
 </section>
 
 <!-- ===== SLIDER ===== -->
+
 <section>
-  <h2>🎞️ Slider</h2>
-  <div id="slider">
-    <button id="prev">⬅</button>
-    <img id="slide">
-    <button id="next">➡</button>
-  </div>
+
+<h2>🎞️ Slider</h2>
+
+<div id="slider">
+<button id="prev">⬅</button>
+<img id="slide">
+<button id="next">➡</button>
+</div>
+
 </section>
 
 <!-- ===== LIGHTBOX ===== -->
+
 <div id="lightbox">
-  <span id="close">✖</span>
-  <img id="lightboxImg">
+<span id="close">✖</span>
+<img id="lightboxImg">
 </div>
 
 <script>
+
+/* ===== DANE ===== */
+
+const scrapItems=[
+"Zardzewiała rura 🔧",
+"Złom elektroniczny 💾",
+"Stary monitor 📺",
+"Fragment pancerza 🛡️",
+"Moduł energii ⚡"
+];
+
+const crewNames=["Ola","Adam","Kasia","Marek","Piotr"];
+
+/* ===== ELEMENTY ===== */
+
+const scrapList=document.getElementById("scrapList");
+const crewList=document.getElementById("crewList");
+
+/* ===== DRAG & DROP ===== */
+
+let dragged=null;
+
+function addDragAndDrop(li){
+
+li.addEventListener("dragstart",()=>{
+dragged=li;
+li.classList.add("dragging");
+});
+
+li.addEventListener("dragend",()=>{
+dragged=null;
+li.classList.remove("dragging");
+});
+
+li.addEventListener("dragover",e=>e.preventDefault());
+
+li.addEventListener("drop",()=>{
+if(dragged && dragged!==li){
+
+const temp=document.createElement("div");
+
+scrapList.insertBefore(temp,dragged);
+scrapList.insertBefore(dragged,li);
+scrapList.insertBefore(li,temp);
+
+temp.remove();
+}
+
+});
+
+}
+
+/* ===== TWORZENIE ZŁOMU ===== */
+
+function createScrap(){
+
+const li=document.createElement("li");
+li.classList.add("scrap");
+li.draggable=true;
+
+const nameSpan=document.createElement("span");
+nameSpan.className="item-name";
+nameSpan.textContent=scrapItems[Math.floor(Math.random()*scrapItems.length)];
+
+const editBtn=document.createElement("button");
+editBtn.textContent="Zmień ✏️";
+
+editBtn.addEventListener("click",()=>{
+const newName=prompt("Nowa nazwa złomu:",nameSpan.textContent);
+
+if(newName){
+nameSpan.textContent=newName;
+}
+});
+
+const deleteBtn=document.createElement("button");
+deleteBtn.textContent="Usuń ❌";
+
+deleteBtn.addEventListener("click",()=>{
+li.remove();
+});
+
+li.appendChild(nameSpan);
+li.appendChild(editBtn);
+li.appendChild(deleteBtn);
+
+addDragAndDrop(li);
+
+return li;
+}
+
+/* ===== DODAWANIE ZŁOMU ===== */
+
+document.getElementById("addScrapTop").addEventListener("click",()=>{
+const li=createScrap();
+scrapList.prepend(li);
+});
+
+document.getElementById("addScrapBottom").addEventListener("click",()=>{
+const li=createScrap();
+scrapList.appendChild(li);
+});
+
+/* ===== USUŃ WSZYSTKO ===== */
+
+document.getElementById("clearScrap").addEventListener("click",()=>{
+scrapList.innerHTML="";
+});
+
+/* ===== ZAŁOGA ===== */
+
+document.getElementById("addCrew").addEventListener("click",()=>{
+
+const li=document.createElement("li");
+
+const name=crewNames[Math.floor(Math.random()*crewNames.length)];
+const id=Math.floor(Math.random()*100);
+
+li.innerHTML=`
+<span class="item-name">${name} 👨‍🚀</span>
+<span class="item-id">ID: ${id}</span>
+`;
+
+const btn=document.createElement("button");
+btn.textContent="Zabity ☠️";
+
+btn.addEventListener("click",()=>{
+li.remove();
+});
+
+li.appendChild(btn);
+crewList.appendChild(li);
+
+});
+
 /* ===== LIGHTBOX ===== */
-const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.getElementById("lightboxImg");
-const closeBtn = document.getElementById("close");
 
-document.querySelectorAll("#gallery img").forEach(img => {
-  img.addEventListener("click", () => {
-    lightboxImg.src = img.src;
-    lightbox.classList.add("active");
-  });
+const lightbox=document.getElementById("lightbox");
+const lightboxImg=document.getElementById("lightboxImg");
+const closeBtn=document.getElementById("close");
+
+document.querySelectorAll("#gallery img").forEach(img=>{
+
+img.addEventListener("click",()=>{
+
+lightboxImg.src=img.src;
+lightbox.classList.add("active");
+
 });
 
-closeBtn.addEventListener("click", () => {
-  lightbox.classList.remove("active");
 });
 
-/* ESC zamyka lightbox */
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape") {
-    lightbox.classList.remove("active");
-  }
+closeBtn.addEventListener("click",()=>{
+lightbox.classList.remove("active");
+});
+
+document.addEventListener("keydown",e=>{
+if(e.key==="Escape"){
+lightbox.classList.remove("active");
+}
 });
 
 /* ===== SLIDER ===== */
-const slides = [
-  "https://picsum.photos/700/400?10",
-  "https://picsum.photos/700/400?11",
-  "https://picsum.photos/700/400?12"
+
+const slides=[
+"https://picsum.photos/700/400?10",
+"https://picsum.photos/700/400?11",
+"https://picsum.photos/700/400?12"
 ];
 
-let index = 0;
-const slideImg = document.getElementById("slide");
-slideImg.src = slides[index];
+let index=0;
 
-document.getElementById("next").addEventListener("click", () => {
-  index = (index + 1) % slides.length;
-  slideImg.src = slides[index];
+const slideImg=document.getElementById("slide");
+slideImg.src=slides[index];
+
+document.getElementById("next").addEventListener("click",()=>{
+index=(index+1)%slides.length;
+slideImg.src=slides[index];
 });
 
-document.getElementById("prev").addEventListener("click", () => {
-  index = (index - 1 + slides.length) % slides.length;
-  slideImg.src = slides[index];
+document.getElementById("prev").addEventListener("click",()=>{
+index=(index-1+slides.length)%slides.length;
+slideImg.src=slides[index];
 });
+
 </script>
 
 </body>
 </html>
-
