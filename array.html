@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Ekwipunek RPG</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#111;
+color:#9cff57;
+padding:30px;
+}
+
+button{
+padding:6px 10px;
+margin:3px;
+border:none;
+background:#9cff57;
+cursor:pointer;
+font-weight:bold;
+}
+
+ul{
+list-style:none;
+padding:0;
+margin-top:20px;
+}
+
+li{
+background:#000;
+padding:12px;
+margin-bottom:10px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-left:5px solid #9cff57;
+cursor:grab;
+}
+
+.controls button{
+font-size:12px;
+}
+
+li.dragging{
+opacity:0.4;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>🎮 Ekwipunek bohatera</h1>
+
+<button id="addTop">Dodaj na początek</button>
+<button id="addBottom">Dodaj na koniec</button>
+<button id="clear">Usuń wszystko</button>
+
+<p>Ilość przedmiotów: <span id="count"></span></p>
+
+<ul id="inventory"></ul>
+
+<script>
+
+/* ===== ARRAY LOSOWYCH PRZEDMIOTÓW ===== */
+
+const itemsArray=[
+"Miecz ⚔️",
+"Tarcza 🛡️",
+"Eliksir 🧪",
+"Łuk 🏹",
+"Kryształ 🔮",
+"Zbroja 🪖"
+];
+
+/* ===== GŁÓWNY ARRAY EKWIPUNKU ===== */
+
+let inventoryArray=[
+"Miecz ⚔️",
+"Eliksir 🧪",
+"Tarcza 🛡️"
+];
+
+const list=document.getElementById("inventory");
+const count=document.getElementById("count");
+
+let draggedIndex=null;
+
+/* ===== RENDER ===== */
+
+function renderInventory(){
+
+list.innerHTML="";
+
+inventoryArray.forEach((item,index)=>{
+
+const li=document.createElement("li");
+li.draggable=true;
+
+/* NAZWA */
+
+const name=document.createElement("span");
+name.textContent=item;
+
+/* PRZYCISKI */
+
+const controls=document.createElement("div");
+controls.className="controls";
+
+/* ZMIEŃ NAZWĘ */
+
+const editBtn=document.createElement("button");
+editBtn.textContent="✏️";
+
+editBtn.onclick=()=>{
+
+const newName=prompt("Nowa nazwa:",item);
+
+if(newName){
+inventoryArray[index]=newName;
+renderInventory();
+}
+
+};
+
+/* USUŃ */
+
+const deleteBtn=document.createElement("button");
+deleteBtn.textContent="❌";
+
+deleteBtn.onclick=()=>{
+
+inventoryArray.splice(index,1);
+renderInventory();
+
+};
+
+controls.appendChild(editBtn);
+controls.appendChild(deleteBtn);
+
+li.appendChild(name);
+li.appendChild(controls);
+
+/* ===== DRAG START ===== */
+
+li.addEventListener("dragstart",()=>{
+
+draggedIndex=index;
+li.classList.add("dragging");
+
+});
+
+/* ===== DRAG END ===== */
+
+li.addEventListener("dragend",()=>{
+
+li.classList.remove("dragging");
+
+});
+
+/* ===== ALLOW DROP ===== */
+
+li.addEventListener("dragover",(e)=>{
+
+e.preventDefault();
+
+});
+
+/* ===== DROP ===== */
+
+li.addEventListener("drop",()=>{
+
+if(draggedIndex!==null && draggedIndex!==index){
+
+const draggedItem=inventoryArray[draggedIndex];
+
+inventoryArray.splice(draggedIndex,1);
+inventoryArray.splice(index,0,draggedItem);
+
+renderInventory();
+
+}
+
+});
+
+list.appendChild(li);
+
+});
+
+/* LENGTH */
+
+count.textContent=inventoryArray.length;
+
+}
+
+/* ===== DODAJ NA POCZĄTEK ===== */
+
+document.getElementById("addTop").onclick=()=>{
+
+const randomItem=itemsArray[Math.floor(Math.random()*itemsArray.length)];
+
+inventoryArray.unshift(randomItem);
+
+renderInventory();
+
+};
+
+/* ===== DODAJ NA KONIEC ===== */
+
+document.getElementById("addBottom").onclick=()=>{
+
+const randomItem=itemsArray[Math.floor(Math.random()*itemsArray.length)];
+
+inventoryArray.push(randomItem);
+
+renderInventory();
+
+};
+
+/* ===== WYCZYŚĆ ===== */
+
+document.getElementById("clear").onclick=()=>{
+
+inventoryArray=[];
+
+renderInventory();
+
+};
+
+/* START */
+
+renderInventory();
+
+</script>
+
+</body>
+</html>
