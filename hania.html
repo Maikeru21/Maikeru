@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="pl" class="h-full w-full overflow-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dla Hani - Wyznanie Miłości</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-color: #080205;
+            color: #fce7f3;
+            font-family: 'Montserrat', sans-serif;
+            user-select: none;
+        }
+
+        .font-serif-romantic {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .font-cursive {
+            font-family: 'Great Vibes', cursive;
+        }
+
+        /* Glowing text & shadows */
+        .glow-pink {
+            text-shadow: 0 0 12px rgba(244, 63, 94, 0.8), 0 0 25px rgba(244, 63, 94, 0.6), 0 0 35px rgba(225, 29, 72, 0.4);
+        }
+
+        .glow-gold {
+            text-shadow: 0 0 12px rgba(251, 191, 36, 0.9), 0 0 24px rgba(245, 158, 11, 0.6);
+        }
+
+        .glass-card {
+            background: rgba(20, 8, 16, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(244, 63, 94, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+        }
+
+        .glass-nav {
+            background: rgba(15, 5, 12, 0.88);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(244, 63, 94, 0.25);
+        }
+
+        /* TAB Transitions */
+        .tab-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+            width: 100%;
+            height: 100%;
+        }
+        .tab-content.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* Heartbeat Animation */
+        @keyframes subtleHeartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+        }
+        .animate-heartbeat {
+            animation: subtleHeartbeat 2.2s infinite ease-in-out;
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(2deg); }
+        }
+        .animate-float {
+            animation: floatSlow 3.5s infinite ease-in-out;
+        }
+
+        /* Custom Scrollbar for playlist tab */
+        .custom-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: rgba(15, 5, 12, 0.6);
+            border-radius: 10px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: rgba(244, 63, 94, 0.4);
+            border-radius: 10px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb:hover {
+            background: rgba(244, 63, 94, 0.7);
+        }
+    </style>
+</head>
+<body class="h-full w-full flex flex-col justify-between relative selection:bg-rose-500 selection:text-white">
+
+    <!-- Global background sparkle canvas -->
+    <canvas id="bgCanvas" class="fixed inset-0 pointer-events-none z-0 w-full h-full"></canvas>
+
+    <!-- HEADER NAVIGATION -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav px-3 sm:px-6 py-2.5">
+        <div class="max-w-6xl mx-auto flex items-center justify-between relative">
+            <div class="flex items-center space-x-2 cursor-pointer z-10" onclick="switchTab('heart')">
+                <i class="fa-solid fa-heart text-rose-500 text-xl sm:text-2xl animate-pulse"></i>
+                <span class="font-cursive text-2xl sm:text-3xl font-bold bg-gradient-to-r from-rose-400 via-pink-300 to-amber-200 bg-clip-text text-transparent">Dla Hani</span>
+            </div>
+
+            <!-- Navigation Buttons - WYŚRODKOWANE -->
+            <nav class="sm:absolute sm:left-1/2 sm:-translate-x-1/2 flex items-center space-x-1 sm:space-x-2 bg-rose-950/40 p-1 rounded-full border border-rose-900/40 text-xs sm:text-sm">
+                <button id="nav-heart" onclick="switchTab('heart')" class="px-2.5 sm:px-4 py-1.5 rounded-full font-medium transition-all duration-300 flex items-center gap-1.5 bg-rose-600 text-white shadow-lg shadow-rose-600/30">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                    <span class="hidden md:inline">Serce z Napisów</span>
+                    <span class="md:hidden">Serce</span>
+                </button>
+                <button id="nav-garden" onclick="switchTab('garden')" class="px-2.5 sm:px-4 py-1.5 rounded-full font-medium text-rose-200 hover:text-white transition-all duration-300 flex items-center gap-1.5 hover:bg-rose-900/50">
+                    <i class="fa-solid fa-seedling"></i>
+                    <span class="hidden md:inline">Ogród Róż</span>
+                    <span class="md:hidden">Ogród</span>
+                </button>
+                <button id="nav-jar" onclick="switchTab('jar')" class="px-2.5 sm:px-4 py-1.5 rounded-full font-medium text-rose-200 hover:text-white transition-all duration-300 flex items-center gap-1.5 hover:bg-rose-900/50">
+                    <i class="fa-solid fa-jar"></i>
+                    <span class="hidden md:inline">Słoik Miłości</span>
+                    <span class="md:hidden">Słoik</span>
+                </button>
+                <button id="nav-playlist" onclick="switchTab('playlist')" class="px-2.5 sm:px-4 py-1.5 rounded-full font-medium text-rose-200 hover:text-white transition-all duration-300 flex items-center gap-1.5 hover:bg-rose-900/50">
+                    <i class="fa-solid fa-compact-disc text-amber-400"></i>
+                    <span class="hidden md:inline">Akrostych Muzyczny</span>
+                    <span class="md:hidden">Muzyka</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pt-16 sm:pt-20 pb-4 px-3 sm:px-6 flex-grow relative z-10 w-full h-full flex items-center justify-center">
+
+        <!-- ================= TAB 1: SERCE Z NAPISÓW ================= -->
+        <section id="tab-heart" class="tab-content active flex-col items-center justify-center relative w-full h-full mx-auto">
+            <div class="relative w-full h-full max-w-5xl max-h-[85vh] flex items-center justify-center my-auto mx-auto overflow-hidden">
+                <canvas id="heartCanvas" class="absolute inset-0 w-full h-full m-auto cursor-pointer"></canvas>
+                
+                <div class="absolute inset-0 pointer-events-none flex flex-col items-center justify-center z-20 m-auto">
+                    <div class="px-5 sm:px-8 py-2.5 sm:py-3.5 rounded-full bg-black/60 backdrop-blur-md border border-rose-500/30 text-center animate-heartbeat shadow-2xl">
+                        <span class="block text-[9px] sm:text-[11px] uppercase tracking-widest text-amber-300 font-semibold mb-0.5">Na Zawsze</span>
+                        <span class="font-cursive text-3xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-amber-200 via-rose-300 to-pink-400 bg-clip-text text-transparent glow-gold">Dla Hani</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 2: OGRÓD RÓŻ ================= -->
+        <section id="tab-garden" class="tab-content flex-col items-center justify-center relative w-full h-full max-w-5xl mx-auto my-auto py-2">
+            <div class="w-full flex flex-col items-center justify-center h-full my-auto gap-3">
+                <div class="text-center bg-black/60 px-4 py-2.5 rounded-2xl backdrop-blur-md border border-rose-900/30 max-w-lg w-full">
+                    <h2 class="font-cursive text-2xl sm:text-4xl text-rose-300 glow-pink">Magiczny Ogród Róż dla Hani</h2>
+                    <p class="text-[11px] sm:text-xs text-rose-200/80 mt-0.5">Spadające wyznania miłości i płatki róż... Kliknij na ekranie, aby zasiać różę!</p>
+                </div>
+
+                <div class="relative w-full flex-grow max-h-[72vh] min-h-[300px] rounded-3xl overflow-hidden glass-card border border-rose-500/20 shadow-2xl">
+                    <canvas id="gardenCanvas" class="w-full h-full cursor-crosshair block"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 3: SŁOIK MIŁOŚCI ================= -->
+        <section id="tab-jar" class="tab-content flex-col items-center justify-center relative w-full h-full max-w-4xl mx-auto my-auto px-2">
+            <div class="w-full my-auto flex flex-col items-center justify-center gap-6">
+                <div class="glass-card p-6 sm:p-8 rounded-3xl flex flex-col items-center text-center relative overflow-hidden w-full max-w-2xl shadow-2xl">
+                    <div class="absolute -top-12 -right-12 w-36 h-36 bg-rose-600/20 rounded-full blur-3xl"></div>
+                    <div class="absolute -bottom-12 -left-12 w-36 h-36 bg-amber-500/15 rounded-full blur-3xl"></div>
+                    
+                    <i class="fa-solid fa-jar text-rose-400 text-4xl sm:text-5xl mb-3 animate-float"></i>
+                    
+                    <div id="noteDisplay" class="w-full min-h-[140px] bg-rose-950/40 border border-rose-800/40 rounded-2xl p-5 flex items-center justify-center relative my-4 shadow-inner transition-all duration-300">
+                        <p id="noteText" class="font-serif-romantic text-base sm:text-xl text-rose-100 italic leading-relaxed">
+                            "Kliknij przycisk poniżej, aby poznać romantyczną myśl przygotowaną specjalnie dla Hani..."
+                        </p>
+                    </div>
+
+                    <button onclick="drawLoveNote()" class="px-8 py-3 rounded-full bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white font-semibold text-sm shadow-lg shadow-rose-600/30 transition-all transform active:scale-95 flex items-center gap-2 mb-6">
+                        <i class="fa-solid fa-heart"></i>
+                        <span>Wyciągnij Powód Miłości</span>
+                    </button>
+
+                    <div class="w-full bg-black/50 rounded-2xl p-4 border border-rose-900/30 text-left relative">
+                        <div class="flex items-center gap-2 mb-2 pb-1.5 border-b border-rose-900/40">
+                            <i class="fa-solid fa-feather-pointed text-amber-400 text-base"></i>
+                            <span class="font-serif-romantic text-xs sm:text-sm text-amber-200 font-semibold tracking-wide">Dedykowana Myśl dla Hani</span>
+                        </div>
+                        <p id="typewriter" class="font-serif text-xs sm:text-sm text-rose-200 leading-relaxed italic min-h-[50px] flex items-center">
+                            <!-- Dynamic typewriter text -->
+                        </p>
+                    </div>
+
+                    <button onclick="generateTypewriterMessage()" class="mt-4 px-5 py-2 rounded-full bg-amber-600/20 border border-amber-500/30 text-amber-200 hover:bg-amber-600/40 transition-all text-xs font-medium flex items-center gap-2">
+                        <i class="fa-solid fa-rotate"></i>
+                        <span>Napisz Nową Myśl</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 4: AKROSTYCH MUZYCZNY ("I LOVE YOU") ================= -->
+        <section id="tab-playlist" class="tab-content flex-col items-center justify-start relative w-full h-full max-w-5xl mx-auto py-2">
+            <div class="w-full flex flex-col items-center h-full my-auto gap-3">
+                <!-- Header Banner -->
+                <div class="text-center bg-black/70 px-5 py-3 rounded-2xl backdrop-blur-md border border-amber-500/30 max-w-2xl w-full flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xl">
+                    <div class="text-left">
+                        <h2 class="font-cursive text-2xl sm:text-3xl text-amber-300 glow-gold flex items-center gap-2">
+                            <i class="fa-solid fa-compact-disc text-rose-400"></i> Muzyczny Akrostych dla Hani
+                        </h2>
+                        <p class="text-[11px] sm:text-xs text-rose-200/80">Odkryj tytuły piosenek, które razem tworzą wiadomość: <strong class="text-amber-300 tracking-widest font-bold">I LOVE YOU</strong></p>
+                    </div>
+                    <button onclick="revealAllTracks()" class="px-4 py-2 rounded-full bg-gradient-to-r from-amber-500 to-rose-600 hover:from-amber-400 hover:to-rose-500 text-white text-xs font-semibold shadow-lg shadow-rose-900/40 transition-all transform active:scale-95 flex items-center gap-1.5 shrink-0">
+                        <i class="fa-solid fa-eye"></i>
+                        <span>Odkryj Wszystkie Utwory</span>
+                    </button>
+                </div>
+
+                <!-- Scrollable Grid of Song Cards -->
+                <div class="w-full flex-grow max-h-[72vh] overflow-y-auto custom-scroll pr-1 py-1">
+                    <div id="acrosticGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+                        <!-- Cards dynamically rendered via JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script>
+        /* ================= GLOBAL BACKGROUND CANVAS ================= */
+        const bgCanvas = document.getElementById('bgCanvas');
+        const bgCtx = bgCanvas.getContext('2d');
+        let bgWidth, bgHeight;
+        let bgParticles = [];
+
+        function initBgCanvas() {
+            bgWidth = bgCanvas.width = window.innerWidth;
+            bgHeight = bgCanvas.height = window.innerHeight;
+            bgParticles = [];
+            for (let i = 0; i < 60; i++) {
+                bgParticles.push({
+                    x: Math.random() * bgWidth,
+                    y: Math.random() * bgHeight,
+                    radius: Math.random() * 2 + 0.5,
+                    alpha: Math.random(),
+                    speed: Math.random() * 0.01 + 0.005
+                });
+            }
+        }
+
+        function renderBg() {
+            bgCtx.clearRect(0, 0, bgWidth, bgHeight);
+            bgParticles.forEach(p => {
+                p.alpha += p.speed;
+                if (p.alpha > 1 || p.alpha < 0) p.speed = -p.speed;
+                bgCtx.beginPath();
+                bgCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                bgCtx.fillStyle = `rgba(251, 191, 36, ${Math.abs(p.alpha) * 0.5})`;
+                bgCtx.fill();
+            });
+            requestAnimationFrame(renderBg);
+        }
+
+        /* ================= TAB 1: HEART CANVAS WITH CONFETTI BURST ================= */
+        const heartCanvas = document.getElementById('heartCanvas');
+        const hCtx = heartCanvas.getContext('2d');
+        let hWidth, hHeight;
+        let heartPoints = [];
+        let heartConfetti = [];
+
+        function resizeHeartCanvas() {
+            if (!heartCanvas || !heartCanvas.parentElement) return;
+            const rect = heartCanvas.parentElement.getBoundingClientRect();
+            hWidth = heartCanvas.width = rect.width;
+            hHeight = heartCanvas.height = rect.height;
+            generateHeartPoints();
+        }
+
+        function generateHeartPoints() {
+            heartPoints = [];
+            const isSmall = hWidth < 600 || hHeight < 500;
+            const count = isSmall ? 320 : 540;
+            const minDim = Math.min(hWidth, hHeight);
+            const scale = (minDim / 600) * (isSmall ? 13 : 17);
+
+            for (let i = 0; i < count; i++) {
+                const t = (Math.PI * 2 * i) / count;
+                const x = 16 * Math.pow(Math.sin(t), 3);
+                const y = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+
+                const depthFactor = 0.88 + Math.random() * 0.24;
+                
+                heartPoints.push({
+                    baseX: x * scale * depthFactor,
+                    baseY: y * scale * depthFactor,
+                    phase: Math.random() * Math.PI * 2,
+                    speed: 0.02 + Math.random() * 0.02,
+                    glow: Math.random() * Math.PI * 2,
+                    glowSpeed: 0.03 + Math.random() * 0.02,
+                    hue: Math.random() * 30 + 330
+                });
+            }
+        }
+
+        function drawMiniHeart(ctx, x, y, size, color, alpha) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.globalAlpha = Math.max(0, alpha);
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            const topCurveHeight = size * 0.3;
+            ctx.moveTo(0, topCurveHeight);
+            ctx.bezierCurveTo(0, 0, -size / 2, 0, -size / 2, topCurveHeight);
+            ctx.bezierCurveTo(-size / 2, (size + topCurveHeight) / 2, 0, size, 0, size);
+            ctx.bezierCurveTo(0, size, size / 2, (size + topCurveHeight) / 2, size / 2, topCurveHeight);
+            ctx.bezierCurveTo(size / 2, 0, 0, 0, 0, topCurveHeight);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function triggerHeartConfetti(originX, originY) {
+            const count = 35;
+            for (let i = 0; i < count; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 7 + 2;
+                heartConfetti.push({
+                    x: originX,
+                    y: originY,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed - 2,
+                    size: Math.random() * 10 + 8,
+                    alpha: 1,
+                    decay: Math.random() * 0.018 + 0.012,
+                    gravity: 0.15,
+                    color: `hsl(${Math.random() * 40 + 330}, 100%, ${Math.random() * 20 + 60}%)`
+                });
+            }
+        }
+
+        let globalTime = 0;
+
+        function renderHeart() {
+            hCtx.clearRect(0, 0, hWidth, hHeight);
+
+            globalTime += 0.03;
+            const pulseScale = 1 + Math.sin(globalTime * 1.5) * 0.06;
+
+            const centerX = hWidth / 2;
+            const centerY = hHeight / 2;
+
+            hCtx.font = '600 10px Montserrat, sans-serif';
+            hCtx.textAlign = 'center';
+
+            heartPoints.forEach((p, idx) => {
+                p.phase += p.speed;
+                p.glow += p.glowSpeed;
+
+                const currentGlow = (Math.sin(p.glow) + 1) / 2;
+
+                const waveX = Math.sin(globalTime * 2 + idx * 0.08) * 6;
+                const waveY = Math.cos(globalTime * 2 + idx * 0.08) * 6;
+
+                const currX = centerX + (p.baseX + waveX) * pulseScale;
+                const currY = centerY + (p.baseY + waveY) * pulseScale;
+
+                hCtx.fillStyle = `hsla(${p.hue}, 92%, ${60 + currentGlow * 30}%, ${0.45 + currentGlow * 0.55})`;
+                hCtx.fillText('I LOVE YOU', currX, currY);
+            });
+
+            for (let i = heartConfetti.length - 1; i >= 0; i--) {
+                const p = heartConfetti[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += p.gravity;
+                p.alpha -= p.decay;
+
+                if (p.alpha <= 0) {
+                    heartConfetti.splice(i, 1);
+                } else {
+                    drawMiniHeart(hCtx, p.x, p.y, p.size, p.color, p.alpha);
+                }
+            }
+
+            requestAnimationFrame(renderHeart);
+        }
+
+        heartCanvas.addEventListener('click', (e) => {
+            const rect = heartCanvas.getBoundingClientRect();
+            triggerHeartConfetti(e.clientX - rect.left, e.clientY - rect.top);
+        });
+
+        heartCanvas.addEventListener('touchstart', (e) => {
+            if (e.touches && e.touches[0]) {
+                const rect = heartCanvas.getBoundingClientRect();
+                triggerHeartConfetti(e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top);
+            }
+        }, { passive: true });
+
+        /* ================= TAB 2: HIGH-PERFORMANCE GARDEN ENGINE ================= */
+        const gardenCanvas = document.getElementById('gardenCanvas');
+        const gCtx = gardenCanvas.getContext('2d');
+        let gWidth, gHeight;
+
+        let fallingItems = [];
+        let plantedRoses = [];
+        const MAX_PLANTED_ROSES = 20;
+        const MAX_FALLING_ITEMS = 60;
+
+        let lastFrameTime = performance.now();
+        let lastSpawnTime = 0;
+
+        const gardenPhrases = [
+            "I love you Haniu",
+            "I love you skarbie",
+            "Jesteś wspaniała, Haniu",
+            "Moja kochana Hania",
+            "Dla Hani ❤️",
+            "Haniu, kocham Cię"
+        ];
+
+        function resizeGardenCanvas() {
+            if (!gardenCanvas || !gardenCanvas.parentElement) return;
+            const rect = gardenCanvas.parentElement.getBoundingClientRect();
+            gWidth = gardenCanvas.width = rect.width;
+            gHeight = gardenCanvas.height = rect.height;
+        }
+
+        function spawnFallingItem() {
+            if (fallingItems.length < MAX_FALLING_ITEMS) {
+                const isText = Math.random() < 0.35;
+                fallingItems.push({
+                    type: isText ? 'text' : 'petal',
+                    text: isText ? gardenPhrases[Math.floor(Math.random() * gardenPhrases.length)] : '',
+                    x: Math.random() * gWidth,
+                    y: -30,
+                    speedY: Math.random() * 80 + 50,
+                    speedX: (Math.random() - 0.5) * 40,
+                    rotation: Math.random() * Math.PI * 2,
+                    rotSpeed: (Math.random() - 0.5) * 1.5,
+                    size: Math.random() * 8 + 10,
+                    opacity: Math.random() * 0.4 + 0.6
+                });
+            }
+        }
+
+        function renderGarden(now) {
+            const dt = Math.min((now - lastFrameTime) / 1000, 0.1);
+            lastFrameTime = now;
+
+            if (now - lastSpawnTime > 200) {
+                spawnFallingItem();
+                lastSpawnTime = now;
+            }
+
+            gCtx.clearRect(0, 0, gWidth, gHeight);
+
+            for (let i = plantedRoses.length - 1; i >= 0; i--) {
+                const rose = plantedRoses[i];
+                if (rose.scale < 1) rose.scale = Math.min(1, rose.scale + dt * 4);
+                
+                if (rose.fading) {
+                    rose.opacity -= dt * 2.5;
+                    if (rose.opacity <= 0) {
+                        plantedRoses.splice(i, 1);
+                        continue;
+                    }
+                }
+
+                gCtx.save();
+                gCtx.globalAlpha = Math.max(0, rose.opacity);
+                gCtx.translate(rose.x, rose.y);
+                gCtx.scale(rose.scale, rose.scale);
+
+                gCtx.fillStyle = '#15803d';
+                gCtx.beginPath();
+                gCtx.ellipse(-6, 12, 10, 4, Math.PI / 4, 0, Math.PI * 2);
+                gCtx.fill();
+                gCtx.beginPath();
+                gCtx.ellipse(6, 12, 10, 4, -Math.PI / 4, 0, Math.PI * 2);
+                gCtx.fill();
+
+                gCtx.fillStyle = '#e11d48';
+                gCtx.beginPath();
+                gCtx.arc(0, 0, 16, 0, Math.PI * 2);
+                gCtx.fill();
+
+                gCtx.fillStyle = '#fb7185';
+                gCtx.beginPath();
+                gCtx.arc(-4, -4, 9, 0, Math.PI * 2);
+                gCtx.fill();
+
+                gCtx.fillStyle = '#fecdd3';
+                gCtx.beginPath();
+                gCtx.arc(2, 2, 4, 0, Math.PI * 2);
+                gCtx.fill();
+
+                gCtx.font = '600 12px Montserrat';
+                gCtx.fillStyle = '#fef08a';
+                gCtx.textAlign = 'center';
+                gCtx.shadowColor = '#000';
+                gCtx.shadowBlur = 4;
+                gCtx.fillText('❤️ Kocham Cię Haniu!', 0, -22);
+
+                gCtx.restore();
+            }
+
+            for (let i = fallingItems.length - 1; i >= 0; i--) {
+                const item = fallingItems[i];
+                item.y += item.speedY * dt;
+                item.x += (item.speedX + Math.sin(item.y * 0.02) * 20) * dt;
+                item.rotation += item.rotSpeed * dt;
+
+                gCtx.save();
+                gCtx.translate(item.x, item.y);
+                gCtx.rotate(item.rotation);
+
+                if (item.type === 'text') {
+                    gCtx.font = 'italic 15px "Playfair Display", serif';
+                    gCtx.fillStyle = `rgba(253, 164, 175, ${item.opacity})`;
+                    gCtx.shadowColor = 'rgba(244, 63, 94, 0.6)';
+                    gCtx.shadowBlur = 8;
+                    gCtx.fillText(item.text, 0, 0);
+                } else {
+                    gCtx.fillStyle = `rgba(225, 29, 72, ${item.opacity})`;
+                    gCtx.beginPath();
+                    gCtx.moveTo(0, 0);
+                    gCtx.bezierCurveTo(-item.size, -item.size, -item.size, item.size, 0, item.size * 1.5);
+                    gCtx.bezierCurveTo(item.size, item.size, item.size, -item.size, 0, 0);
+                    gCtx.fill();
+                }
+
+                gCtx.restore();
+
+                if (item.y > gHeight + 50) {
+                    fallingItems.splice(i, 1);
+                }
+            }
+
+            requestAnimationFrame(renderGarden);
+        }
+
+        function plantRoseAt(clickX, clickY) {
+            plantedRoses.push({
+                x: clickX,
+                y: clickY,
+                scale: 0.1,
+                opacity: 1,
+                fading: false
+            });
+
+            if (plantedRoses.length > MAX_PLANTED_ROSES) {
+                const overflow = plantedRoses.length - MAX_PLANTED_ROSES;
+                for (let i = 0; i < overflow; i++) {
+                    plantedRoses[i].fading = true;
+                }
+            }
+
+            for (let i = 0; i < 5; i++) {
+                if (fallingItems.length < MAX_FALLING_ITEMS + 15) {
+                    fallingItems.push({
+                        type: 'petal',
+                        x: clickX + (Math.random() - 0.5) * 20,
+                        y: clickY + (Math.random() - 0.5) * 20,
+                        speedY: Math.random() * 60 + 30,
+                        speedX: (Math.random() - 0.5) * 80,
+                        rotation: Math.random() * Math.PI * 2,
+                        rotSpeed: (Math.random() - 0.5) * 3,
+                        size: 8,
+                        opacity: 0.9
+                    });
+                }
+            }
+        }
+
+        gardenCanvas.addEventListener('click', (e) => {
+            const rect = gardenCanvas.getBoundingClientRect();
+            plantRoseAt(e.clientX - rect.left, e.clientY - rect.top);
+        });
+
+        gardenCanvas.addEventListener('touchstart', (e) => {
+            if (e.touches && e.touches[0]) {
+                const rect = gardenCanvas.getBoundingClientRect();
+                plantRoseAt(e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top);
+            }
+        }, { passive: true });
+
+        /* ================= TAB 3: READ-ONLY LOVE NOTES FOR HANIA ================= */
+        const loveNotesForHania = [
+            "Haniu, jesteś moim najpiękniejszym powodem do uśmiechu każdego dnia.",
+            "Uwielbiam sposób, w jaki Twoje oczy błyszczą, gdy jesteś szczęśliwa, Haniu.",
+            "Dzięki Tobie, Haniu, mój świat staje się cieplejszy, piękny i pełen magii.",
+            "Jesteś moją bezpieczną przystanią i najlepszą przyjaciółką, Haniu.",
+            "Każda chwila spędzona z Tobą, Haniu, jest dla mnie bezcennym skarbem.",
+            "Odkąd jesteś w moim życiu, Haniu, moje serce bije szybciej i pełniej.",
+            "Haniu, Twój uśmiech potrafi rozświetlić nawet najbardziej pochmurny dzień.",
+            "Kocham Cię, Haniu, nie tylko za to kim jesteś, ale kim jestem przy Tobie."
+        ];
+
+        const complimentsForHania = [
+            "Haniu, Twoja obecność zamienia zwykłe dni w najpiękniejsze wspomnienia mojego życia.",
+            "Twój głos to moja ulubiona melodia, której mógłbym słuchać bez końca, Haniu.",
+            "Jestem najszczęśliwszym człowiekiem na świecie, mając Cię u swojego boku, Haniu.",
+            "Odkąd jesteś w moim życiu, Haniu, każdy dzień ma niepowtarzalny sens i piękno."
+        ];
+
+        function drawLoveNote() {
+            const noteText = document.getElementById('noteText');
+            const noteDisplay = document.getElementById('noteDisplay');
+            
+            noteDisplay.classList.add('scale-95', 'opacity-50');
+            
+            setTimeout(() => {
+                const randomNote = loveNotesForHania[Math.floor(Math.random() * loveNotesForHania.length)];
+                noteText.textContent = `"${randomNote}"`;
+                noteDisplay.classList.remove('scale-95', 'opacity-50');
+            }, 200);
+        }
+
+        let charIndex = 0;
+        let currentString = "";
+        let isTyping = false;
+
+        function generateTypewriterMessage() {
+            if (isTyping) return;
+            const typewriterEl = document.getElementById('typewriter');
+            typewriterEl.textContent = "";
+            currentString = complimentsForHania[Math.floor(Math.random() * complimentsForHania.length)];
+            charIndex = 0;
+            isTyping = true;
+            typeNextChar();
+        }
+
+        function typeNextChar() {
+            const typewriterEl = document.getElementById('typewriter');
+            if (charIndex < currentString.length) {
+                typewriterEl.textContent += currentString.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeNextChar, 40);
+            } else {
+                isTyping = false;
+            }
+        }
+
+        /* ================= TAB 4: MULTI-GENRE ACROSTIC PLAYLIST WITH ORIGINAL QUOTES ================= */
+        const acrosticSongs = [
+            {
+                letter: 'I',
+                title: 'In the End',
+                artist: 'Linkin Park',
+                genre: 'Alternative Rock / Nu Metal',
+                color: 'from-amber-600 to-rose-700',
+                quote: 'I tried so hard and got so far / But in the end it doesn\'t even matter',
+                revealed: false,
+                coverSvg: `<svg class="w-full h-full" viewBox="0 0 100 100"><rect width="100" height="100" fill="#1c130d"/><polygon points="20,80 50,20 80,80" fill="#d97706" opacity="0.8"/><circle cx="50" cy="50" r="15" fill="#f43f5e"/><text x="50" y="92" text-anchor="middle" fill="#fef3c7" font-size="7" font-family="Montserrat">HYBRID THEORY</text></svg>`
+            },
+            {
+                letter: 'L',
+                title: 'Lithium',
+                artist: 'Nirvana',
+                genre: 'Grunge / Alt Rock',
+                color: 'from-blue-600 to-indigo-800',
+                quote: 'I\'m so happy \'cause today I found my friends / They\'re in my head',
+                revealed: false,
+                coverSvg: `<svg class="w-full h-full" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0b132b"/><circle cx="50" cy="45" r="28" fill="none" stroke="#3b82f6" stroke-width="4"/><circle cx="50" cy="45" r="12" fill="#fbbf24"/><text x="50" y="92" text-anchor="middle" fill="#93c5fd" font-size="7" font-family="Montserrat">NEVERMIND</text></svg>`
+            },
+            {
+                letter: 'O',
+                title: 'Ostatnia noc',
+                artist: 'Young Multi',
+                genre: 'Polish Trap / Rap',
+                color: 'from-pink-600 to-purple-800',
+                quote: 'To nasza ostatnia noc / I nie chcę znowu patrzeć na twój chłód',
+                revealed: false,
+                coverSvg: `<svg class="w-full h-full" viewBox="0 0 100 100"><rect width="100" height="100" fill="#2d0612"/><circle cx="50" cy="50" r="32" stroke="#f43f5e" stroke-width="3" fill="none"/><line x1="20" y1="50" x2="80" y2="50" stroke="#fbbf24" stroke-width="3"/><text x="50" y="92" text-anchor="middle" fill="#fce7f3" font-size="7" font-family="Montserrat">TRAP WAVE</text></svg>`
+            },
+            {
+                letter: 'V',
+                title: 'VHS',
+                artist: 'PRO8L3M',
+                genre: 'Polish Rap / Hip-Hop',
+                color: 'from-red-600 to-rose-900',
+                quote: 'To jak stary film na VHS / Pamiętam każdą z tamtych chwil',
+                revealed: false,
+                coverSvg: `<svg class="w-full h-full" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0f0006"/><rect x="20" y="30" width="60" height="40" fill="#1f1f1f" stroke="#e11d48" stroke-width="2" rx="4"/><circle cx="38" cy="50" r="8" fill="#fbbf24"/><circle cx="62" cy="50" r="8" fill="#fbbf24"/><text x="50" y="92" text-anchor="middle" fill="#fda4af" font-size="7" font-family="Montserrat">PRO8L3M VHS</text></svg>`
+            },
+            {
+                letter: 'E',
+                title: 'Elegancja',
+                artist: 'Taco Hemingway',
+                genre: 'Polish Hip-Hop',
+                color: 'from-emerald-600 to-teal-800',
+                quote: 'Elegancja i styl, zostawiamy po sobie ślad / Prosto przez ten zwariowany świat',
+                revealed: false,
+                coverSvg: `<svg class="w-full h-full" viewBox="0 0 100 100"><rect width="100" height="100" fill="#042f2e"/><rect x="25" y="25" width="50" height="50" fill="none" stroke="#10b981" stroke-width="3"/><circle cx="50" cy="50" r="10" fill="#fbbf24"/><text x="50" y="92" text-anchor="middle" fill="#a7f3d0" font-size="7" font-family="Montserrat">MŁODY FIFI</text></svg>`
+            },
+            {
+                letter: 'Y',
+                title: 'Young 22',
+                artist: 'Bedoes 2115',
+                genre: 'Polish Rap / Trap',
+                color: 'from-amber-500 to-orange-700',
+                quote: 'Kiedy byłem młody, miałem własny plan / Cały ten świat zdobyć sam',
+                revealed: false,
+                coverSvg: `<svg class="w-full h-full" viewBox="0 0 100 100"><rect width="100" height="100" fill="#241400"/><text x="50" y="58" text-anchor="middle" fill="#f59e0b" font-size="28" font-weight="bold">2115</text><text x="50" y="92" text-anchor="middle" fill="#fef3c7" font-size="7" font-family="Montserrat">BEDOES GANG</text></svg>`
+            },
+            {
+                letter: 'O',
+                title: '1-800-OŚWIECENIE',
+                artist: 'Taco Hemingway',
+                genre: 'Polish Hip-Hop',
+                color: 'from-purple-600 to-pink-700',
+                quote: 'Witamy w audycji, włącz swe radio już teraz / Nocne przemyślenia znowu w głowie otwieram',
+                revealed: false,
+                coverSvg: `<svg class="w-full h-full" viewBox="0 0 100 100"><rect width="100" height="100" fill="#1e1035"/><circle cx="50" cy="45" r="22" fill="#c084fc" opacity="0.3"/><circle cx="50" cy="45" r="8" fill="#fff"/><text x="50" y="92" text-anchor="middle" fill="#f3e8ff" font-size="7" font-family="Montserrat">1-800-RADIO</text></svg>`
+            },
+            {
+                letter: 'U',
+                title: 'Until It’s Gone',
+                artist: 'Linkin Park',
+                genre: 'Alternative Rock',
+                color: 'from-cyan-700 to-blue-900',
+                quote: 'Cause you don\'t know what you\'ve got / Until it\'s gone',
+                revealed: false,
+                coverSvg: `<svg class="w-full h-full" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0c2a3a"/><path d="M20,20 L80,80 M80,20 L20,80" stroke="#06b6d4" stroke-width="4"/><circle cx="50" cy="50" r="14" fill="#e11d48"/><text x="50" y="92" text-anchor="middle" fill="#cffaff" font-size="7" font-family="Montserrat">HUNTING PARTY</text></svg>`
+            }
+        ];
+
+        function renderAcrosticGrid() {
+            const grid = document.getElementById('acrosticGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            acrosticSongs.forEach((song, idx) => {
+                const card = document.createElement('div');
+                card.className = `glass-card p-3.5 rounded-2xl flex flex-col justify-between cursor-pointer transition-all duration-300 transform hover:-translate-y-1 hover:border-amber-400/60 relative overflow-hidden group shadow-lg`;
+                card.onclick = () => toggleSongReveal(idx);
+
+                const hiddenTitle = song.letter + " " + "• ".repeat(Math.max(3, song.title.length - 1));
+
+                card.innerHTML = `
+                    <div class="absolute -right-6 -bottom-6 w-20 h-20 bg-gradient-to-br ${song.color} opacity-20 rounded-full blur-xl group-hover:opacity-40 transition-all"></div>
+
+                    <div class="flex items-center gap-3 mb-2.5">
+                        <div class="w-14 h-14 rounded-xl overflow-hidden shrink-0 border border-amber-500/30 shadow-md relative">
+                            ${song.coverSvg}
+                        </div>
+                        <div class="overflow-hidden">
+                            <span class="inline-block text-[9px] uppercase font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 mb-1">
+                                Utwór na litery
+                            </span>
+                            <h3 class="font-bold text-sm sm:text-base ${song.revealed ? 'text-amber-200 glow-gold' : 'text-rose-100'} transition-all">
+                                <span class="text-xl sm:text-2xl text-amber-400 font-extrabold mr-0.5">${song.letter}</span>${song.revealed ? song.title.slice(1) : hiddenTitle.slice(1)}
+                            </h3>
+                            <p class="text-[11px] font-semibold text-rose-300 truncate">${song.artist}</p>
+                            <p class="text-[9px] text-rose-300/60 truncate">${song.genre}</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-2 pt-2 border-t border-rose-900/30">
+                        <div class="text-[10px] uppercase font-semibold text-amber-400/80 mb-0.5 flex items-center gap-1">
+                            <i class="fa-solid fa-quote-left text-[8px]"></i> Cytat z Utworu:
+                        </div>
+                        <p class="text-[11px] font-serif-romantic italic text-rose-200/90 leading-tight min-h-[38px] flex items-center">
+                            ${song.revealed ? `"${song.quote}"` : 'Kliknij, aby odkryć wykonawcę, utwór i oryginalny cytat...'}
+                        </p>
+                    </div>
+
+                    <div class="mt-2.5 flex items-center justify-between text-[10px]">
+                        <span class="${song.revealed ? 'text-amber-400' : 'text-rose-400/60'} font-semibold flex items-center gap-1">
+                            <i class="fa-solid ${song.revealed ? 'fa-lock-open' : 'fa-lock'}"></i>
+                            ${song.revealed ? 'Odkryty' : 'Kliknij kartę'}
+                        </span>
+                        <i class="fa-solid fa-compact-disc text-rose-400/60 group-hover:rotate-180 transition-transform duration-700"></i>
+                    </div>
+                `;
+
+                grid.appendChild(card);
+            });
+        }
+
+        function toggleSongReveal(index) {
+            acrosticSongs[index].revealed = !acrosticSongs[index].revealed;
+            renderAcrosticGrid();
+        }
+
+        function revealAllTracks() {
+            acrosticSongs.forEach(s => s.revealed = true);
+            renderAcrosticGrid();
+        }
+
+        /* ================= TAB SWITCHING & RESIZING ================= */
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            const selectedTab = document.getElementById(`tab-${tabName}`);
+            if (selectedTab) {
+                selectedTab.classList.add('active');
+            }
+
+            ['heart', 'garden', 'jar', 'playlist'].forEach(t => {
+                const btn = document.getElementById(`nav-${t}`);
+                if (btn) {
+                    if (t === tabName) {
+                        btn.className = "px-2.5 sm:px-4 py-1.5 rounded-full font-medium transition-all duration-300 flex items-center gap-1.5 bg-rose-600 text-white shadow-lg shadow-rose-600/30";
+                    } else {
+                        btn.className = "px-2.5 sm:px-4 py-1.5 rounded-full font-medium text-rose-200 hover:text-white transition-all duration-300 flex items-center gap-1.5 hover:bg-rose-900/50";
+                    }
+                }
+            });
+
+            setTimeout(() => {
+                if (tabName === 'heart') resizeHeartCanvas();
+                if (tabName === 'garden') resizeGardenCanvas();
+            }, 50);
+        }
+
+        /* ================= INITIALIZATION ================= */
+        window.onload = function () {
+            initBgCanvas();
+            renderBg();
+
+            resizeHeartCanvas();
+            renderHeart();
+
+            resizeGardenCanvas();
+            lastFrameTime = performance.now();
+            requestAnimationFrame(renderGarden);
+
+            generateTypewriterMessage();
+            renderAcrosticGrid();
+
+            window.addEventListener('resize', () => {
+                initBgCanvas();
+                resizeHeartCanvas();
+                resizeGardenCanvas();
+            });
+        };
+    </script>
+</body>
+</html>
